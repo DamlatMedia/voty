@@ -26,7 +26,7 @@ const StudentLogin = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/student/login",
+        "http://localhost:5000/student/login",
         values
       );
 

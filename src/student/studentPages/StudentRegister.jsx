@@ -85,7 +85,7 @@ function Register() {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/student/register",
+        "http://localhost:5000/student/register",
         values
       );
 
