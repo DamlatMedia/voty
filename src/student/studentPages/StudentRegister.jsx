@@ -12,8 +12,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "../../App.css";
-import logo from "../studentAssests/logo.png";
-import logos from "../studentAssests/IES1.png";
+import logo from "../studentAssests/logo.jpg";
+// import logos from "../studentAssests/IES1.png";
 import {
   LoginSocialGoogle,
   LoginSocialAmazon,
@@ -147,9 +147,9 @@ function Register() {
           <div className={style.logoHead}>
               {/* <div> */}
               <img src={logo} alt="Logo 1" />
-              <img src={logos} alt="Logo 2" />
+              {/* <img src={logos} alt="Logo 2" /> */}
               {/* </div> */}
-              <h1>I-Eschool</h1>
+              <h1>Voty</h1>
             </div>
 
             <h1 className={style.welcome}>Welcome back.</h1>
