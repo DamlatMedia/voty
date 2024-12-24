@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.logoHead {
+  display: flex; /* Arrange items in a row */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  /* flex-direction: column; */
+  gap: 1px; /* Add space between items */
+  background-color: #f8f9fa; /* Light background color */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logoHead img {
+  width: 150px; /* Set a standard width for images */
+  height: 50px; /* Set a standard height for images */
+  object-fit: contain; /* Ensure the image fits within the dimensions */
+}
+
+.logoHead h1 {
+  font-size: 24px; /* Larger font size */
+  font-weight: bold; /* Bold text */
+  color: #333; /* Dark text color */
+  margin: 0; /* Remove default margin */
+  text-transform: uppercase; /* Uppercase text */
+  font-family: "Arial", sans-serif; /* Define font family */
+}
+
+.welcome {
+  text-align: center;
+}
+
+.form {
+  border: 0.1rem solid black;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.textInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.dashboardLogin {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(231, 228, 228);
+}
+
+.settings {
+  width: 50%;
+  padding: 5rem 3rem;
+}
+
+.login {
+  padding: 1rem;
+  /* border: 0.1rem solid black; */
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h4{
+margin: 1rem 0 0 0;
+}
+
+.register{
+}
+
+.register a {
+    text-decoration: none;
+    text-align: center;
+  color: black;
+
+}
+
+.option {
+  display: flex;
+  gap: 0rem;
+  justify-content: center;
+  /* justify-content: space-between; */
+  margin: 1rem;
+}
+
+/* .button {
+  width: 50%;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: 0.1rem solid;
+  text-align: center;
+  cursor: pointer;
+} */
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btnFeedback{
+    padding: .8rem .9rem;
+    border-radius: .5rem;
+    background-color: black;
+    color: white;
+    width: 20%;
+    margin: .5rem auto;
+    cursor: pointer; /* Pointer cursor for hover effect */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
+}
+
+.btnFeedback:hover {
+    background-color: white; /* Light shade on hover */
+    color: black;
+    }
+
+    .field{
+border-radius:3rem ;
+    }
+
+.loginImage {
+  width: 50%;
+  max-width: 500px; /* Ensures image doesn't get too large on wider screens */
+}
+
+@media (max-width: 1024px) {
+  .dashboardLogin {
+    flex-direction: column;
+    height: auto; /* Adjusts height for medium screens */
+  }
+
+  .settings,
+  .loginImage {
+    width: 80%; /* Centers the content for medium screens */
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    min-height: 100vh;
+    padding: 1rem; /* Adds padding for smaller screens */
+  }
+
+  .dashboardLogin {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .loginImage,
+  .settings {
+    width: 100%;
+  }
+
+  .settings {
+    padding: 2rem; /* Reduces padding for smaller screens */
+  }
+
+  .button {
+    width: 80%; /* Expands button for smaller screens */
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings {
+    padding: 1rem;
+  }
+
+  .button {
+    width: 100%; /* Full-width button on mobile */
+    padding: 0.5rem;
+  }
+
+  .textInputs,
+  .login {
+    gap: 1rem; /* Reduces gap for smaller screens */
+  }
+}

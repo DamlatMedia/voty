@@ -1,0 +1,287 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+  }
+  
+  .componentContent {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .headerContent {
+    margin-left: 12.6rem;
+    width: 100%;
+  }
+  
+  .header {
+    /* background-color: rgb(93,86,68); */
+    background-color: rgb(104, 145, 63);
+    position: fixed;
+    width: 100%;
+    display: flex;
+    gap: 55rem;
+    height: 10vh;
+    padding: 0.5rem 0 0.5rem 0;
+    align-items: center;
+  }
+  
+  .headerName {
+    color: rgb(255, 255, 255);
+  }
+  
+  .profile{
+    width: 2.8%;
+    /* border: .1rem solid black;  */
+  }
+  
+  .logos{
+    width: 42%;
+    /* border: .1rem solid black; */
+  }
+  
+  .bar {
+    width: 15%;
+    /* background-color: rgb(93,86,68); */
+    /* border: .1rem solid black; */
+    background-color: rgb(104, 145, 63);
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 0 1rem;
+    position: fixed;
+    height: 100vh;
+  }
+  
+  .navLi a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: .9rem;
+  }
+  
+  .active {
+    background-color: white;
+    border-radius: 0.1rem;
+  }
+  
+  .navUl {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 1rem;
+  }
+  
+  .Home {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 3rem 0 0 0;
+    gap: 2rem;
+  }
+  
+  .postAnalyses {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    height: 50vh;
+  }
+  
+  .homeDivs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: rgb(231, 230, 230);
+    box-shadow: 0 0 0 0 0;
+    padding: 1rem;
+    justify-content: left;
+    border-radius: 1rem;
+    width: 24%;
+  }
+  
+  .postIcon {
+    margin-bottom: 3rem;
+  }
+  
+  .others {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    justify-content: space-between;
+    height: 50vh;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4.3rem 0 0 0.4rem;
+    /* border: .1rem solid blue; */
+  }
+  
+  .th,
+  .td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .th {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .ths,
+  .tds {
+    padding: 10px 4.45rem;
+    text-align: left;
+  }
+  
+  .ths {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .thd,
+  .tdd {
+    padding: 10px 1.3rem;
+    text-align: left;
+  }
+  
+  .thd {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .thb,
+  .tdb {
+    padding: 10px 1.2rem;
+    text-align: left;
+  }
+  
+  .thb {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .thr,
+  .tdr {
+    padding: 10px 1.2rem;
+    text-align: left;
+  }
+  
+  .thr {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .the,
+  .tde {
+    padding: 10px 1.38rem;
+    text-align: left;
+  }
+  
+  .the {
+    background-color: rgb(104, 145, 63);
+    color: rgb(255, 255, 255);
+  }
+  
+  .tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .blogUpload{
+      display: flex;
+      flex-direction: column;
+      margin: 4.4rem auto 0 auto;
+      justify-content: center;
+      width: 80%;
+      padding: 1.3rem;
+      border: .1rem solid black;
+      gap: 1rem;
+      border-radius: .8rem;
+      background-color: rgb(231,228,228);
+  }
+  
+  .input{
+      width: 100%;
+      padding: 1rem;
+  }
+  
+  .textInputs{
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+  }
+  
+  .dashboard{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(231,228,228);
+  }
+  
+  .dashboardLogin{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(231,228,228);
+  }
+  
+  .settings{
+    width: 50%;
+    padding: 5rem 3rem;
+    /* background-image: url("../../../public/images/be-mentally-whole-home.jpg"); */
+  }
+  
+  .login{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .register a{
+    text-decoration: none;
+    color: rgb(112,90,83);
+  }
+  
+  .preloader{
+    font-size: 6rem;
+    margin-top: 4rem;
+  }
+  
+  .button{
+  width: 50%;
+  margin: 0 auto;
+  padding: .8rem;
+  border-radius: 1rem;
+  border: .1rem solid ;
+  }
+  
+  .loginImage{
+    width: 50%
+  }
+  
+  @media (max-width: 768px) {
+  
+    .dashboard{
+      height: 0vh;
+      flex-direction: column;
+    }
+  
+    .dashboardLogin{
+      flex-direction: column;
+      height: 0vh;
+    }
+  
+    .loginImage{
+      width: 100%;
+    }
+  
+    .settings{
+      width: 100%;
+    }
+  
+  }

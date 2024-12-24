@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.footDesc{
+    display: flex;
+    justify-content: center;
+    gap:3rem;
+}
+
+.footDesc1{
+    display: flex;
+    gap: 3rem;
+}
+
+.footDesc2{
+    display: flex;
+    gap: 3rem;
+}
+
+.navLi a {
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  .navUl {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap:2rem;
+  }
+
+  .footLogos{
+    display: flex;
+    justify-content: center;
+    gap:3rem;
+  }
+
+  .footCopy{
+    text-align: center;
+  }
