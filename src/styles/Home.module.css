@@ -1,0 +1,373 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  margin: 5rem 0 3rem 0;
+  align-items: center;
+}
+
+.home1 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 40%;
+}
+
+.voty {
+  /* border: 0.1rem solid black; */
+  padding: 0.7rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.groupImg {
+  /* width: 100%; */
+}
+
+.head {
+  color: rgba(0, 0, 0, 1);
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.home2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 40%;
+  gap: 0.9rem;
+}
+
+.dico {
+  font-size: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.start {
+  background-color: rgba(40, 21, 103, 1);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.claim {
+  color: rgba(40, 21, 103, 1);
+  border: 0.1rem solid rgba(40, 21, 103, 1);
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.video {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.vidImage {
+  width: 100%;
+}
+
+.feature {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tri {
+  color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+}
+
+.triGam {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.seeAll {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.arrow {
+  width: 20%;
+}
+
+.triva {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trivDiv {
+  border: 0.1rem solid black;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  border-radius: 1rem;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  width: 24%;
+  /* align-items: center; */
+  margin: 1rem 0;
+}
+
+.course {
+  /* display: flex; */
+  flex-direction: column;
+  gap: 1rem;
+  align-items: left;
+  justify-content: center;
+}
+
+.phTag {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.bout {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.about {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aboutImg {
+  width: 100%;
+}
+
+.aboutP {
+  width: 45%;
+}
+
+.aboutp {
+  font-size: 1.5rem;
+}
+
+.tellTag {
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(109, 125, 139, 1);
+  font-weight: 700;
+}
+
+.testimonials {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+.testimonial1 {
+  background: url("../../public/images/testimonial.png");
+  padding: 1rem;
+  height: 74vh;
+}
+.testimonial2 {
+  background: url("../../public/images/Testimonial2.png");
+  padding: 1rem;
+  height: 74vh;
+}
+.testimonial3 {
+  background: url("../../public/images/Testimonial3.png");
+  padding: 1rem;
+  height: 74vh;
+}
+.testimonial4 {
+  background: url("../../public/images/Testimonial4.png");
+  padding: 1rem;
+  height: 74vh;
+}
+
+.lorem {
+  background-color: white;
+  /* border: .1rem solid blue; */
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-top: 13rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.testP {
+  font-size: 1.2rem;
+}
+
+.faqContainer {
+  padding: 2rem;
+}
+
+.faqItem {
+  margin: 1rem 0;
+  background-color: rgba(246, 246, 246, 1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  color: rgba(40, 21, 103, 1);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question:hover {
+  color: #df5c10;
+}
+
+.answer {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  /* color: #555; */
+  color: rgba(40, 21, 103, 1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.partTag {
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgba(37, 49, 60, 1);
+  font-weight: 700;
+  margin: 1.2rem 0 0 0;
+}
+
+.partPic {
+  /* min-width: 100%; */
+  animation: slideLeft 10s linear infinite;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* Moves two sets of images off-screen */
+  }
+}
+
+.partner {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .home {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .home1,
+  .home2 {
+    width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .head {
+    font-size: 2rem;
+  }
+
+  .voty {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .video {
+    flex-direction: column;
+  }
+
+  .testimonials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .testimonial1,
+  .testimonial2,
+  .testimonial3,
+  .testimonial4 {
+    height: auto;
+    min-height: 30vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .triva {
+    flex-direction: column;
+  }
+
+  .trivDiv {
+    width: 100%;
+  }
+
+  .about {
+    gap: 1rem;
+    flex-direction: column;
+    /* width: 100%; */
+  }
+
+  .aboutP {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    margin: 3rem 0;
+  }
+
+  .head {
+    font-size: 1.8rem;
+  }
+
+  .start,
+  .claim {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .voty {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .faqItem {
+    font-size: 0.9rem;
+  }
+}

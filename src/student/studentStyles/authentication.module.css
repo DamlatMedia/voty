@@ -5,30 +5,33 @@
 }
 
 .logoHead {
-  display: flex; /* Arrange items in a row */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  /* flex-direction: column; */
-  gap: 1px; /* Add space between items */
-  background-color: #f8f9fa; /* Light background color */
-  padding: 10px 20px; /* Add padding */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logoHead img {
-  width: 150px; /* Set a standard width for images */
-  height: 50px; /* Set a standard height for images */
-  object-fit: contain; /* Ensure the image fits within the dimensions */
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
 }
 
 .logoHead h1 {
-  font-size: 24px; /* Larger font size */
-  font-weight: bold; /* Bold text */
-  color: #333; /* Dark text color */
-  margin: 0; /* Remove default margin */
-  text-transform: uppercase; /* Uppercase text */
-  font-family: "Arial", sans-serif; /* Define font family */
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  font-family: "Arial", sans-serif;
+}
+
+.sign {
+  text-align: center;
 }
 
 .welcome {
@@ -42,10 +45,9 @@
 .input {
   width: 100%;
   padding: 1rem;
-  /* border-radius: 1rem;
-  display: flex;
-  align-items: center; */
-  /* background-color: black; */
+  border-radius: .5rem;
+  border: .1rem solid black;
+  outline: none;
 }
 
 .textInputs {
@@ -77,12 +79,20 @@
 
 .login {
   padding: 1rem;
-  /* border: 0.1rem solid black; */
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  gap: .5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login1{
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .label {
@@ -102,7 +112,13 @@
   display: flex;
   gap: 0.3rem;
   justify-content: center;
-  margin: 1rem;
+}
+
+.option1 {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
 .btn {
@@ -112,17 +128,28 @@
 
 .btnFeedback {
   padding: 0.8rem 0.9rem;
-  border-radius: 0.5rem;
-  background-color: black;
+  border-radius: 2rem;
+  background-color: rgba(40, 21, 103, 1);
   color: white;
-  width: 20%;
-  margin: 0.5rem auto;
-  cursor: pointer; /* Pointer cursor for hover effect */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
+  width: 90%;
+  margin: 1.5rem auto;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btnFeedback1 {
+  padding: 0.8rem 0.9rem;
+  border-radius: 2rem;
+  background-color: rgba(40, 21, 103, 1);
+  color: white;
+  width: 90%;
+  margin: 3rem 0 1.5rem 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btnFeedback:hover {
-  background-color: white; /* Light shade on hover */
+  background-color: white;
   color: black;
 }
 
@@ -132,18 +159,51 @@
 
 .loginImage {
   width: 50%;
-  max-width: 500px; /* Ensures image doesn't get too large on wider screens */
+  max-width: 500px;
+}
+
+.socials {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.social {
+  border: 0.1rem solid rgba(233, 234, 236, 1);
+  padding: 0.6rem 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.7rem;
+}
+
+.hrsign {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.horiz {
+  width: 35%;
+}
+
+.vest {
+  color: rgb(135, 153, 175);
 }
 
 @media (max-width: 1024px) {
   .dashboardLogin {
     flex-direction: column;
-    height: auto; /* Adjusts height for medium screens */
+    height: auto;
   }
 
   .settings,
   .loginImage {
-    width: 80%; /* Centers the content for medium screens */
+    width: 80%;
     max-width: 600px;
   }
 }
@@ -151,7 +211,7 @@
 @media (max-width: 768px) {
   .dashboard {
     min-height: 100vh;
-    padding: 1rem; /* Adds padding for smaller screens */
+    padding: 1rem;
   }
 
   .dashboardLogin {
@@ -165,12 +225,16 @@
   }
 
   .settings {
-    padding: 2rem; /* Reduces padding for smaller screens */
+    padding: 2rem;
   }
 
   .button {
-    width: 80%; /* Expands button for smaller screens */
+    width: 80%;
     padding: 0.6rem;
+  }
+
+  .horiz {
+    width: 20%;
   }
 }
 
@@ -180,12 +244,12 @@
   }
 
   .button {
-    width: 100%; /* Full-width button on mobile */
+    width: 100%;
     padding: 0.5rem;
   }
 
   .textInputs,
   .login {
-    gap: 1rem; /* Reduces gap for smaller screens */
+    gap: 1rem;
   }
 }

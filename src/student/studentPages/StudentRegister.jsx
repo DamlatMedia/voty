@@ -12,36 +12,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "../../App.css";
-import logo from "../studentAssests/logo.jpg";
-// import logos from "../studentAssests/IES1.png";
-import {
-  LoginSocialGoogle,
-  LoginSocialAmazon,
-  LoginSocialFacebook,
-  LoginSocialGithub,
-  LoginSocialInstagram,
-  LoginSocialLinkedin,
-  LoginSocialMicrosoft,
-  LoginSocialPinterest,
-  LoginSocialTwitter,
-  LoginSocialApple,
-  LoginSocialTiktok,
-} from "reactjs-social-login";
 
-// CUSTOMIZE ANY UI BUTTON
-import {
-  FacebookLoginButton,
-  GoogleLoginButton,
-  GithubLoginButton,
-  AmazonLoginButton,
-  InstagramLoginButton,
-  LinkedInLoginButton,
-  MicrosoftLoginButton,
-  TwitterLoginButton,
-  AppleLoginButton,
-} from "react-social-login-buttons";
-import { ReactComponent as PinterestLogo } from "../studentAssests/Pinterest-logo.svg";
-import { ReactComponent as TiktokLogo } from "../studentAssests/Tiktok_icon.svg";
+import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
 
 // REDIRECT URL must be same with URL where the (reactjs-social-login) components is locate
 // MAKE SURE the (reactjs-social-login) components aren't unmounted or destroyed before the ask permission dialog closes
@@ -57,6 +29,7 @@ function Register() {
 
   // State to track password visibility
   const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
 
   // Hook to navigate programmatically
   const navigate = useNavigate();
@@ -137,25 +110,26 @@ function Register() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const toggleRePasswordVisibility = () => setShowRePassword(!showRePassword);
 
   return (
     <>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility"
+      />
       <div className={style.dashboard}>
         <div className={style.settings}>
           <div className={style.login}>
-          <div className={style.logoHead}>
-              {/* <div> */}
-              <img src={logo} alt="Logo 1" />
-              {/* <img src={logos} alt="Logo 2" /> */}
-              {/* </div> */}
-              <h1>Voty</h1>
-            </div>
+            <h1 className={style.sign}>Sign Up</h1>
 
-            <h1 className={style.welcome}>Welcome back.</h1>
-            <p className={style.welcome}>
-              Stay ahead. Sign Up or Sign In right now.
-            </p>
+            <span className={style.option}>
+              <h3 className={style.register}>Already Have An Account? </h3>
+              <h3 className={style.register}>
+                {" "}
+                <NavLink to="/student/login">Login</NavLink>{" "}
+              </h3>
+            </span>
 
             <Formik
               initialValues={{ username: "", email: "", password: "" }}
@@ -165,7 +139,7 @@ function Register() {
               {({ isSubmitting }) => (
                 <Form>
                   <div>
-                  <h4 className={style.label}>Username</h4>
+                    <h4 className={style.label}>Username</h4>
                     <Field
                       type="text"
                       name="username"
@@ -181,8 +155,8 @@ function Register() {
                   </div>
 
                   <div>
-                  <h4 className={style.label}>Email Address</h4>
-                    <Field                  
+                    <h4 className={style.label}>Email Address</h4>
+                    <Field
                       type="email"
                       name="email"
                       placeholder="Email"
@@ -197,11 +171,27 @@ function Register() {
                   </div>
 
                   <div>
+                    <h4 className={style.label}>Phone Number</h4>
+                    <Field
+                      type="number"
+                      name="number"
+                      placeholder="Phone Number"
+                      component={TextInput}
+                      ariaLabel="Enter Your Phone Number"
+                    />
+                    <ErrorMessage
+                      name="number"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div>
                     <div
                       className={style.textInputs}
                       style={{ position: "relative" }}
                     >
-                       <h4 className={style.label}>Password</h4>
+                      <h4 className={style.label}>Password</h4>
                       <Field
                         type={showPassword ? "text" : "password"}
                         name="password"
@@ -216,14 +206,14 @@ function Register() {
                         style={{
                           position: "absolute",
                           right: "10px",
-                          top: "66%",
+                          top: "80%",
                           transform: "translateY(-50%)",
                           cursor: "pointer",
                         }}
                       >
-                        
-                        {/* {showPassword ? "<span class="material-symbols-outlined">visibility</span>" : "<span class="material-symbols-outlined">visibility_off</span>"} */}
-                        {showPassword ? "👁️" : "🙈"}
+                        <span className="material-symbols-outlined">
+                          {showPassword ? "visibility" : "🙈"}
+                        </span>
                       </span>
                     </div>
                     <ErrorMessage
@@ -233,35 +223,64 @@ function Register() {
                     />
                   </div>
 
-                  <span className={style.option}>
-                    <h3 className={style.register}>
-                      Already Have An Account?{" "}
-                    </h3>
-                    <h3 className={style.register}>
-                      {" "}
-                      <NavLink to="/student/login">Login</NavLink>{" "}
-                    </h3>
-                  </span>
-                  <div className={style.btn}>
-                  <button
-                    type="submit"
-                    className={style.btnFeedback}
-                    aria-label="Register"
-                    disabled={isSubmitting}
-                  >
-                    {/* REGISTER */}
-                    {/* {isSubmitting ? <span className="spinner"></span> : "REGISTER"} */}
-                    {isSubmitting ? (
-                      <TailSpin // Use react-loader-spinner
-                        height="20"
-                        width="20"
-                        color="#fff"
-                        ariaLabel="loading"
+                  {/* Re-enter Password Field */}
+                  <div>
+                    <div
+                      className={style.textInputs}
+                      style={{ position: "relative" }}
+                    >
+                      <h4 className={style.label}>Re-enter Password</h4>
+                      <Field
+                        type={showRePassword ? "text" : "password"}
+                        name="repassword"
+                        placeholder="Re-enter Password"
+                        component={TextInput}
+                        style={{ position: "relative" }}
+                        ariaLabel="Re-enter Your Password"
                       />
-                    ) : (
-                      "REGISTER"
-                    )}
-                  </button>
+
+                      <span
+                        onClick={toggleRePasswordVisibility}
+                        style={{
+                          position: "absolute",
+                          right: "10px",
+                          top: "80%",
+                          transform: "translateY(-50%)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span className="material-symbols-outlined">
+                          {showRePassword ? "visibility" : "visibility"}
+                        </span>
+                      </span>
+                    </div>
+                    <ErrorMessage
+                      name="repassword"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div className={style.btn}>
+                    <button
+                      type="submit"
+                      className={style.btnFeedback}
+                      aria-label="Sign Up"
+                      disabled={isSubmitting}
+                    >
+                      {/* REGISTER */}
+                      {/* {isSubmitting ? <span className="spinner"></span> : "REGISTER"} */}
+                      {isSubmitting ? (
+                        <TailSpin // Use react-loader-spinner
+                          height="20"
+                          width="20"
+                          color="#fff"
+                          ariaLabel="loading"
+                        />
+                      ) : (
+                        "Sign Up"
+                      )}
+                    </button>
                   </div>
                 </Form>
               )}
@@ -269,175 +288,60 @@ function Register() {
 
             <ToastContainer />
 
+            <div className={style.hrsign}>
+              <hr className={style.horiz} />
+              <p>Or sign up with</p>
+              <hr className={style.horiz} />
+            </div>
+
+            {provider && profile ? (
+              <User
+                provider={provider}
+                profile={profile}
+                onLogout={onLogoutSuccess}
+              />
+            ) : (
+              <div className={style.socials}>
+                <LoginSocialGoogle
+                  isOnlyGetToken
+                  client_id={process.env.REACT_APP_GG_APP_ID || ""}
+                  onLoginStart={onLoginStart}
+                  onResolve={handleLoginResolve}
+                  onReject={handleLoginReject}
+                >
+                  <div className={style.social}>
+                    <img
+                      src="/images/Google.png"
+                      alt="Googl"
+                      className={style.socio}
+                    />
+                    <p>Google</p>
+                  </div>
+                  {/* <GoogleLoginButton /> */}
+                </LoginSocialGoogle>
+
+                <LoginSocialFacebook
+                  isOnlyGetToken
+                  appId={process.env.REACT_APP_FB_APP_ID || ""}
+                  onLoginStart={onLoginStart}
+                  onResolve={handleLoginResolve}
+                  onReject={handleLoginReject}
+                >
+                  <div className={style.social}>
+                    <img
+                      src="/images/FB.png"
+                      alt="FB"
+                      className={style.socio}
+                    />
+                    <p>Facebook</p>
+                  </div>
+                  {/* <FacebookLoginButton /> */}
+                </LoginSocialFacebook>
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {provider && profile ? (
-        <User
-          provider={provider}
-          profile={profile}
-          onLogout={onLogoutSuccess}
-        />
-      ) : (
-        <div className={`App ${provider && profile ? "hide" : ""}`}>
-          <h1 className="title">or sign up with</h1>
-
-          <LoginSocialFacebook
-            isOnlyGetToken
-            appId={process.env.REACT_APP_FB_APP_ID || ""}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <FacebookLoginButton />
-          </LoginSocialFacebook>
-
-          <LoginSocialGoogle
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_GG_APP_ID || ""}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <GoogleLoginButton />
-          </LoginSocialGoogle>
-
-          <LoginSocialInstagram
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_INSTAGRAM_APP_ID || ""}
-            client_secret={process.env.REACT_APP_INSTAGRAM_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <InstagramLoginButton />
-          </LoginSocialInstagram>
-
-          <LoginSocialMicrosoft
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_MICROSOFT_APP_ID || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <MicrosoftLoginButton />
-          </LoginSocialMicrosoft>
-
-          <LoginSocialLinkedin
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_LINKEDIN_APP_ID || ""}
-            client_secret={process.env.REACT_APP_LINKEDIN_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <LinkedInLoginButton />
-          </LoginSocialLinkedin>
-
-          <LoginSocialGithub
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_GITHUB_APP_ID || ""}
-            client_secret={process.env.REACT_APP_GITHUB_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <GithubLoginButton />
-          </LoginSocialGithub>
-
-          <LoginSocialTwitter
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <TwitterLoginButton />
-          </LoginSocialTwitter>
-
-          {/* <LoginSocialApple
-            client_id={process.env.REACT_APP_APPLE_ID || ''}
-            scope={'name email'}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider);
-              setProfile(data);
-            }}
-            onReject={err => {
-              console.log(err);
-            }}
-          >
-            <AppleLoginButton />
-          </LoginSocialApple> */}
-
-          {/* <LoginSocialAmazon
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_AMAZON_APP_ID || ''}
-            redirect_uri={REDIRECT_URI}
-            onResolve={({ provider, data }) => {
-              setProvider(provider)
-              setProfile(data)
-            }}
-            onReject={(err) => {
-              console.log(err)
-            }}
-            onLoginStart={onLoginStart}
-          >
-            <AmazonLoginButton />
-          </LoginSocialAmazon> */}
-
-          {/* <LoginSocialPinterest
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_PINTEREST_APP_ID || ''}
-            client_secret={process.env.REACT_APP_PINTEREST_APP_SECRET || ''}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider)
-              setProfile(data)
-            }}
-            onReject={(err) => {
-              console.log(err)
-            }}
-            className='pinterest-btn'
-          >
-            <div className='content'>
-              <div className='icon'>
-                <PinterestLogo />
-              </div>
-              <span className='txt'>Login With Pinterest</span>
-            </div>
-          </LoginSocialPinterest> */}
-
-          {/* <LoginSocialTiktok
-            client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider);
-              setProfile(data);
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-            className="pinterest-btn"
-          >
-            <div className="content">
-              <div className="icon">
-                <TiktokLogo />
-              </div>
-              <span className="txt">Login With Tiktok</span>
-            </div>
-          </LoginSocialTiktok> */}
-        </div>
-      )}
     </>
   );
 }

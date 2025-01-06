@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: .5rem auto;
+}
+
+.logoHead{
+    width: 5%;
+}
+
+.logo{
+    width: 100%;
+}
+
+.headNav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navUl {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.navLi a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navLi a:hover {
+  color: #f0f0f0;
+  background-color: rgba(40, 21, 103, 1);
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.navLi a.active {
+  background-color:rgba(40, 21, 103, 1);
+  color: #fff;
+}
+
+.auth {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+}
+
+.sign {
+  background-color: rgba(40, 21, 103, 1);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  text-align: center;
+}
+
+.sign:hover {
+    color: black;
+    background-color: white;
+  }
+
+.sign a {
+  text-decoration: none;
+  color: white;
+}
+
+.sign a:hover {
+  color: black;
+  background-color: white;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .headNav {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    position: absolute;
+    top: 4rem;
+    right: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 60%;
+    z-index: 1000;
+  }
+
+  .headNav.active {
+    display: flex;
+  }
+
+  .menuButton {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .auth {
+    align-items: flex-start;
+  }
+
+  .logoHead {
+    width: 15%;
+  }
+
+  .navUl {
+    flex-direction: column;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 769px) {
+  .menuButton {
+    display: none;
+  }
+
+  .headNav {
+    display: flex !important;
+  }
+}

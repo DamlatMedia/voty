@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.logTag {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  list-style: none;
+  gap: 1rem;
+}
+
+.resources {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  list-style: none;
+  gap: 1rem;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.phTag {
+  font-size: 1.2rem;
+  color: rgba(40, 21, 103, 1);
+  font-weight: 700;
+}
+
+.pTag {
+  color: rgba(109, 125, 139, 1);
+  font-size: .9rem;
+}
+
+.pmTag {
+  color: rgba(40, 21, 103, 1);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.logoHead {
+  width: 50%;
+}
+
+.logo {
+  width: 100%;
+}
+
+.navLi a {
+  text-decoration: none;
+  color: rgba(132, 132, 132, 1);
+  font-weight: 600;
+  position: relative;
+  transition: color 300ms;
+}
+
+.navLi a:hover {
+  color: rgba(40, 21, 103, 1);
+}
+
+.navLi a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(40, 21, 103, 1);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.navLi a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(40, 21, 103, 1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.subscribe{
+    background-color: rgba(40, 21, 103, 1);
+    color: white;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+}
+
+.inp{
+    background-color: white;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+}
+
+.copyright{
+    padding: 1rem 2rem;
+    background-color: rgba(40, 21, 103, 1);
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+}
+
+.termPolicy{
+    display: flex;
+    gap: 1rem;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .foot {
+    flex-direction: column; /* Stacks the sections vertically */
+    gap: 2rem; /* Adds space between stacked items */
+  }
+
+  .logTag,
+  .company,
+  .resources,
+  .newsletter {
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .newsletter {
+    text-align: center;
+  }
+
+  .newsletter button {
+    width: 100%; /* Full width for the button on smaller screens */
+  }
+
+  .copyright {
+    flex-direction: column; /* Stacks copyright and policy links */
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .termPolicy {
+    justify-content: center; /* Centers policy links */
+  }
+}
