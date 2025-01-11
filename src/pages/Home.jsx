@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import style from "../styles/Home.module.css";
@@ -71,9 +72,9 @@ function Home() {
         
 
                 <div className={style.buttons}>
-                  <p className={style.start}>Start Now</p>
+                  <p className={style.start}> <NavLink to="/student/register">Start Now</NavLink></p>
                
-                  <p className={style.claim}>Claim Your Spot</p>
+                  <p className={style.claim}> <NavLink to="/student/register">Claim Your Spot</NavLink></p>
                 </div>
           
           
@@ -195,7 +196,7 @@ function Home() {
               academic excellence, and empowers students to shape their future.
               In partnership with key ministries and organizations, VOTY is
               dedicated to building a generation of responsible, ethical, and
-              ambitious youth—at no cost to participants.
+              ambitious youth.
             </p>
           </div>
 

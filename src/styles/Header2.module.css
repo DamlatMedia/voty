@@ -34,7 +34,7 @@
 
 .navLi a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: 600;
   font-size: 1.2rem;
   position: relative;
@@ -42,8 +42,7 @@
 }
 
 .navLi a:hover {
-  color: rgba(40, 21, 103, 1);
-  /* background-color: rgba(40, 21, 103, 1); */
+  /* color: #f0f0f0; */
 }
 
 .navLi a:hover::after {
@@ -53,7 +52,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: rgba(40, 21, 103, 1);
+  background-color: white;
   transform: scaleX(1);
   transform-origin: left;
   transition: transform 300ms;
@@ -66,18 +65,14 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: rgba(40, 21, 103, 1);
+  background-color: white;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 300ms;
 }
 
 .navLi a.active {
-  /* padding: 0.5rem 1rem;
-  border: 1px solid transparent;
-  border-radius: 5px; */
-  /* background-color: rgba(40, 21, 103, 1); */
-  color: rgba(40, 21, 103, 1);
+  color: #fff;
 }
 
 .navLi a.active::after {
@@ -92,26 +87,59 @@
 }
 
 .sign {
-  background-color: rgba(40, 21, 103, 1);
+  list-style: none;
+  text-decoration: none;
+  font-weight: 600;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.7rem;
-  text-align: center;
+  padding: 0.8rem 1rem;
+  color: rgba(40, 21, 103, 1);
+  background-color: white;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 300ms, color 300ms;
 }
 
 .sign:hover {
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: rgba(40, 21, 103, 1);
 }
 
 .sign a {
   text-decoration: none;
-  color: white;
+  color: rgba(40, 21, 103, 1);
 }
 
 .sign a:hover {
-  color: black;
+  color: white;
+}
+.sign a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
   background-color: white;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.sign a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms;
 }
 
 .style {
@@ -129,7 +157,9 @@
     display: none;
     flex-direction: column;
     gap: 1rem;
-    background-color: white;
+    /* background-color: white; */
+    background-color: rgba(40, 21, 103, 1);
+    /* color:  rgba(40, 21, 103, 1); */
     position: absolute;
     top: 4rem;
     right: 1rem;
@@ -164,7 +194,6 @@
   .navUl {
     flex-direction: column;
   }
-
   .style {
     display: flex;
     /* width:; */

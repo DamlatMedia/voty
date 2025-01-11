@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import style from "../styles/Header.module.css";
+import style from "../styles/Header2.module.css";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,7 +78,6 @@ function Header() {
           </button>
         </div>
         </div>
-
       </div>
     </>
   );

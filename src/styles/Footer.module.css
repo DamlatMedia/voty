@@ -37,6 +37,7 @@
   display: flex;
   flex-direction: column;
   width: 20%;
+  gap: .5rem;
 }
 
 .phTag {
@@ -53,6 +54,13 @@
 .pmTag {
   color: rgba(40, 21, 103, 1);
   font-size: 1.3rem;
+  font-weight: 600;
+}
+
+
+.pmTag2 {
+  color: rgba(40, 21, 103, 1);
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -101,12 +109,50 @@
   transform-origin: left;
   transition: transform 300ms;
 }
+.navLis a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  position: relative;
+  transition: color 300ms;
+}
+
+.navLis a:hover {
+  color:white;
+}
+
+.navLis a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.navLis a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms;
+}
 
 .subscribe{
     background-color: rgba(40, 21, 103, 1);
     color: white;
     border-radius: 1rem;
     padding: 1rem 2rem;
+    border: none;
 }
 
 .inp{
@@ -114,6 +160,8 @@
     padding: 1rem;
     margin-top: 2rem;
     border-radius: 1rem;
+    outline: none;
+    border: .1rem solid black;
 }
 
 .copyright{
@@ -143,6 +191,10 @@
   .resources,
   .newsletter {
     width: 100%; /* Full width for smaller screens */
+  }
+
+  .logoHead{
+    width: 100px;
   }
 
   .newsletter {

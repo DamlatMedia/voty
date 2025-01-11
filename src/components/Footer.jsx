@@ -20,7 +20,7 @@ function Footer() {
         <div className={style.company}>
           <p className={style.pmTag}>Company</p>
           <li className={style.navLi}>
-            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className={style.navLi}>
             <NavLink to="/about">About us</NavLink>
@@ -37,22 +37,25 @@ function Footer() {
         <div className={style.resources}>
         <p className={style.pmTag}>Resources</p>
           <li className={style.navLi}>
-            <NavLink to="/video">Video Library</NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink to="/leaderboard">Leaderboard</NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink to="/scholarship">Scholarship</NavLink>
+            <NavLink to="/student/register">Video Library</NavLink>
           </li>
 
           <li className={style.navLi}>
-            <NavLink to="/trivia">Trivia Games</NavLink>
+            <NavLink to="/student/register">Trivia Games</NavLink>
           </li>
+          
+          <li className={style.navLi}>
+            <NavLink to="/student/register">Leaderboard</NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink to="/student/register">Scholarship</NavLink>
+          </li>
+
+         
         </div>
 
         <div className={style.newsletter}>
-          <p>Subscribe to our newsletter</p>
+          <p  className={style.pmTag2}>Subscribe to our newsletter</p>
 
           <input type="text" placeholder="Enter your email" className={style.inp} />
           <button className={style.subscribe}>Subscribe</button>
@@ -62,8 +65,12 @@ function Footer() {
       <div className={style.copyright}>
         <p>c 2024 Damlat Media Concept Limited All rights reserved</p>
         <div className={style.termPolicy}>
-          <p>Terms of service</p>
-          <p>Privacy policy</p>
+          <p className={style.navLis}>
+            <NavLink to="/terms">Terms</NavLink>
+          </p>
+          <p className={style.navLis}>
+            <NavLink to="/policy">Policy</NavLink>
+          </p>
         </div>
       </div>
     </>

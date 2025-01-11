@@ -1,0 +1,246 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.color {
+  background-color: rgba(40, 21, 103, 1);
+  padding: 0 0 4rem 0;
+}
+
+.about {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: white;
+  margin: 10rem 0 16rem 0;
+}
+
+.partner {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: -14rem 0 2rem 0; 
+  align-items: center;
+}
+
+.partPic {
+  width: 22%;
+  border-radius: 1rem;
+}
+
+.about2 {
+  width: 90%;
+  margin: 4rem auto;
+}
+
+.desc {
+  text-align: center;
+}
+
+.head {
+  font-size: 1.4rem;
+  color: rgba(40, 21, 103, 1);
+  margin-bottom: 2rem;
+}
+
+.para {
+  color: rgba(132, 132, 132, 1);
+}
+
+.bold {
+  font-weight: bold;
+  color: black;
+}
+
+.how {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  /* border: .1rem solid black; */
+  margin: 1rem 0;
+}
+
+.step {
+  width: 45%;
+}
+
+.stek {
+  /* width: 45%; */
+  width: 100%;
+  /* border: .1rem solid black; */
+}
+
+.howStep {
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex-direction: column;
+  gap: 1.1rem;
+  /* border: .1rem solid black; */
+}
+
+.stepby {
+  display: flex;
+  gap: 0.4rem;
+  border: 0.1rem solid rgba(132, 132, 132, 1);
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.head1 {
+  font-size: 1.2rem;
+  color: rgba(40, 21, 103, 1);
+  /* margin-bottom: 2rem; */
+}
+
+.para2 {
+  color: rgba(132, 132, 132, 1);
+}
+
+.head2 {
+  font-size: 1.4rem;
+  color: rgba(40, 21, 103, 1);
+  /* margin-bottom: 2rem; */
+}
+
+.headText {
+  font-weight: bold;
+}
+
+.form {
+  margin: 1rem auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.input {
+  outline: none;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  width: 45%;
+  border: 0.1rem solid black;
+}
+
+.input1 {
+  padding: 0.7rem 1rem;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+  width: 100%;
+  outline: none;
+}
+
+.textare {
+  width: 100%;
+  border-radius: 0.4rem;
+  padding: 0.7rem 1rem;
+}
+
+.send {
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(40, 21, 103, 1);
+  padding: 0.7rem 0;
+  color: white;
+  width: 30%;
+}
+
+@media (max-width: 768px) {
+  .about {
+    font-size: 1.3rem;
+    margin: 6rem 0 10rem 0;
+  }
+
+  .para{
+    font-size: .9rem;
+  }
+
+  .partner {
+    margin: -7rem 0 1rem 0;
+    gap: 0.5rem; 
+  }
+
+  .how{
+    flex-direction: column;
+  }
+
+  .step{
+    width: 100%;
+  }
+
+  .howStep{
+    width: 100%;
+  }
+
+  .about2 {
+    width: 95%;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .name {
+    flex-direction: column; /* Stack inputs on smaller screens */
+    gap: 1rem;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .send {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+
+  .partner {
+    margin: -4rem 0 1rem 0;
+    gap: 0.3rem;
+  }
+
+  /* .about {
+    font-size: 1.2rem;
+    margin: 4rem 0 8rem 0;
+  }
+
+  .partner {
+    margin: -8rem 0 1rem 0;
+    gap: 0.3rem;
+  }
+
+  .partPic {
+    width: 40%;
+    max-width: 80px;
+  }
+
+  .head2 {
+    font-size: 1.2rem;
+  }
+
+  .form {
+    gap: 1rem;
+  }
+
+  .send {
+    width: 70%;
+    font-size: 0.9rem;
+  } */
+}
