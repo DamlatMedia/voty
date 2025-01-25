@@ -1,17 +1,16 @@
 import style from "../studentStyles/student.module.css";
-import Footer from "../studentComponent/Footer";
-import Header from "../studentComponent/Header";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../components/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
+import UserSideBar from "../studentComponent/UserSideBar";
+import UserHeader from "../studentComponent/UserHeader";
 
 function StudentDashboard() {
   const context = useContext(UserContext) || {};
   const { username, setUsername } = context;
-
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -62,51 +61,31 @@ function StudentDashboard() {
     //   }, [username, navigate, setUsername]);
   }, [username, navigate]);
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("username");
-  //   localStorage.removeItem("authToken");
-  //   setUsername(""); // Clear context
-  //   navigate("/student/login");
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("authToken");
+    setUsername(""); // Clear context
+    navigate("/student/login");
+  };
 
   return (
     <div>
-      <Header />
-      {loading ? (
+      {/* {loading ? (
         <p>Loading...</p>
-      ) : username ? (
-        <>
-          <p>Welcome {username} to ScienceDive!</p>
+      ) : username ? ( */}
+      
+          <div className={style.dashSide}>
+            <UserSideBar />
+            <UserHeader />
 
-          <div className={style.dashBody}>
-            <button className={style.btnNew}>
-              Announcing our next round of advanced courses.{" "}
-              <a href="#" className={style.more}>
-                Read more
-              </a>
-            </button>
-
-            <h1 className={style.dashHead}>
-              DsZAK - Master Mathematics with Interactive Learning
-            </h1>
-
-            <p className={style.dashP}>
-              Engage with our interactive quizzes, in-depth tutorials, and
-              personalized learning paths to enhance your math skills and
-              achieve your academic goals.
-            </p>
-
-            <button className={style.btnFeedback}>Give Your Feedback</button>
-
-            {/* <button className={style.logout} onClick={handleLogout}>
-              <span className="material-symbols-outlined">logout</span> Logout
-            </button> */}
+            <div className={style.dash}>
+              <p>Welcome {username} to ScienceDive!</p>
+            </div>
           </div>
-        </>
-      ) : (
+    
+      {/* ) : (
         <p>No user data available. Redirecting...</p>
-      )}
-      <Footer />
+      )} */}
     </div>
   );
 }

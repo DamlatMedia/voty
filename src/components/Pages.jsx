@@ -26,11 +26,11 @@ import Contact from "../pages/Contact";
 import StudentLogin from "../student/studentPages/StudentLogin";
 import StudentRegister from "../student/studentPages/StudentRegister";
 import StudentDashboard from "../student/studentPages/StudentDashboard";
-import StudentSetting from "../student/studentPages/StudentSetting";
-import StudentFeedback from "../student/studentPages/StudentFeedback";
-import StudentMaterials from "../student/studentPages/StudentMaterials";
-import StudentQuiz from "../student/studentPages/StudentQuiz";
-import StudentStore from "../student/studentPages/StudentStore";
+import StudentScholarship from "../student/studentPages/StudentScholarship"
+import StudentTrivia from "../student/studentPages/StudentTrivia"
+import StudentSetting from "../student/studentPages/StudentSetting"
+import StudentVideos from "../student/studentPages/StudentVideos"
+import StudentNotification from "../student/studentPages/StudentNotification"
 
 function Pages() {
   const { username, setUsername } = useContext(UserContext);
@@ -70,14 +70,14 @@ function Pages() {
         /> */}
 
         {/* Student Pages*/}
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/student/login" element={<StudentLogin />} />
         <Route path="/student/register" element={<StudentRegister />} />
-        <Route path="/student/settings" element={<StudentSetting />} />
-        <Route path="/student/feedback" element={<StudentFeedback />} />
-        <Route path="/student/materials" element={<StudentMaterials />} />
-        <Route path="/student/quiz" element={<StudentQuiz />} />
-        <Route path="/student/store" element={<StudentStore />} />
+        <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/student/videos" element={<StudentVideos />} />
+        <Route path="/student/trivia" element={<StudentTrivia />} />
+        <Route path="/student/scholarship" element={<StudentScholarship/>} />
+        <Route path="/student/notification" element={<StudentNotification />} />
+        <Route path="/student/setting" element={<StudentSetting/>} />
       </Routes>
     </div>
   );

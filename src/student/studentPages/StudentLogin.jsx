@@ -40,7 +40,7 @@ const StudentLogin = () => {
     setProfile(data);
 
     // Redirect to dashboard after processing login
-    window.location.href = "/student/home";
+    window.location.href = "/student/dashboard";
   };
 
   const handleLoginReject = (error) => {
@@ -67,7 +67,7 @@ const StudentLogin = () => {
 
         // Navigate to dashboard
         setTimeout(() => {
-          navigate("/");
+          navigate("/student/dashboard");
         }, 3000);
       } else {
         throw new Error("Invalid response from server");

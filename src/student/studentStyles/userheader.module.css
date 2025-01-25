@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.haeder {
+  position: fixed;
+  top: 0;
+  left: 20%;
+  width: calc(100% - 20%);
+  height: 10vh;
+  /* background-color: #f4f4f4; */
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  z-index: 50;
+  justify-content: space-between;
+}
+
+.dashIcon {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dashboard {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.dashLogos {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 1rem;
+  align-items: center;
+  width: 20%;
+  /* border: .1rem solid black; */
+}
+
+.profile{
+  width: 17%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.person{
+  width: 100%; /* Set width */
+  aspect-ratio: 1/1;
+  /* height: 100px;  */
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Ensures the image fits within the round shape */
+  border: 2px solid #ccc; /* Optional: Add a border */
+}
+
+@media (max-width: 768px) {
+  .haeder {
+    width: calc(100% - 90px);
+    left: 90px;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .haeder {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    height: auto;
+    padding: 1rem;
+  }
+}

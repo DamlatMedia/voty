@@ -1,9 +1,8 @@
-
 import UserSideBar from "../studentComponent/UserSideBar";
 import UserHeader from "../studentComponent/UserHeader";
 import style from "../studentStyles/student.module.css";
 
-function StudentSetting () {
+function StudentVideos () {
     return (
         <div>
           {/* {loading ? (
@@ -26,4 +25,4 @@ function StudentSetting () {
       );
 }
 
-export default StudentSetting;
+export default StudentVideos;

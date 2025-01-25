@@ -1,53 +1,7 @@
-.dashBody{
+.dashSide{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 60%;
-    margin: 5rem auto;
 }
 
-.btnNew{
-    font-size: .9rem;
-    margin: .5rem auto;
-    width: 55%;
-padding: .7rem;
-border-radius: 2rem;
-background-color: transparent;
-border: .1rem solid rgb(207,209,212);
+.dash{
+    
 }
-
-.more{
-    color: rgb(85,85,230);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.dashHead{
-    font-size: 4rem;
-    font-weight: 700;
-    text-align: center;
-    /* line-height: 4rem; */
-    padding: .5rem;
-}
-
-.dashP{
-font-size: 1rem;
-text-align: center;
-padding: .5rem;
-}
-
-.btnFeedback{
-    padding: .8rem .9rem;
-    border-radius: .5rem;
-    background-color: black;
-    color: white;
-    width: 20%;
-    margin: .5rem auto;
-    cursor: pointer; /* Pointer cursor for hover effect */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
-}
-
-.btnFeedback:hover {
-    background-color: white; /* Light shade on hover */
-    color: black;
-    }
