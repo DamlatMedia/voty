@@ -34,17 +34,47 @@ function Register() {
   // Hook to navigate programmatically
   const navigate = useNavigate();
 
+  // const validationSchema = Yup.object().shape({
+  //   username: Yup.string()
+  //     .required("Username is required")
+  //     .min(5, "Username must be at least 5 characters"),
+  //   email: Yup.string().email("Invalid email").required("Email is required"),
+  //   password: Yup.string()
+  //     .min(8, "Password must be at least 8 characters")
+  //     .required("Password is required")
+  //     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+  //     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+  //     .matches(/\d/, "Password must contain at least one digit"),
+  // });
+
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .required("Username is required")
-      .min(5, "Username must be at least 5 characters"),
+      .min(5, "Username must be at least 5 characters")
+      .max(10, "Username cannot exceed 10 characters"),
     email: Yup.string().email("Invalid email").required("Email is required"),
+    number: Yup.string()
+    .matches(/^\+?\d{10,15}$/, "Phone number must be valid and include country code")
+    .required("Phone number is required"),
     password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required")
+      .min(8, "Password must be at least 5 characters")
+      .max(70, "Password cannot exceed 15 characters")
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .matches(/\d/, "Password must contain at least one digit"),
+      .matches(/\d/, "Password must contain at least one digit")
+      .required("Password is required"),
+    repassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Please confirm your password"),
+    birth: Yup.date()
+      .required("Date of birth is required")
+      .typeError("Invalid date format"),
+    gender: Yup.string()
+      .oneOf(["male", "female"], "Invalid gender")
+      .required("Gender is required"),
+    address: Yup.string().min(5, "Address must be at least 5 characters").required("Address is required"),
+    school: Yup.string().min(2, "School name must be at least 2 characters").required("School name is required"),
+    grade: Yup.string().min(1, "Grade must be at least 1 character").required("Grade is required"),
   });
 
   useEffect(() => {
@@ -55,11 +85,17 @@ function Register() {
   }, []); // This will run only once when the component mounts
 
   // Handle form submission
-  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => { 
+    // const { repassword, ...studentData } = values; // Exclude repassword
+    const { repassword, ...studentData } = {
+      ...values,
+      number: String(values.number), // Ensure number is a string
+      birth: new Date(values.birth).toISOString(), // Format birth as ISO
+    };
     try {
       const response = await axios.post(
         "http://localhost:5000/student/register",
-        values
+        studentData 
       );
 
       console.log(response.data);
@@ -116,7 +152,7 @@ function Register() {
     <>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
       <div className={style.dashboard}>
         <div className={style.settings}>
@@ -132,14 +168,25 @@ function Register() {
             </span>
 
             <Formik
-              initialValues={{ username: "", email: "", password: "" }}
+           initialValues={{
+    username: "",
+    email: "",
+    number: "",
+    password: "",
+    repassword: "",
+    birth: "",
+    gender: "",
+    address: "",
+    school: "",
+    grade: "",
+  }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
               {({ isSubmitting }) => (
                 <Form>
                   <div>
-                    <h4 className={style.label}>Username</h4>
+                    <h4 className={style.label}>Name</h4>
                     <Field
                       type="text"
                       name="username"
@@ -191,7 +238,7 @@ function Register() {
                       className={style.textInputs}
                       style={{ position: "relative" }}
                     >
-                      <h4 className={style.label}>Password</h4>
+                      <h4 className={style.label}> Enter Password</h4>
                       <Field
                         type={showPassword ? "text" : "password"}
                         name="password"
@@ -212,9 +259,10 @@ function Register() {
                         }}
                       >
                         <span className="material-symbols-outlined">
-                          {showPassword ? "visibility" : "🙈"}
+                          {showPassword ? "visibility" : "visibility_off"}
                         </span>
                       </span>
+
                     </div>
                     <ErrorMessage
                       name="password"
@@ -250,12 +298,99 @@ function Register() {
                         }}
                       >
                         <span className="material-symbols-outlined">
-                          {showRePassword ? "visibility" : "visibility"}
+                          {showRePassword ? "visibility" : "visibility_off"}
                         </span>
                       </span>
                     </div>
                     <ErrorMessage
                       name="repassword"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+<br /><br />
+                  <h3>Profile Information</h3>
+                  <div>
+                    <h4 className={style.label}>Date of Birth</h4>
+                    <Field
+                      type="text"
+                      name="birth"
+                      component={TextInput}
+                      placeholder="Enter Your Date of Birth"
+                      ariaLabel="Enter Your  Date of Birth"
+                    />
+                    <ErrorMessage
+                      name="birth"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className={style.label}>Gender</h4>
+                    {/* <Field
+                      type="text"
+                      name="gender"
+                      component={TextInput}
+                      placeholder="Male"
+                      ariaLabel="Enter Your Gender"
+                    /> */}
+
+<Field name="gender" as="select">
+        <option value="" label="Select Gender" />
+        <option value="male" label="Male" />
+        <option value="female" label="Female" />
+      </Field>
+                    <ErrorMessage
+                      name="gender"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className={style.label}>Address</h4>
+                    <Field
+                      type="text"
+                      name="address"
+                      component={TextInput}
+                      placeholder="Enter Your Address"
+                      ariaLabel="Enter Your Address"
+                    />
+                    <ErrorMessage
+                      name="address"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className={style.label}>Current School Name</h4>
+                    <Field
+                      type="text"
+                      name="school"
+                      component={TextInput}
+                      placeholder="Enter Your School Name"
+                      ariaLabel="Enter Your School Name"
+                    />
+                    <ErrorMessage
+                      name="school"
+                      component="div"
+                      style={{ color: "red" }}
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className={style.label}>Grade/Class</h4>
+                    <Field
+                      type="text"
+                      name="grade"
+                      component={TextInput}
+                      placeholder="Enter Your Grade Level"
+                      ariaLabel="Enter Your Grade Level"
+                    />
+                    <ErrorMessage
+                      name="class"
                       component="div"
                       style={{ color: "red" }}
                     />
@@ -347,3 +482,4 @@ function Register() {
 }
 
 export default Register;
+

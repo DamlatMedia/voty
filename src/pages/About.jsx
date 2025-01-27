@@ -6,8 +6,8 @@ import React, { useState } from "react";
 function About() {
   return (
     <>
-      <div className={style.body}>
-        <div className={style.color}>
+  <div className={style.body}>
+        <div className={style.colo}>
           <HeaderTwo />
           <p className={style.about}>About Us</p>
         </div>
@@ -157,7 +157,7 @@ function About() {
           </div>
         </div>
         <Footer />
-      </div>
+        </div>
     </>
   );
 }

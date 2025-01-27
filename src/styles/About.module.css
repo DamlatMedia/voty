@@ -4,7 +4,11 @@
   padding: 0;
 }
 
-.color {
+.body{
+  border: .1rem solid red;
+}
+
+.colo {
   background-color: rgba(40, 21, 103, 1);
   padding: 0 0 4rem 0;
 }

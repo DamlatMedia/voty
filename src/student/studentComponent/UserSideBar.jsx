@@ -116,7 +116,7 @@ function UserSideBar() {
         <li className={style.navLi}>
           <NavLink
             className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/scholarships"
+            to="/student/scholarship"
           >
             <span class="material-symbols-outlined">
               account_balance_wallet

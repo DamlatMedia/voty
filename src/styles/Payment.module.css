@@ -1,0 +1,60 @@
+.dashboard {
+  /* display: flex;
+    justify-content: space-between; */
+  width: 100%;
+  background-color: rgb(231, 228, 228);
+}
+
+.settings {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.textInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loginImage {
+  width: 50%;
+}
+
+.register {
+  text-align: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.button {
+  width: 50%;
+  margin: 1rem auto 1rem auto;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: 0.1rem solid;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .loginImage {
+    width: 100%;
+  }
+
+  .settings {
+    width: 100%;
+    margin-top: 3.5rem;
+  }
+}
