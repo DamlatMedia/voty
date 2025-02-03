@@ -213,7 +213,7 @@ const StudentLogin = () => {
                     <span className={style.option1}>
                       <h3 className={style.register}>Don't Have An Account?</h3>
                       <h3 className={style.register}>
-                        <NavLink to="/payment">Sign Up</NavLink>
+                        <NavLink to="/student/register">Sign Up</NavLink>
                       </h3>
                     </span>
                   </Form>

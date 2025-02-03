@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import UserSideBar from "../studentComponent/UserSideBar";
 import UserHeader from "../studentComponent/UserHeader";
+import UserSuccessful from "../studentComponent/UserSuccessful";
+import UserPayment from "../studentComponent/UserPayment";
+import UserPaystack from "../studentComponent/UserPaystack";
+import UserDashboard from "../studentComponent/UserDashboard";
 
 function StudentDashboard() {
   const context = useContext(UserContext) || {};
@@ -69,23 +73,30 @@ function StudentDashboard() {
   };
 
   return (
-    <div>
-      {/* {loading ? (
+    <div className={style.dash}>
+      {loading ? (
         <p>Loading...</p>
-      ) : username ? ( */}
-      
-          <div className={style.dashSide}>
+      ) : username ? (
+        <div className={style.dashSide}>
+          <div className={style.side}>
             <UserSideBar />
+          </div>
+
+          <div className={style.home}>
             <UserHeader />
 
-            <div className={style.dash}>
-              <p>Welcome {username} to ScienceDive!</p>
+            <div className={style.content}>
+              {/* <UserPayment/> */}
+              {/* <UserSuccessful/> */}
+              {/* <UserPaystack /> */}
+
+              <UserDashboard/>
             </div>
           </div>
-    
-      {/* ) : (
+        </div>
+      ) : (
         <p>No user data available. Redirecting...</p>
-      )} */}
+      )}
     </div>
   );
 }

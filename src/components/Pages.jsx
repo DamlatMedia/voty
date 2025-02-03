@@ -6,7 +6,7 @@ import { UserContext } from "./UserContext";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import Payment from "../components/Payment";
+
 
 //Admin Routes
 // import AdminEncouragements from "../admin/adminPages/AdminEncouragement";
@@ -32,6 +32,7 @@ import StudentTrivia from "../student/studentPages/StudentTrivia"
 import StudentSetting from "../student/studentPages/StudentSetting"
 import StudentVideos from "../student/studentPages/StudentVideos"
 import StudentNotification from "../student/studentPages/StudentNotification"
+// import Payment from "../components/Payment";
 
 function Pages() {
   const { username, setUsername } = useContext(UserContext);
@@ -42,7 +43,7 @@ function Pages() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/payment" element={<Payment />} />
+        {/* <Route path="/payment" element={<Payment />} /> */}
        
         {/* Admin Pages*/}
         {/* <Route path="/admin/home" element={<AdminHome />} />

@@ -117,8 +117,6 @@ function Home() {
               Semantic, a large language ocean. A small river name..
             </p>
           </div>
-
-         
         </div>
 
         <div className={style.triGam}>

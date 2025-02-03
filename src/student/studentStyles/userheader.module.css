@@ -5,10 +5,10 @@
 }
 
 .haeder {
-  position: fixed;
-  top: 0;
-  left: 20%;
-  width: calc(100% - 20%);
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 20%; */
+  /* width: calc(100% - 20%); */
   height: 10vh;
   /* background-color: #f4f4f4; */
   background-color: white;
@@ -18,12 +18,15 @@
   padding: 1rem;
   z-index: 50;
   justify-content: space-between;
+  /* border: .1rem solid black; */
 }
 
-.dashIcon {
+.dashName {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  flex-direction: column;
+  gap: .4rem;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .dashboard {
@@ -32,32 +35,23 @@
 }
 
 .dashLogos {
-  display: flex;
-  /* justify-content: space-between; */
-  gap: 1rem;
-  align-items: center;
-  width: 20%;
-  /* border: .1rem solid black; */
-}
-
-.profile{
-  width: 17%;
+  width: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .person{
-  width: 100%; /* Set width */
+  width: 100%;
   aspect-ratio: 1/1;
   /* height: 100px;  */
-  border-radius: 50%; /* Make it circular */
-  object-fit: cover; /* Ensures the image fits within the round shape */
-  border: 2px solid #ccc; /* Optional: Add a border */
+  border-radius: 50%; 
+  object-fit: cover;
+  border: 2px solid #ccc; 
 }
 
 @media (max-width: 768px) {
-  .haeder {
+  .haeder {    
     width: calc(100% - 90px);
     left: 90px;
     padding: 0.5rem;

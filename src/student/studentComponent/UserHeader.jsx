@@ -75,19 +75,12 @@ function UserHeader() {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         />
 
-        <div className={style.dashIcon}>
-          <p className={style.dashboard}>Dashboard</p>
-          <span class="material-symbols-outlined">chevron_left</span>
+        <div className={style.dashName}>
+         <p>Hello {username} 👋🏿</p>
+         <p>what are you today?</p>
         </div>
 
         <div className={style.dashLogos}>
-          <span class="material-symbols-outlined">notifications</span>
-          <div className={style.profile}>
-            {/* <img
-              src="/images/profile.jpeg"
-              alt="person"
-              className={style.person}
-            /> */}
             <img
               src={
                 userData?.profilePicture ||
@@ -97,9 +90,6 @@ function UserHeader() {
               className={style.person}
             />
           </div>
-          <p>{username}</p>
-          <span class="material-symbols-outlined">keyboard_arrow_down</span>
-        </div>
       </div>
     </>
   );

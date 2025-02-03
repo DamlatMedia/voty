@@ -1,7 +1,24 @@
-.dashSide{
-    display: flex;
+.dash {
+  /* border: 0.1rem solid black; */
 }
 
-.dash{
-    
+.dashSide {
+  display: flex;
+  /* border: .1rem solid black; */
+}
+
+.side {
+  width: 20%;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  /* border: 0.1rem solid black; */
+}
+
+.content {
+  /* border: 0.1rem solid black; */
+  padding: 1rem;
 }
