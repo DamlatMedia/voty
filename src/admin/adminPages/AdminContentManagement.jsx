@@ -6,18 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import AdminSideBar from "../adminComponents/AdminSideBar";
 import AdminHeader from "../adminComponents/AdminHeader";
-import AdminDashboard from "../adminComponents/AdminDashboard";
-import AdminHom from "../adminComponents/AdminHom";
 import AdminVideo from "../adminComponents/AdminVideo";
 import AdminTrivia from "../adminComponents/AdminTrivia";
-import AdminTable from "../adminComponents/AdminTable";
+import UserVideos from "../adminComponents/AdminVideos";
+import UserTrivias from "../adminComponents/AdminTrivias";
 
 function AdminHome() {
   return (
     <div className={style.dash}>
-      {/* {loading ? (
-        <p>Loading...</p>
-      ) : username ? ( */}
       <div className={style.dashSide}>
         <div className={style.side}>
           <AdminSideBar />
@@ -27,29 +23,21 @@ function AdminHome() {
           <AdminHeader />
 
           <div className={style.content}>
-            {/* <UserPayment/> */}
-            {/* <UserSuccessful/> */}
-            {/* <UserPaystack /> */}
+           <div className={style.stud}>
+            <p className={style.act}>Moral Videos</p>
+            <p className={style.act}>Trivia Games</p>
+            <p className={style.act}>Drafts</p>
+           </div>
 
-            {/* <AdminDashboard/> */}
+            {/* <AdminVideo /> */}
 
-            <div className={style.card}>
-              <AdminHom />
-              <AdminHom />
-              <AdminHom />
-            </div>
-
-            <AdminVideo/>
+            {/* <UserVideos/> */}
 
             <AdminTrivia/>
-
-            <AdminTable/>
+            <UserTrivias/>
           </div>
         </div>
       </div>
-      {/* ) : (
-        <p>No user data available. Redirecting...</p>
-      )} */}
     </div>
   );
 }

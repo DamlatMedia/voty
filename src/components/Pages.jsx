@@ -18,8 +18,10 @@ import Contact from "../pages/Contact";
 // import AdminRegister from "../admin/adminPages/AdminRegister";
 // import AdminLogin from "../admin/adminPages/AdminLogin";
 // import AdminTutors from "../admin/adminPages/AdminTutors";
-// import AdminHome from "../admin/adminPages/AdminHomePage";
-// import AdminStudents from "../admin/adminPages/AdminStudents";
+import AdminDashboard from "../admin/adminPages/AdminHomePage";
+import AdminUserManagement from "../admin/adminPages/AdminUserManagement";
+import AdminContentManagement from "../admin/adminPages/AdminContentManagement";
+import AdminScholarshipManagement from "../admin/adminPages/AdminScholarshipManagement";
 // import AdminStudentFeedback from "../admin/adminPages/AdminStudentFeedback";
 // import AdminSettings from "../admin/adminPages/AdminSettings";
 
@@ -35,7 +37,7 @@ import StudentNotification from "../student/studentPages/StudentNotification"
 // import Payment from "../components/Payment";
 
 function Pages() {
-  const { username, setUsername } = useContext(UserContext);
+  // const { username, setUsername } = useContext(UserContext);
   return (
     <div>
       <Routes>
@@ -46,8 +48,11 @@ function Pages() {
         {/* <Route path="/payment" element={<Payment />} /> */}
        
         {/* Admin Pages*/}
-        {/* <Route path="/admin/home" element={<AdminHome />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/user-management" element={<AdminUserManagement />} />
+        <Route path="/admin/content-management" element={<AdminContentManagement />} />
+        <Route path="/admin/scholarship-management" element={<AdminScholarshipManagement />} />
+        {/* <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/register" element={<AdminRegister />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="/admin/students" element={<AdminStudents />} />

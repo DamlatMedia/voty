@@ -6,18 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import AdminSideBar from "../adminComponents/AdminSideBar";
 import AdminHeader from "../adminComponents/AdminHeader";
-import AdminDashboard from "../adminComponents/AdminDashboard";
-import AdminHom from "../adminComponents/AdminHom";
-import AdminVideo from "../adminComponents/AdminVideo";
-import AdminTrivia from "../adminComponents/AdminTrivia";
 import AdminTable from "../adminComponents/AdminTable";
 
 function AdminHome() {
   return (
     <div className={style.dash}>
-      {/* {loading ? (
-        <p>Loading...</p>
-      ) : username ? ( */}
       <div className={style.dashSide}>
         <div className={style.side}>
           <AdminSideBar />
@@ -27,29 +20,28 @@ function AdminHome() {
           <AdminHeader />
 
           <div className={style.content}>
-            {/* <UserPayment/> */}
-            {/* <UserSuccessful/> */}
-            {/* <UserPaystack /> */}
+            <h2>Students</h2>
 
-            {/* <AdminDashboard/> */}
+            <div className={style.stuact}>
+              <div className={style.stu}>
+                <p className={style.act}>All Students</p>
+                <p className={style.act}>Active Students</p>
+                <p className={style.act}>Top 10 On The Leaderboard</p>
+                <p className={style.act}>New Students</p>
+                <p className={style.act}>Name A - Z</p>
+              </div>
 
-            <div className={style.card}>
-              <AdminHom />
-              <AdminHom />
-              <AdminHom />
+              <div className={style.stu}>
+                <p className={style.act}>Females</p>
+                <p className={style.act}>Males</p>
+                <p className={style.act}>Students Taking Game Tests</p>
+                <p className={style.act}>Students Watching Videos</p>
+              </div>
             </div>
-
-            <AdminVideo/>
-
-            <AdminTrivia/>
-
-            <AdminTable/>
+            <AdminTable />
           </div>
         </div>
       </div>
-      {/* ) : (
-        <p>No user data available. Redirecting...</p>
-      )} */}
     </div>
   );
 }
