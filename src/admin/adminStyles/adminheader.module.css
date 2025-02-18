@@ -18,7 +18,7 @@
 .dashName {
   display: flex;
   flex-direction: column;
-  gap: .4rem;
+  gap: 0.4rem;
   justify-content: center;
 }
 
@@ -34,12 +34,12 @@
   align-items: center;
 }
 
-.person{
+.person {
   width: 100%;
   aspect-ratio: 1/1;
-  border-radius: 50%; 
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
 }
 
 @media (max-width: 1024px) {
@@ -64,12 +64,7 @@
 }
 
 @media (max-width: 480px) {
-  
-
   .dashLogos {
     width: 15%;
   }
 }
-
-
-
