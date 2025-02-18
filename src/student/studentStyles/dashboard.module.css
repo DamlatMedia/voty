@@ -401,3 +401,77 @@
   border-bottom: .1rem solid #281567;
   padding-bottom: .5rem;
 }
+
+@media screen and (max-width: 1024px) {
+  .top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resume, .leaders {
+    width: 100%;
+  }
+
+  .video, .triva {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .trivDiv {
+    width: 48%; /* Adjust for smaller screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top, .video, .triva {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .numResume, .progress {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trivDiv {
+    width: 100%;
+  }
+
+  .advertProgress {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .advert, .progressBar {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .resume {
+    padding: 0.5rem;
+  }
+
+  .namResume {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .leader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .name{
+    font-size: .8rem;
+  }
+
+  .profileName {
+    width: 70%;
+  }
+}

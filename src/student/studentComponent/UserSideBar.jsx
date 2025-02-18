@@ -12,6 +12,7 @@ function UserSideBar() {
   const { username, setUsername } = context;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -35,19 +36,11 @@ function UserSideBar() {
 
         const response = await axios.get(
           `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
-
-          // const response = await axios.get(
-          //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
 
-        console.log(response.data); // Check the response format
-
-        // if (response.data && response.data.studentData?.username) {
-        //   setUsername(response.data.studentData.username);
-        // }
         if (response.data && response.data.studentData?.username) {
           console.log(response.data.studentData.username);
         }
@@ -60,7 +53,6 @@ function UserSideBar() {
     };
 
     fetchUser();
-    //   }, [username, navigate, setUsername]);
   }, [username, navigate]);
 
   const handleLogout = () => {
@@ -71,101 +63,97 @@ function UserSideBar() {
   };
 
   return (
-    <div className={style.bar}>
-      <div className={style.lname}>
-        <img
-          src="/images/default-profile.jpg"
-          alt="img"
-          className={style.logos}
-        />
+    <>
+      {/* Toggle Button for Mobile */}
+      <button
+        className={style.toggleButton}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        ☰
+      </button>
 
-        <div className={style.nameInf}>
-          <p className={style.name}>{username}</p>
-          <p>Profile Information</p>
+      <div className={`${style.bar} ${isSidebarOpen ? style.open : ""}`}>
+        <div className={style.lname}>
+          <img
+            src="/images/default-profile.jpg"
+            alt="img"
+            className={style.logos}
+          />
+          <div className={style.nameInf}>
+            <p className={style.name}>{username}</p>
+            <p>Profile Information</p>
+          </div>
         </div>
-      </div>
 
-      <nav className={style.sideHeader}>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        />
+        <nav className={style.sideHeader}>
+          <ul className={style.navUl1}>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/dashboard"
+              >
+                <span className="material-symbols-outlined">grid_view</span>
+                <span>Home</span>
+              </NavLink>
+            </li>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/videos"
+              >
+                <span className="material-symbols-outlined">apartment</span>{" "}
+                <span>Moral Videos</span>
+              </NavLink>
+            </li>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/trivia"
+              >
+                <span className="material-symbols-outlined">monitoring</span>{" "}
+                <span>Trivia Games</span>
+              </NavLink>
+            </li>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/scholarship"
+              >
+                <span className="material-symbols-outlined">
+                  account_balance_wallet
+                </span>{" "}
+                <span>Scholarships</span>
+              </NavLink>
+            </li>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/notification"
+              >
+                <span className="material-symbols-outlined">
+                  business_center
+                </span>{" "}
+                <span>Notifications</span>
+              </NavLink>
+            </li>
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/student/setting"
+              >
+                <span className="material-symbols-outlined">settings</span>{" "}
+                <span>Settings</span>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
 
-        <ul className={style.navUl1}>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/dashboard"
-            >
-              <span class="material-symbols-outlined">grid_view</span>
-              <span>Home</span>
-            </NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/videos"
-            >
-              <span class="material-symbols-outlined">apartment</span>{" "}
-              <span>Moral Videos</span>
-            </NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/trivia"
-            >
-              <span class="material-symbols-outlined">monitoring</span>{" "}
-              <span>Trivia Games</span>
-            </NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/scholarship"
-            >
-              <span class="material-symbols-outlined">
-                account_balance_wallet
-              </span>{" "}
-              <span>Scholarships</span>
-            </NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/notification"
-            >
-              <span class="material-symbols-outlined">business_center</span>{" "}
-              <span>Notificaions</span>
-            </NavLink>
-          </li>
-          <li className={style.navLi}>
-            <NavLink
-              className={({ isActive }) => (isActive ? style.active : "")}
-              to="/student/setting"
-            >
-              <span class="material-symbols-outlined">settings</span>{" "}
-              <span>Settings</span>
-            </NavLink>
-          </li>
+        <ul className={style.navUl2}>
+          <li onClick={handleLogout}>Log Out</li>
         </ul>
-      </nav>
-
-      <ul className={style.navUl2}>
-        <li
-          className={({ isActive }) => (isActive ? style.active : "")}
-          onClick={handleLogout}
-        >
-          {/* <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/login"
-          > */}
-          Log Out
-          {/* </NavLink> */}
-        </li>
-      </ul>
-      <ToastContainer />
-    </div>
+        <ToastContainer />
+      </div>
+    </>
   );
 }
 

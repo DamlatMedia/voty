@@ -1,10 +1,8 @@
 .dash {
-  /* border: 0.1rem solid black; */
 }
 
 .dashSide {
   display: flex;
-  /* border: .1rem solid black; */
 }
 
 .side {
@@ -15,27 +13,24 @@
   display: flex;
   flex-direction: column;
   width: 80%;
-  /* border: 0.1rem solid black; */
 }
 
 .content {
-  /* border: 0.1rem solid black; */
   padding: 1rem;
 }
 
-.new{
-  background-color: rgb(40,21,103); 
+.new {
+  background-color: rgb(40, 21, 103);
   color: white;
   border-radius: 1rem;
   width: 30%;
-  padding: .5rem;
+  padding: 0.5rem;
   text-align: center;
- }
+}
 
 .com {
   border-radius: 1rem;
   border: 0.1rem solid black;
-  /* width: 100%; */
   padding: 0.6rem;
   display: flex;
   flex-direction: column;
@@ -50,7 +45,6 @@
 
 .card {
   display: flex;
-  /* border: .1rem solid black; */
   justify-content: space-between;
 }
 
@@ -78,7 +72,12 @@
   display: flex;
   margin: 0.5rem 0;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-around;
   gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+  }
 }
