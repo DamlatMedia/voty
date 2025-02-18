@@ -34,10 +34,10 @@ function UserSideBar() {
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
         const response = await axios.get(
-          `${API_BASE_URL}/student/one-student?username=${currentUsername}` ,
-      
-        // const response = await axios.get(
-        //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
+          `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
+
+          // const response = await axios.get(
+          //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -70,100 +70,103 @@ function UserSideBar() {
     navigate("/student/login");
   };
 
+  return (
+    <div className={style.bar}>
+      <div className={style.lname}>
+        <img
+          src="/images/default-profile.jpg"
+          alt="img"
+          className={style.logos}
+        />
 
-  return(  <div className={style.bar}>
-
-    <div className={style.lname}>
-      <img src= "/images/default-profile.jpg" alt="img" className={style.logos} />
-      
-      <div className={style.nameInf}>
-        <p className={style.name}>{username}</p>
-        <p>Profile Information</p>
+        <div className={style.nameInf}>
+          <p className={style.name}>{username}</p>
+          <p>Profile Information</p>
+        </div>
       </div>
-    </div>
 
-    <nav className={style.sideHeader}>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-      />
+      <nav className={style.sideHeader}>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
 
-      <ul className={style.navUl1}>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/dashboard"
-          >
-            <span class="material-symbols-outlined">grid_view</span>
-            <span>Home</span>
-          </NavLink>
-        </li>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/videos"
-          >
-            <span class="material-symbols-outlined">apartment</span>{" "}
-            <span>Moral Videos</span>
-          </NavLink>
-        </li>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/trivia"
-          >
-            <span class="material-symbols-outlined">monitoring</span>{" "}
-            <span>Trivia Games</span>
-          </NavLink>
-        </li>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/scholarship"
-          >
-            <span class="material-symbols-outlined">
-              account_balance_wallet
-            </span>{" "}
-            <span>Scholarships</span>
-          </NavLink>
-        </li>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/notification"
-          >
-            <span class="material-symbols-outlined">business_center</span>{" "}
-            <span>Notificaions</span>
-          </NavLink>
-        </li>
-        <li className={style.navLi}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.active : "")}
-            to="/student/setting"
-          >
-            <span class="material-symbols-outlined">settings</span>{" "}
-            <span>Settings</span>
-          </NavLink>
-        </li>
-      </ul>
+        <ul className={style.navUl1}>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/dashboard"
+            >
+              <span class="material-symbols-outlined">grid_view</span>
+              <span>Home</span>
+            </NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/videos"
+            >
+              <span class="material-symbols-outlined">apartment</span>{" "}
+              <span>Moral Videos</span>
+            </NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/trivia"
+            >
+              <span class="material-symbols-outlined">monitoring</span>{" "}
+              <span>Trivia Games</span>
+            </NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/scholarship"
+            >
+              <span class="material-symbols-outlined">
+                account_balance_wallet
+              </span>{" "}
+              <span>Scholarships</span>
+            </NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/notification"
+            >
+              <span class="material-symbols-outlined">business_center</span>{" "}
+              <span>Notificaions</span>
+            </NavLink>
+          </li>
+          <li className={style.navLi}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : "")}
+              to="/student/setting"
+            >
+              <span class="material-symbols-outlined">settings</span>{" "}
+              <span>Settings</span>
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
 
-     
-    </nav>
-
-    <ul className={style.navUl2}>
-        <li className={style.navLi}>
-          <NavLink
+      <ul className={style.navUl2}>
+        <li
+          className={({ isActive }) => (isActive ? style.active : "")}
+          onClick={handleLogout}
+        >
+          {/* <NavLink
             className={({ isActive }) => (isActive ? style.active : "")}
             to="/login"
-          >
-           Log Out
-          </NavLink>
+          > */}
+          Log Out
+          {/* </NavLink> */}
         </li>
       </ul>
-      <ToastContainer/>
-  </div>
-  )
-
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default UserSideBar;

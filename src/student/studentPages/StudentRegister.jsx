@@ -54,8 +54,11 @@ function Register() {
       .max(10, "Username cannot exceed 10 characters"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     number: Yup.string()
-    .matches(/^\+?\d{10,15}$/, "Phone number must be valid and include country code")
-    .required("Phone number is required"),
+      .matches(
+        /^\+?\d{10,15}$/,
+        "Phone number must be valid and include country code"
+      )
+      .required("Phone number is required"),
     password: Yup.string()
       .min(8, "Password must be at least 5 characters")
       .max(70, "Password cannot exceed 15 characters")
@@ -72,9 +75,15 @@ function Register() {
     gender: Yup.string()
       .oneOf(["male", "female"], "Invalid gender")
       .required("Gender is required"),
-    address: Yup.string().min(5, "Address must be at least 5 characters").required("Address is required"),
-    school: Yup.string().min(2, "School name must be at least 2 characters").required("School name is required"),
-    grade: Yup.string().min(1, "Grade must be at least 1 character").required("Grade is required"),
+    address: Yup.string()
+      .min(5, "Address must be at least 5 characters")
+      .required("Address is required"),
+    school: Yup.string()
+      .min(2, "School name must be at least 2 characters")
+      .required("School name is required"),
+    grade: Yup.string()
+      .min(1, "Grade must be at least 1 character")
+      .required("Grade is required"),
   });
 
   useEffect(() => {
@@ -85,7 +94,7 @@ function Register() {
   }, []); // This will run only once when the component mounts
 
   // Handle form submission
-  const handleSubmit = async (values, { setSubmitting, setErrors }) => { 
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     // const { repassword, ...studentData } = values; // Exclude repassword
     const { repassword, ...studentData } = {
       ...values,
@@ -93,13 +102,12 @@ function Register() {
       birth: new Date(values.birth).toISOString(), // Format birth as ISO
     };
     try {
-
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        `${API_BASE_URL}/student/register` ,
-      // const response = await axios.post(
-      //   "http://localhost:5000/student/register",
-        studentData 
+        `${API_BASE_URL}/student/register`,
+        // const response = await axios.post(
+        //   "http://localhost:5000/student/register",
+        studentData
       );
 
       console.log(response.data);
@@ -172,18 +180,18 @@ function Register() {
             </span>
 
             <Formik
-           initialValues={{
-    username: "",
-    email: "",
-    number: "",
-    password: "",
-    repassword: "",
-    birth: "",
-    gender: "",
-    address: "",
-    school: "",
-    grade: "",
-  }}
+              initialValues={{
+                username: "",
+                email: "",
+                number: "",
+                password: "",
+                repassword: "",
+                birth: "",
+                gender: "",
+                address: "",
+                school: "",
+                grade: "",
+              }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
@@ -266,7 +274,6 @@ function Register() {
                           {showPassword ? "visibility" : "visibility_off"}
                         </span>
                       </span>
-
                     </div>
                     <ErrorMessage
                       name="password"
@@ -312,12 +319,13 @@ function Register() {
                       style={{ color: "red" }}
                     />
                   </div>
-<br /><br />
+                  <br />
+                  <br />
                   <h3>Profile Information</h3>
                   <div>
                     <h4 className={style.label}>Date of Birth</h4>
                     <Field
-                      type="text"
+                      type="date"
                       name="birth"
                       component={TextInput}
                       placeholder="Enter Your Date of Birth"
@@ -340,11 +348,11 @@ function Register() {
                       ariaLabel="Enter Your Gender"
                     /> */}
 
-<Field name="gender" as="select">
-        <option value="" label="Select Gender" />
-        <option value="male" label="Male" />
-        <option value="female" label="Female" />
-      </Field>
+                    <Field name="gender" as="select">
+                      <option value="" label="Select Gender" />
+                      <option value="male" label="Male" />
+                      <option value="female" label="Female" />
+                    </Field>
                     <ErrorMessage
                       name="gender"
                       component="div"
@@ -486,4 +494,3 @@ function Register() {
 }
 
 export default Register;
-
