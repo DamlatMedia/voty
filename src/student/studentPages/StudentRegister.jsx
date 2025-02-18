@@ -93,8 +93,12 @@ function Register() {
       birth: new Date(values.birth).toISOString(), // Format birth as ISO
     };
     try {
+
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        "http://localhost:5000/student/register",
+        `${API_BASE_URL}/student/register` ,
+      // const response = await axios.post(
+      //   "http://localhost:5000/student/register",
         studentData 
       );
 

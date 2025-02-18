@@ -49,8 +49,12 @@ const StudentLogin = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
+
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        "http://localhost:5000/student/login",
+        `${API_BASE_URL}/student/login` ,
+      // const response = await axios.post(
+      //   "http://localhost:5000/student/login",
         values
       );
 
