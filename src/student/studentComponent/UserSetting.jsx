@@ -32,10 +32,13 @@ function UserNotification() {
             navigate("/user/login");
             return;
           }
-  
-          const API_URL = process.env.REACT_APP_API_URL;
+          const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
           const response = await axios.get(
-            `http://localhost:4000/user/user?username=${currentUsername}`,
+            `${API_BASE_URL}/admin/user/user?username=${currentUsername}` ,
+      
+          // const response = await axios.get(
+          //   `http://localhost:4000/user/user?username=${currentUsername}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

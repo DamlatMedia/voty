@@ -36,10 +36,13 @@ function StudentDashboard() {
           navigate("/student/login");
           return;
         }
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-        const API_URL = process.env.REACT_APP_API_URL;
         const response = await axios.get(
-          `http://localhost:4000/student/one-student?username=${currentUsername}`,
+          `${API_BASE_URL}/student/one-student?username=${currentUsername}` ,
+      
+        // const response = await axios.get(
+        //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
