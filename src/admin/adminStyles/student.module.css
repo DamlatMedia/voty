@@ -120,6 +120,7 @@
   display: flex;
   justify-content: space-between;
   gap: 9rem;
+  /* padding: .5rem; */
 }
 
 .card {
@@ -169,3 +170,35 @@
   justify-content: space-around;
   gap: 1rem;
 }
+
+.stud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.act {
+  border: 0.1rem solid black;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+    gap: .5rem;
+  }}
+
+  @media (max-width: 425px) {
+   .tot{
+    /* padding-right: .5rem; */
+    font-size: .8rem;
+   }
+    .act {
+      padding: 0.5rem ;
+      font-size: .7rem;
+    }
+    
+  }

@@ -862,6 +862,7 @@ tbody tr:hover {
   border-radius: 8px;
   overflow-x: auto; /* Enables horizontal scrolling */
   max-width: 100%;
+  display: block; /* Ensures it doesn't break the layout */
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
@@ -869,7 +870,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  min-width: 800px; /* Ensures table doesn't shrink too much */
+  min-width: 900px; /* Prevents table from shrinking too much */
 }
 
 thead th {
@@ -877,7 +878,7 @@ thead th {
   background-color: rgb(40, 21, 103);
   padding: 0.75rem 1rem;
   font-weight: 600;
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 tbody td {
@@ -885,7 +886,7 @@ tbody td {
   border-bottom: 1px solid #ddd;
   font-size: 1rem;
   color: rgb(40, 21, 103);
-  white-space: nowrap; /* Prevents text from wrapping */
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 tbody tr:nth-child(even) {
@@ -912,6 +913,18 @@ tbody tr:hover {
   border-radius: 2rem;
   padding: 0.5rem 1.5rem;
   white-space: nowrap;
+}
+
+.stu{
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.act{
+  border: .1rem solid black;
+  border-radius: 2rem;
+  padding: .5rem 1.5rem;
 }
 
 @media screen and (max-width: 1024px) {
@@ -969,14 +982,13 @@ tbody tr:hover {
   .advert, .progressBar {
     width: 100%;
   }
-
   .table-container {
-    overflow-x: auto;
+    overflow-x: auto; /* Ensures full scrolling */
+    display: block; /* Prevents layout breaking */
   }
 
   table {
-    font-size: 0.9rem; /* Reduce font size for better fit */
-    min-width: 600px;
+    min-width: 700px; /* Prevents too much shrinking */
   }
 
   thead th,
@@ -990,6 +1002,14 @@ tbody tr:hover {
 
   .act {
     padding: 0.4rem 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .stu{
+   
+    flex-direction: column;
+    gap: .5rem;
   }
 }
 
@@ -1009,8 +1029,13 @@ tbody tr:hover {
   }
 
   .filter {
-    flex-direction: column;
+    /* flex-direction: column; */
+    align-items: center;
     gap: 0.5rem;
+  }
+
+  .filter3 {
+    width: 20%;
   }
 
   .name{
@@ -1022,12 +1047,14 @@ tbody tr:hover {
   }
 
   .table-container {
+    width: 100%;
     overflow-x: auto;
+    display: block;
   }
 
   table {
     font-size: 0.8rem;
-    min-width: 500px;
+    min-width: 600px; /* Ensures scrolling instead of squeezing */
   }
 
   thead th,

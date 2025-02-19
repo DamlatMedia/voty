@@ -38,7 +38,7 @@ function AdminHome() {
                 <p className={style.act}>Students Watching Videos</p>
               </div>
             </div>
-            <AdminTable />
+            {/* <AdminTable /> */}
           </div>
         </div>
       </div>
