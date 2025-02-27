@@ -105,8 +105,7 @@ function Register() {
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
         `${API_BASE_URL}/student/register`,
-        // const response = await axios.post(
-        //   "http://localhost:5000/student/register",
+    
         studentData
       );
 

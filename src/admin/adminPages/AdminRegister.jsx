@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback, } from "react";
-import '../../App.css'
-import { User } from '../adminComponents/User' // component display user (see detail on /example directory)
+import React, { useContext, useState, useEffect, useCallback } from "react";
+import "../../App.css";
+import { User } from "../adminComponents/User"; // component display user (see detail on /example directory)
 import {
   LoginSocialGoogle,
   LoginSocialAmazon,
@@ -13,7 +13,7 @@ import {
   LoginSocialTwitter,
   LoginSocialApple,
   LoginSocialTiktok,
-} from 'reactjs-social-login'
+} from "reactjs-social-login";
 
 // CUSTOMIZE ANY UI BUTTON
 import {
@@ -26,10 +26,10 @@ import {
   MicrosoftLoginButton,
   TwitterLoginButton,
   AppleLoginButton,
-} from 'react-social-login-buttons'
+} from "react-social-login-buttons";
 
-import { ReactComponent as PinterestLogo } from '../adminAssests/Pinterest-logo.svg'
-import { ReactComponent as TiktokLogo } from '../adminAssests/Tiktok_icon.svg'
+import { ReactComponent as PinterestLogo } from "../adminAssests/Pinterest-logo.svg";
+import { ReactComponent as TiktokLogo } from "../adminAssests/Tiktok_icon.svg";
 import style from "../adminStyles/authentication.module.css";
 import { TailSpin } from "react-loader-spinner"; // Import spinner
 import TextInput from "../../components/TextInput";
@@ -50,9 +50,9 @@ import "react-toastify/dist/ReactToastify.css";
 const REDIRECT_URI = `${window.location.origin}/auth/callback`;
 
 function Register() {
-    const [provider, setProvider] = useState('')
-    const [profile, setProfile] = useState(null)
-    
+  const [provider, setProvider] = useState("");
+  const [profile, setProfile] = useState(null);
+
   const { setUsername } = useContext(UserContext); // Access setUsername from UserContext
 
   // State to track password visibility
@@ -60,24 +60,7 @@ function Register() {
 
   // Hook to navigate programmatically
   const navigate = useNavigate();
-  
-   // Error Handling Function
-//   const handleApiError = (error, setErrors) => {
-//     if (error.response && error.response.data.errors) {
-//       const errorMessages = error.response.data.errors; // Assuming the API sends errors in an `errors` array
-//       errorMessages.forEach((err) => {
-//         toast.error(err.message); // Display each error using toast
-//         setErrors({
-//           [err.field]: err.message, // Set field-specific error using Formik's setErrors
-//         });
-//       });
-//     } else {
-//       toast.error("Registration failed! Please try again.");
-//     }
-//   };
 
-  // Validation Schema
-   
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .required("Username is required")
@@ -88,17 +71,25 @@ function Register() {
       .required("Password is required")
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .matches(/\d/, "Password must contain at least one digit"),
+      .matches(/\d/, "Password must contain at least one digit")
+      .matches(/[@$!%*?&]/, "Password must contain at least one special character")
   });
-
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
     }
-  }, []); // This will run only once when the component mounts
+  }, [setUsername]); // Add dependency
+  
+  // useEffect(() => {
+  //   const storedUsername = localStorage.getItem("username");
+  //   if (storedUsername) {
+  //     setUsername(storedUsername);
+  //   }
+  // }, []); // This will run only once when the component mounts
 
   // Handle form submission
+ 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       // const API_URL = process.env.REACT_APP_API_URL;
@@ -106,17 +97,15 @@ function Register() {
 
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        `${API_BASE_URL}/admin/register` ,
-      // const response = await axios.post(
-      //   "http://localhost:4000/admin/register",
+        `${API_BASE_URL}/admin/register`,
+        // const response = await axios.post(
+        //   "http://localhost:4000/admin/register",
         values
       );
 
       console.log(response.data);
       // Save username globally using UserContext
       setUsername(values.username);
-      // localStorage.setItem('username', response.data.username); // Save to localStorage
-      // setUsername(response.data.username);
 
       // Display success message using toastify
       toast.success("Registration successful", { autoClose: 2000 });
@@ -125,35 +114,40 @@ function Register() {
         navigate("/admin/login");
       }, 2000); // Delay for 2 seconds before redirecting
     } catch (error) {
-        console.error("Registration error:", error);
-        toast.error("Registration failed!");
-        console.log("Submitting data:", values);
-    //   handleApiError(error, setErrors); // Pass setErrors to handle API validation errors
+      console.error("Registration error:", error);
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong! Please try again.");
+      }
+      
+      console.log("Submitting data:", values);
+      //   handleApiError(error, setErrors); // Pass setErrors to handle API validation errors
     } finally {
       setSubmitting(false); // Reset the form submission state
     }
   };
 
-    const onLoginStart = useCallback(() => {
-    alert('login start')
-  }, [])
+  const onLoginStart = useCallback(() => {
+    alert("login start");
+  }, []);
 
   const onLogoutSuccess = useCallback(() => {
-    setProfile(null)
-    setProvider('')
-    alert('Logged out successfully')
-  }, [])
+    setProfile(null);
+    setProvider("");
+    alert("Logged out successfully");
+  }, []);
 
   const handleLoginResolve = ({ provider, data }) => {
     setProvider(provider);
     setProfile(data);
 
     // Redirect to dashboard after processing login
-    window.location.href = '/admin/home';
+    window.location.href = "/admin/home";
   };
 
   const handleLoginReject = (error) => {
-    console.error('Login failed:', error);
+    console.error("Login failed:", error);
   };
 
   // Toggle password visibility
@@ -280,14 +274,18 @@ function Register() {
       </div>
 
       {provider && profile ? (
-        <User provider={provider} profile={profile} onLogout={onLogoutSuccess} />
+        <User
+          provider={provider}
+          profile={profile}
+          onLogout={onLogoutSuccess}
+        />
       ) : (
-        <div className={`App ${provider && profile ? 'hide' : ''}`}>
-          <h1 className='title'>or sign up with</h1>
+        <div className={`App ${provider && profile ? "hide" : ""}`}>
+          <h1 className="title">or sign up with</h1>
 
           <LoginSocialFacebook
             isOnlyGetToken
-            appId={process.env.REACT_APP_FB_APP_ID || ''}
+            appId={process.env.REACT_APP_FB_APP_ID || ""}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
             onReject={handleLoginReject}
@@ -297,7 +295,7 @@ function Register() {
 
           <LoginSocialGoogle
             isOnlyGetToken
-            client_id={process.env.REACT_APP_GG_APP_ID || ''}
+            client_id={process.env.REACT_APP_GG_APP_ID || ""}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
             onReject={handleLoginReject}
@@ -307,8 +305,8 @@ function Register() {
 
           <LoginSocialInstagram
             isOnlyGetToken
-            client_id={process.env.REACT_APP_INSTAGRAM_APP_ID || ''}
-            client_secret={process.env.REACT_APP_INSTAGRAM_APP_SECRET || ''}
+            client_id={process.env.REACT_APP_INSTAGRAM_APP_ID || ""}
+            client_secret={process.env.REACT_APP_INSTAGRAM_APP_SECRET || ""}
             redirect_uri={REDIRECT_URI}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
@@ -319,7 +317,7 @@ function Register() {
 
           <LoginSocialMicrosoft
             isOnlyGetToken
-            client_id={process.env.REACT_APP_MICROSOFT_APP_ID || ''}
+            client_id={process.env.REACT_APP_MICROSOFT_APP_ID || ""}
             redirect_uri={REDIRECT_URI}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
@@ -330,8 +328,8 @@ function Register() {
 
           <LoginSocialLinkedin
             isOnlyGetToken
-            client_id={process.env.REACT_APP_LINKEDIN_APP_ID || ''}
-            client_secret={process.env.REACT_APP_LINKEDIN_APP_SECRET || ''}
+            client_id={process.env.REACT_APP_LINKEDIN_APP_ID || ""}
+            client_secret={process.env.REACT_APP_LINKEDIN_APP_SECRET || ""}
             redirect_uri={REDIRECT_URI}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
@@ -340,10 +338,10 @@ function Register() {
             <LinkedInLoginButton />
           </LoginSocialLinkedin>
 
-           <LoginSocialGithub
+          <LoginSocialGithub
             isOnlyGetToken
-            client_id={process.env.REACT_APP_GITHUB_APP_ID || ''}
-            client_secret={process.env.REACT_APP_GITHUB_APP_SECRET || ''}
+            client_id={process.env.REACT_APP_GITHUB_APP_ID || ""}
+            client_secret={process.env.REACT_APP_GITHUB_APP_SECRET || ""}
             redirect_uri={REDIRECT_URI}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}
@@ -354,7 +352,7 @@ function Register() {
 
           <LoginSocialTwitter
             isOnlyGetToken
-            client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ''}
+            client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ""}
             redirect_uri={REDIRECT_URI}
             onLoginStart={onLoginStart}
             onResolve={handleLoginResolve}

@@ -31,11 +31,7 @@ function AdminBlogs() {
           },
         });
 
-        // const response = await axios.get('http://localhost:5000/api/blogs/all-blogs', {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // });
+       
 
         console.log('Blogs response data:', response.data);
         if (response.data && Array.isArray(response.data.blogData)) {

@@ -1,24 +1,25 @@
 import { createContext, useState, useEffect } from 'react';
 
-export const UserContext = createContext();
+export const useAdmin = createContext();
 
-export const UserProvider = ({ children }) => {
+export const AdminProvider = ({ children }) => {
   const [username, setUsername] = useState(() => {
     // Check if the username is saved in localStorage
-    const savedUsername = localStorage.getItem("username");
+    const savedUsername = localStorage.getItem("adminUsername");
     return savedUsername || "";
   });
 
   // Sync username to localStorage whenever it changes
   useEffect(() => {
     if (username) {
-      localStorage.setItem("username", username);  // Save username to localStorage
+      localStorage.setItem("adminUsername", username);  // Save username to localStorage
     }
   }, [username]);
 
   return (
-    <UserContext.Provider value={{ username, setUsername }}>
+    <useAdmin.Provider value={{ username, setUsername }}>
       {children}
-    </UserContext.Provider>
+    </useAdmin.Provider>
   );
 };
+

@@ -4,7 +4,7 @@
 // function App() {
 //   return (
 //     <div>
-//       <Router> 
+//       <Router>
 //       <Pages />
 //       </Router>
 //     </div>
@@ -15,19 +15,25 @@
 
 import React from "react";
 import { UserProvider } from "./components/UserContext";
+import { AdminProvider } from "./components/AdminContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import Pages from "./components/Pages";
+import { VideoProvider } from "./components/VideoContext";
 
 function App() {
   console.log("Rendering App...");
   return (
+    <AdminProvider>
     <UserProvider>
-      <Router>
-        <div>
-          <Pages />
-        </div>
-      </Router>
+      <VideoProvider>
+        <Router>
+          <div>
+            <Pages />
+          </div>
+        </Router>
+      </VideoProvider>
     </UserProvider>
+    </AdminProvider>
   );
 }
 

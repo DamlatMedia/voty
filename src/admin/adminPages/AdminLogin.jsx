@@ -8,15 +8,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { TailSpin } from "react-loader-spinner"; // Import spinner
 import TextInput from "../../components/TextInput";
 import "react-toastify/dist/ReactToastify.css";
-import { UserContext } from "../../components/UserContext";
-
+import { useAdmin } from "../../components/AdminContext";
 const App = () => {
-  const { username, setUsername } = useContext(UserContext); // Access UserContext
-
-  // State to track password visibility
+  const { setUsername } = useContext(useAdmin);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Hook to navigate programmatically
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -26,34 +22,24 @@ const App = () => {
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      // const response = await axios.post('https://quiz-interfaces-backend.onrender.com/user/login', formData);
-      
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-      const response = await axios.post(
-        `${API_BASE_URL}/admin/login` ,
-      // const response = await axios.post(
-        // "http://localhost:4000/admin/login",
-        values
-      );
-      const { adminData, authToken } = response.data;
+      const response = await axios.post(`${API_BASE_URL}/admin/login`, values);
+      const { adminData, authToken: token } = response.data;
 
-      setUsername(adminData.username);
-      console.log(response.data);
-      console.log("Login successful, username:", adminData.username); // Double-check the username value
+      if (token && adminData.username) {
+        // Store the token and username in localStorage
+        localStorage.setItem("adminAuthToken", token);
+        localStorage.setItem("adminUsername", adminData.username);
 
-      const { authToken: token, username: storedUsername } = response.data;
-
-      if (token) {
-        // Store the token in localStorage
-        localStorage.setItem("authToken", token);
-
-        localStorage.setItem("username", storedUsername);
+        setUsername(adminData.username);
+        console.log(response.data);
+        // console.log("Login successful, username:", adminData.username); // Double-check the username value
 
         toast.success("successful", { autoClose: 2000 });
 
         // Redirect to the admin dashboard after a short delay
         setTimeout(() => {
-          navigate("/admin/home");
+          navigate("/admin/dashboard");
         }, 3000); // Delay for 3 seconds before redirecting
       } else {
         throw new Error("Token is missing from the response.");
@@ -69,11 +55,12 @@ const App = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
       <div className={style.dashboard}>
         <div className={style.settings} onSubmit={handleSubmit}>
           <div className={style.login}>
@@ -89,51 +76,51 @@ const App = () => {
               {({ isSubmitting }) => (
                 <Form>
                   <div>
+                    <h4 className={style.label}>Email Address</h4>
                     <Field
                       type="email"
                       name="email"
-                      placeholder="Email"
+                      placeholder="Enter your email"
                       component={TextInput}
                       ariaLabel="Enter Your Email Address"
                     />
                   </div>
 
-                  <div>
-                    <div
-                      className={style.textInputs}
-                      style={{ position: "relative" }}
-                    >
-                      <Field
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
-                        component={TextInput}
-                        style={{ position: "relative" }}
-                        ariaLabel="Enter Your Password"
-                      />
+                  {/* Password Input with Visibility Toggle */}
+                  <div style={{ position: "relative" }}>
+                    <h4 className={style.label}>Password</h4>
 
-                      <span
-                        onClick={togglePasswordVisibility}
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {showPassword ? "👁️" : "🙈"}
+                    <Field
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Password"
+                      component={TextInput}
+                      ariaLabel="Enter Your Password"
+                    />
+                    <span
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "75%",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <span className="material-symbols-outlined">
+                        {showPassword ? "visibility" : "visibility_off"}
                       </span>
-                    </div>
+                    </span>
                   </div>
 
+                  {/* Register Link */}
                   <span className={style.option}>
-                    <h3 className={style.register}>Don't Have An Account? </h3>
-                    <p className={style.register}>
-                      {" "}
-                      <NavLink to="/admin/register">Register</NavLink>{" "}
-                    </p>
+                    <h3 className={style.register}>Don't Have An Account?</h3>
+                    <h3 className={style.register}>
+                      <NavLink to="/admin/register">Sign Up</NavLink>
+                    </h3>
                   </span>
+                  
                   <button
                     type="submit"
                     className={style.button}
@@ -158,7 +145,7 @@ const App = () => {
             <ToastContainer />
           </div>
         </div>
-        <div>{username ? <h2>Welcome back, {username}!</h2> : <></>}</div>
+        {/* <div>{username ? <h2>Welcome back, {username}!</h2> : <></>}</div> */}
       </div>
     </>
   );
