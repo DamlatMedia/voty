@@ -23,6 +23,8 @@ function StudentDashboard() {
       setLoading(true);
       try {
         let currentUsername = username || localStorage.getItem("username");
+        
+  const studentId = localStorage.getItem("studentId");
 
         if (!currentUsername) {
           toast.error("Username is not available. Redirecting to login...");
@@ -39,7 +41,7 @@ function StudentDashboard() {
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
         const response = await axios.get(
-          `${API_BASE_URL}/student/one-student?username=${currentUsername}` ,
+          `${API_BASE_URL}/student/one-student/${studentId}` ,
       
         // const response = await axios.get(
         //   `http://localhost:4000/student/one-student?username=${currentUsername}`,

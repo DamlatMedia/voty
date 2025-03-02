@@ -20,6 +20,8 @@ function UserHeader() {
       try {
         let currentUsername = username || localStorage.getItem("username");
 
+        const studentId = localStorage.getItem("studentId");
+
         if (!currentUsername) {
           toast.error("Username is not available. Redirecting to login...");
           navigate("/user/login");
@@ -34,12 +36,14 @@ function UserHeader() {
         }
 
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-      
-        const response = await axios.get(
-          `${API_BASE_URL}/admin/user/user?username=${currentUsername}`,
 
-        // const response = await axios.get(
-        //   `http://localhost:4000/user/user?username=${currentUsername}`,
+        const response = await axios.get(
+          // `${API_BASE_URL}/admin/user/user?username=${currentUsername}`,
+
+          `${API_BASE_URL}/student/one-student/${studentId}`,
+
+          // const response = await axios.get(
+          //   `http://localhost:4000/user/user?username=${currentUsername}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -59,7 +63,6 @@ function UserHeader() {
         } else {
           toast.error("Failed to fetch user data.");
         }
-       
       } finally {
         setLoading(false);
       }
@@ -80,20 +83,17 @@ function UserHeader() {
         />
 
         <div className={style.dashName}>
-         <p>Hello {username} 👋🏿</p>
-         <p>what are you today?</p>
+          <p>Hello {username} 👋🏿</p>
+          <p>what are you today?</p>
         </div>
 
         <div className={style.dashLogos}>
-            <img
-              src={
-                userData?.profilePicture ||
-                "/images/default-profile.jpg"
-              }
-              alt="person"
-              className={style.person}
-            />
-          </div>
+          <img
+            src={userData?.profilePicture || "/images/default-profile.jpg"}
+            alt="person"
+            className={style.person}
+          />
+        </div>
       </div>
     </>
   );

@@ -20,6 +20,8 @@ function UserSideBar() {
       try {
         let currentUsername = username || localStorage.getItem("username");
 
+        const studentId = localStorage.getItem("studentId");
+
         if (!currentUsername) {
           toast.error("Username is not available. Redirecting to login...");
           navigate("/student/login");
@@ -35,7 +37,9 @@ function UserSideBar() {
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
         const response = await axios.get(
-          `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
+          // `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
+
+          `${API_BASE_URL}/student/one-student/${studentId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -105,7 +109,7 @@ function UserSideBar() {
                 <span>Moral Videos</span>
               </NavLink>
             </li>
-            <li className={style.navLi}>
+            {/* <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
                 to="/student/trivia"
@@ -113,7 +117,7 @@ function UserSideBar() {
                 <span className="material-symbols-outlined">monitoring</span>{" "}
                 <span>Trivia Games</span>
               </NavLink>
-            </li>
+            </li> */}
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}

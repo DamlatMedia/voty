@@ -32,6 +32,7 @@ import StudentTrivia from "../student/studentPages/StudentTrivia";
 import StudentSetting from "../student/studentPages/StudentSetting";
 import StudentVideos from "../student/studentPages/StudentVideos";
 import StudentNotification from "../student/studentPages/StudentNotification";
+import StudentQuizReview from "../student/studentComponent/StudentQuizReview";
 // import Payment from "../components/Payment";
 
 function Pages() {
@@ -67,6 +68,7 @@ function Pages() {
         <Route path="/student/scholarship" element={<StudentScholarship />} />
         <Route path="/student/notification" element={<StudentNotification />} />
         <Route path="/student/setting" element={<StudentSetting />} />
+        <Route path="/student/review" element={<StudentQuizReview />} />
       </Routes>
     </div>
   );

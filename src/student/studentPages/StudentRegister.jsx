@@ -34,19 +34,6 @@ function Register() {
   // Hook to navigate programmatically
   const navigate = useNavigate();
 
-  // const validationSchema = Yup.object().shape({
-  //   username: Yup.string()
-  //     .required("Username is required")
-  //     .min(5, "Username must be at least 5 characters"),
-  //   email: Yup.string().email("Invalid email").required("Email is required"),
-  //   password: Yup.string()
-  //     .min(8, "Password must be at least 8 characters")
-  //     .required("Password is required")
-  //     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-  //     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-  //     .matches(/\d/, "Password must contain at least one digit"),
-  // });
-
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .required("Username is required")
@@ -75,6 +62,7 @@ function Register() {
     gender: Yup.string()
       .oneOf(["male", "female"], "Invalid gender")
       .required("Gender is required"),
+    
     address: Yup.string()
       .min(5, "Address must be at least 5 characters")
       .required("Address is required"),
@@ -157,6 +145,7 @@ function Register() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const toggleRePasswordVisibility = () => setShowRePassword(!showRePassword);
 
   return (
@@ -339,14 +328,6 @@ function Register() {
 
                   <div>
                     <h4 className={style.label}>Gender</h4>
-                    {/* <Field
-                      type="text"
-                      name="gender"
-                      component={TextInput}
-                      placeholder="Male"
-                      ariaLabel="Enter Your Gender"
-                    /> */}
-
                     <Field name="gender" as="select">
                       <option value="" label="Select Gender" />
                       <option value="male" label="Male" />
