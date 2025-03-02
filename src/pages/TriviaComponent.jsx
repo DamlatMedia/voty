@@ -20,8 +20,9 @@ const StudentTrivia = ({ videoTitle }) => {
 
     const fetchTrivia = async () => {
       try {
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
         const { data } = await axios.get(
-          `http://localhost:7000/api/trivia/video/${encodeURIComponent(
+          `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
             videoTitle
           )}/${encodeURIComponent(ageCategory)}`
         );
@@ -53,8 +54,10 @@ const StudentTrivia = ({ videoTitle }) => {
         alert("You must be logged in to submit an answer.");
         return;
       }
-      const { data } = await axios.post(
-        `http://localhost:7000/api/trivia/video/${encodeURIComponent(
+
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+      const { data } = await axios.get(
+        `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
           videoTitle
         )}/${encodeURIComponent(ageCategory)}/answer`,
         { triviaId, answer: selectedAnswers[triviaId] },

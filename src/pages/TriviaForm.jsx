@@ -59,8 +59,9 @@ const AdminTrivia = () => {
 
       console.log("Token being sent:", token);
 
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        "http://localhost:7000/api/trivia/add",
+        `${API_BASE_URL}/api/trivia/add`,
         {
           videoTitle, // Convert to string
           question,
@@ -107,16 +108,14 @@ const AdminTrivia = () => {
         setExcelMessage("Authentication token is missing. Please log in.");
         return;
       }
-      await axios.post(
-        "http://localhost:7000/api/trivia/upload-excel",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+      await axios.post(`${API_BASE_URL}/api/trivia/upload-excel`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setExcelMessage("Trivia questions uploaded successfully!");
       setFile(null);

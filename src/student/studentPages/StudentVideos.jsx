@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import UserVideos from "../studentComponent/UserVideos";
 
-function StudentVideos () {
+function StudentVideos() {
   const context = useContext(UserContext) || {};
   const { username, setUsername } = context;
   const navigate = useNavigate();
@@ -34,11 +34,11 @@ function StudentVideos () {
           return;
         }
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-      
+
         const response = await axios.get(
-          `${API_BASE_URL}/student/one-student?username=${currentUsername}` ,
-        // const response = await axios.get(
-        //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
+          `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
+          // const response = await axios.get(
+          //   `http://localhost:4000/student/one-student?username=${currentUsername}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -63,9 +63,9 @@ function StudentVideos () {
     fetchUser();
     //   }, [username, navigate, setUsername]);
   }, [username, navigate]);
-   
+
   return (
-      <div className={style.dash}>
+    <div className={style.dash}>
       {loading ? (
         <p>Loading...</p>
       ) : username ? (
@@ -78,7 +78,7 @@ function StudentVideos () {
             <UserHeader />
 
             <div className={style.content}>
-          <UserVideos/>
+              <UserVideos />
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ function StudentVideos () {
         <p>No user data available. Redirecting...</p>
       )}
     </div>
-      );
+  );
 }
 
 export default StudentVideos;

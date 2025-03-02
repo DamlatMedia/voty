@@ -122,12 +122,12 @@
   width: 100%;
 }
 
-.markBtn{
+.markBtn {
   display: flex;
   justify-content: space-between;
 }
 
-.mark{
+.mark {
   border: none;
   background-color: #281567;
   color: white;
@@ -135,7 +135,7 @@
   border-radius: 1rem;
 }
 
-.mark1{
+.mark1 {
   border: none;
   background-color: #281567;
   color: white;
@@ -143,7 +143,7 @@
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .feature {
@@ -306,12 +306,12 @@
   padding: 0.4rem;
 }
 
-.lead{
+.lead {
   /* border: .1rem solid black; */
   /* padding: 1rem; */
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .leaderN {
@@ -324,108 +324,108 @@
   background-color: #d0cfd329;
 }
 
-.logs{
+.logs {
   /* border: .1rem solid black; */
   width: 5%;
 }
 
-.h4{
+.h4 {
   font-weight: 600;
   font-size: 1.2rem;
 }
 
 /* User Setting */
 
-.imageText{
+.imageText {
   display: flex;
   gap: 1rem;
   margin: 1rem 0;
   align-items: center;
 }
 
-.texts{
+.texts {
   display: flex;
   gap: 1rem;
 }
 
-.text1{
-  background-color:#281567 ;
+.text1 {
+  background-color: #281567;
   color: white;
-  padding: .5rem 1rem;
-  border-radius: .5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
 
-.text2{
-  border: .1rem solid #281567;
+.text2 {
+  border: 0.1rem solid #281567;
   color: #281567;
-  padding: .5rem 1rem;
-  border-radius: .5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
 
-.labe{
+.labe {
   display: flex;
   flex-direction: column;
 }
 
-.lab{
-  margin: .5rem 0;
-  color:#281567;
+.lab {
+  margin: 0.5rem 0;
+  color: #281567;
   font-weight: 600;
 }
 
-.input{
+.input {
   outline: none;
-  border: .1rem solid #281567;
+  border: 0.1rem solid #281567;
   padding: 1rem;
-  border-radius: .5rem;
-  margin: .5rem 0;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
 }
 
-.save{
+.save {
   border: none;
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin: 1rem 0;
   color: white;
   background-color: #281567;
 }
 
-.person{
+.person {
   aspect-ratio: 1/1;
   /* height: 100px;  */
-  border-radius: 50%; 
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
 }
 
-.profileInfo{
+.profileInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin: 1rem 0;
 }
 
-.minimie{
-  border-right: .1rem solid black;
+.minimie {
+  border-right: 0.1rem solid black;
   padding: 0 1rem 0 0;
   font-weight: 900;
   font-size: 1.2rem;
 }
 
-.gender{
-  border-right: .1rem solid black;
+.gender {
+  border-right: 0.1rem solid black;
   padding: 0 1rem 0 0;
   font-size: 1.2rem;
 }
 
-.age{
+.age {
   font-weight: 700;
   font-size: 1.2rem;
 }
 
-.school{
-  border-bottom: .1rem solid #281567;
-  padding-bottom: .5rem;
+.school {
+  border-bottom: 0.1rem solid #281567;
+  padding-bottom: 0.5rem;
 }
 
 @media screen and (max-width: 900px) {
@@ -447,11 +447,13 @@
     align-items: stretch;
   }
 
-  .resume, .leaders {
+  .resume,
+  .leaders {
     width: 100%;
   }
 
-  .video, .triva {
+  .video,
+  .triva {
     flex-wrap: wrap;
     gap: 1rem;
   }
@@ -462,12 +464,15 @@
 }
 
 @media screen and (max-width: 768px) {
-  .top, .video, .triva {
+  .top,
+  .video,
+  .triva {
     flex-direction: column;
     align-items: center;
   }
 
-  .numResume, .progress {
+  .numResume,
+  .progress {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -481,7 +486,8 @@
     align-items: center;
   }
 
-  .advert, .progressBar {
+  .advert,
+  .progressBar {
     width: 100%;
   }
 }
@@ -506,8 +512,8 @@
     gap: 0.5rem;
   }
 
-  .name{
-    font-size: .8rem;
+  .name {
+    font-size: 0.8rem;
   }
 
   .profileName {

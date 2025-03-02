@@ -37,8 +37,9 @@ const UploadVideo = () => {
         return;
       }
 
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
-        "http://localhost:7000/api/videos/upload",
+        `${API_BASE_URL}/api/videos/upload`,
         formData,
         {
           headers: {

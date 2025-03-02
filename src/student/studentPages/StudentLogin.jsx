@@ -54,7 +54,7 @@ const StudentLogin = () => {
         `${API_BASE_URL}/student/login`,
         values
       );
-
+ 
       console.log("Login response:", response.data); // Debugging
 
       const { studentData, authToken: token } = response.data;

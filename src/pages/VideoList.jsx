@@ -1,7 +1,6 @@
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 
-
 // const VideoList = () => {
 //   const [videos, setVideos] = useState([]);
 //   const [message, setMessage] = useState("");
@@ -77,20 +76,20 @@
 
 // export default VideoList;
 
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import TriviaQuiz from "./TriviaComponent"; 
+import TriviaQuiz from "./TriviaComponent";
 
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
   const [message, setMessage] = useState("");
-  const [selectedVideo, setSelectedVideo] = useState(null); 
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get("http://localhost:7000/api/videos");
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+        const response = await axios.get(`${API_BASE_URL}/api/videos`);
         setVideos(response.data);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -110,15 +109,12 @@ const VideoList = () => {
         return;
       }
 
-      await axios.put(
-        `http://localhost:7000/api/videos/${videoId}/watch`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+      await axios.get(`${API_BASE_URL}/api/videos/${videoId}/watch`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setVideos((prevVideos) =>
         prevVideos.map((video) =>
@@ -153,9 +149,10 @@ const VideoList = () => {
               Show Trivia
             </button>
 
-
             {/* Render TriviaQuiz when a video is selected */}
-            {selectedVideo === video.title && <TriviaQuiz videoTitle={video.title} />}
+            {selectedVideo === video.title && (
+              <TriviaQuiz videoTitle={video.title} />
+            )}
           </li>
         ))}
       </ul>

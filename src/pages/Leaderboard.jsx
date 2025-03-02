@@ -54,7 +54,6 @@
 
 // export default Leaderboard;
 
-
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
 
@@ -126,8 +125,10 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
         const response = await axios.get(
-          `http://localhost:7000/api/leaderboard?ageCategory=${encodeURIComponent(
+          `${API_BASE_URL}/api/leaderboard?ageCategory=${encodeURIComponent(
             ageCategory
           )}`
         );
@@ -149,7 +150,7 @@ const Leaderboard = () => {
   return (
     <div>
       <h2>Top 1000 Students - Age Category {ageCategory}</h2>
-      
+
       {/* Toggle between age categories */}
       <div style={{ marginBottom: "1rem" }}>
         <button

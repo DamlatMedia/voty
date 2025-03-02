@@ -271,7 +271,10 @@ const StudentQuiz = ({ videoTitle }) => {
 
   // Check quiz lock for the current student on mount.
   useEffect(() => {
-    if (studentId && localStorage.getItem(`quizLocked_${studentId}`) === "true") {
+    if (
+      studentId &&
+      localStorage.getItem(`quizLocked_${studentId}`) === "true"
+    ) {
       setQuizSubmitted(true);
     }
   }, [studentId]);
@@ -284,8 +287,9 @@ const StudentQuiz = ({ videoTitle }) => {
     }
     const fetchTrivia = async () => {
       try {
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
         const { data } = await axios.get(
-          `http://localhost:7000/api/trivia/video/${encodeURIComponent(
+          `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
             videoTitle
           )}/${encodeURIComponent(ageCategory)}`
         );
@@ -315,7 +319,9 @@ const StudentQuiz = ({ videoTitle }) => {
 
   // Format seconds as mm:ss.
   const formatTime = (seconds) => {
-    const mm = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const mm = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
     const ss = (seconds % 60).toString().padStart(2, "0");
     return `${mm}:${ss}`;
   };
@@ -347,8 +353,10 @@ const StudentQuiz = ({ videoTitle }) => {
         alert("You must be logged in to submit an answer.");
         return;
       }
+
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       await axios.post(
-        `http://localhost:7000/api/trivia/video/${encodeURIComponent(
+        `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
           videoTitle
         )}/${encodeURIComponent(ageCategory)}/answer`,
         { triviaId, answer },
@@ -360,7 +368,11 @@ const StudentQuiz = ({ videoTitle }) => {
         }
       );
     } catch (error) {
-      console.error("Error submitting answer for trivia", triviaId, error.response?.data || error);
+      console.error(
+        "Error submitting answer for trivia",
+        triviaId,
+        error.response?.data || error
+      );
     }
   };
 
@@ -386,7 +398,9 @@ const StudentQuiz = ({ videoTitle }) => {
 
   // Calculate progress percentage.
   const progressPercentage =
-    trivias.length > 0 ? ((currentQuestionIndex + 1) / trivias.length) * 100 : 0;
+    trivias.length > 0
+      ? ((currentQuestionIndex + 1) / trivias.length) * 100
+      : 0;
 
   // Prevent reattempt if quiz is already submitted.
   if (loading) return <p>Loading quiz...</p>;
@@ -445,7 +459,7 @@ const StudentQuiz = ({ videoTitle }) => {
                     border: "1px solid #ccc",
                     width: "100%",
                     textAlign: "left",
-                    cursor: !!selectedAnswer ? "not-allowed" : "pointer"
+                    cursor: !!selectedAnswer ? "not-allowed" : "pointer",
                   }}
                 >
                   {option}
@@ -454,7 +468,14 @@ const StudentQuiz = ({ videoTitle }) => {
             ))}
         </ul>
         {selectedAnswer && (
-          <p style={{ marginTop: "1rem", color: feedback.toLowerCase().includes("correct") ? "green" : "red" }}>
+          <p
+            style={{
+              marginTop: "1rem",
+              color: feedback.toLowerCase().includes("correct")
+                ? "green"
+                : "red",
+            }}
+          >
             {feedback}
           </p>
         )}
@@ -469,10 +490,12 @@ const StudentQuiz = ({ videoTitle }) => {
             border: "none",
             borderRadius: "5px",
             width: "100%",
-            marginTop: "2rem"
+            marginTop: "2rem",
           }}
         >
-          {currentQuestionIndex < trivias.length - 1 ? "Next Question" : "Finish Quiz"}
+          {currentQuestionIndex < trivias.length - 1
+            ? "Next Question"
+            : "Finish Quiz"}
         </button>
       )}
       {quizSubmitted && (
@@ -485,8 +508,6 @@ const StudentQuiz = ({ videoTitle }) => {
 };
 
 export default StudentQuiz;
-
-
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";

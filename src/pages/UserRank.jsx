@@ -71,8 +71,10 @@ const UserRank = () => {
           setError("You are not logged in.");
           return;
         }
+
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
         const response = await axios.get(
-          `http://localhost:7000/api/leaderboard/rank?ageCategory=${ageCategory}`,
+          `${API_BASE_URL}/api/leaderboard/rank?ageCategory=${ageCategory}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
