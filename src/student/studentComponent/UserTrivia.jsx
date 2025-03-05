@@ -1,500 +1,192 @@
-// import style from "../studentStyles/dashboard.module.css";
+// import React, { useEffect, useState } from "react";
+// import { useLocation } from "react-router-dom";
+// import TriviaQuiz from "../studentComponent/TriviaComponent"; // Your existing trivia quiz component
+// import axios from "axios";
 
-// function UserTrivia() {
+// const StudentTriviaPage = () => {
+//   const location = useLocation();
+//   const { video } = location.state || {}; // Expect video details from navigation state
+//   const [triviaCount, setTriviaCount] = useState(0);
+
+//   useEffect(() => {
+//     if (video && video.title) {
+//       // Optionally, fetch the count of trivia questions for this video and age category.
+//       // For example, assume your backend endpoint can return a count:
+//       const fetchTriviaCount = async () => {
+//         try {
+//           const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+//           // This assumes you have an endpoint like /api/trivia/count?videoTitle=...&ageCategory=...
+//           const ageCategory = localStorage.getItem("ageCategory");
+//           const { data } = await axios.get(
+//             `${API_BASE_URL}/api/trivia/count?videoTitle=${encodeURIComponent(
+//               video.title
+//             )}&ageCategory=${encodeURIComponent(ageCategory)}`
+//           );
+//           setTriviaCount(data.count);
+//         } catch (error) {
+//           console.error("Error fetching trivia count:", error);
+//         }
+//       };
+//       fetchTriviaCount();
+//     }
+//   }, [video]);
+
+//   if (!video) return <p>No video details found.</p>;
+
 //   return (
-//     <>
-//       <div className={style.all}>
-//         <h2>Recently Taken</h2>
-
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-
-//         <h2>New Trivia Games</h2>
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-
-//         <div className={style.filter}>
-//           <div className={style.allCourse}>
-//             <p className={style.filter1}>All</p>
-//             <select name="" id="" className={style.filter2}>
-//               <option value="">Course</option>
-//               <option value="">Course</option>
-//               <option value="">Course</option>
-//             </select>
-//           </div>
-
-//           <img src="/images/filter.png" alt="games" className={style.filter3} />
-//         </div>
-
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-
-//         <div className={style.triva}>
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/money.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Economics</p>
-//               <p>Systems of Government</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/math.png" alt="math" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Mathematics</p>
-//               <p>Linear Equations</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/english.png" alt="english" />
-//               <p>Course</p>
-//               <p className={style.phTag}>English Language</p>
-//               <p>Passive and Active Voice</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//           <div className={style.trivDiv}>
-//             <div className={style.course}>
-//               <img src="/images/literature.png" alt="games" />
-//               <p>Course</p>
-//               <p className={style.phTag}>Literature-in-English</p>
-//               <p>Figures of Speech</p>
-//             </div>
-
-//             <div>
-//               <img src="/images/progress.png" alt="progres" />
-//             </div>
-//           </div>
-
-//         </div>
-//       </div>
-//     </>
+//     <div style={{ padding: "1rem" }}>
+//       <h1>{video.title}</h1>
+//       <p>{video.description}</p>
+//       <p>Number of Trivia Questions: {triviaCount > 0 ? triviaCount : "N/A"}</p>
+//       <TriviaQuiz videoTitle={video.title} />
+//     </div>
 //   );
-// }
+// };
 
-// export default UserTrivia;
+// export default StudentTriviaPage;
 
-import style from "../studentStyles/dashboard.module.css";
+// StudentTriviaPage.jsx
+
+// StudentTriviaList.jsx
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import style from "../studentStyles/dashboard.module.css"; // your style file
 
-function UserTrivia({ videoTitle }) {
-  // Retrieve the student's age category from localStorage (set during login)
-  const ageCategory = localStorage.getItem("ageCategory");
-
-  const [trivias, setTrivias] = useState([]);
-  const [selectedAnswers, setSelectedAnswers] = useState({}); // keyed by trivia._id
-  const [feedbacks, setFeedbacks] = useState({}); // keyed by trivia._id
+const StudentTriviaList = () => {
+  const [videoData, setVideoData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const ageCategory = localStorage.getItem("ageCategory");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("videoTitle received:", videoTitle);
-    console.log("ageCategory received:", ageCategory);
-    if (!videoTitle || !ageCategory) {
-      setLoading(false);
-      return;
-    }
-
-    const fetchTrivia = async () => {
+    // Fetch all videos first.
+    const fetchVideosWithTriviaCount = async () => {
       try {
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-        const { data } = await axios.get(
-          `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
-            videoTitle
-          )}/${encodeURIComponent(ageCategory)}`
+        const videosRes = await axios.get(`${API_BASE_URL}/api/videos`);
+        const videos = videosRes.data;
+
+        // For each video, fetch trivia for the student's age category.
+        // We'll use Promise.all to make parallel requests.
+        const videosWithTrivia = await Promise.all(
+          videos.map(async (video) => {
+            try {
+              const triviaRes = await axios.get(
+                `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
+                  video.title
+                )}/${encodeURIComponent(ageCategory)}`
+              );
+              // Count how many trivia questions exist for this video.
+              const triviaCount = Array.isArray(triviaRes.data)
+                ? triviaRes.data.length
+                : 0;
+              return { ...video, triviaCount };
+            } catch (err) {
+              console.error(
+                `Error fetching trivia for video ${video.title}:`,
+                err
+              );
+              return { ...video, triviaCount: 0 };
+            }
+          })
         );
-        // Set all trivia documents instead of just the first one
-        setTrivias(data);
-      } catch (error) {
-        console.error("Error fetching trivia:", error);
-        setTrivias([]);
+        setVideoData(videosWithTrivia);
+      } catch (err) {
+        console.error("Error fetching videos:", err);
+        setError("Failed to load videos.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTrivia();
-  }, [videoTitle, ageCategory]);
+    fetchVideosWithTriviaCount();
+  }, [ageCategory]);
 
-  const handleAnswerChange = (triviaId, option) => {
-    setSelectedAnswers((prev) => ({ ...prev, [triviaId]: option }));
+  const handleVideoClick = (video) => {
+    // Navigate to the dedicated trivia quiz page.
+    // Pass the video details in location.state so that the next page can display video title, description, etc.
+    navigate("/student/trivia/page", { state: { video } });
   };
 
-  const handleSubmitAnswer = async (triviaId) => {
-    if (!selectedAnswers[triviaId]) {
-      alert("Please select an answer for this question.");
-      return;
-    }
-    try {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        alert("You must be logged in to submit an answer.");
-        return;
-      }
-
-      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-      const { data } = await axios.post(
-        `${API_BASE_URL}/api/trivia/video/${encodeURIComponent(
-          videoTitle
-        )}/${encodeURIComponent(ageCategory)}/answer`,
-        { triviaId, answer: selectedAnswers[triviaId] },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setFeedbacks((prev) => ({ ...prev, [triviaId]: data.message }));
-    } catch (error) {
-      console.error("Error submitting answer:", error.response?.data || error);
-      alert("Error submitting answer for this question.");
-    }
-  };
-
-  if (loading) return <p>Loading trivia...</p>;
-  if (!trivias.length)
-    return (
-      <p className="text-center text-gray-500">
-        No trivia available for this video for your age group.
-      </p>
-    );
+  if (loading) return <p>Loading videos...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <div className={style.all}>
-        {trivias.map((trivia) => (
+    <div className={style.all}>
+      <h2>Available Videos with Trivia</h2>
+      {/* <div
+        className={style.video}
+        style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
+      >
+        {videoData.map((video) => (
           <div
-            key={trivia._id}
-            className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg mb-4"
+            key={video._id}
+            className={style.feature}
+            style={{ width: "45%" }}
           >
-            <h2 className="text-xl font-bold mb-4">{trivia.question}</h2>
-            <ul>
-              {Array.isArray(trivia.options) && trivia.options.length > 0 ? (
-                trivia.options.map((option, index) => (
-                  <li key={index} className="mb-2">
-                    <label>
-                      <input
-                        type="radio"
-                        name={`answer-${trivia._id}`}
-                        value={option}
-                        checked={selectedAnswers[trivia._id] === option}
-                        onChange={() => handleAnswerChange(trivia._id, option)}
-                        className="mr-2"
-                        disabled={!!feedbacks[trivia._id]} // Disable if feedback exists
-                      />
-                      {option}
-                    </label>
-                  </li>
-                ))
-              ) : (
-                <p>No options available for this question.</p>
-              )}
-            </ul>
+            {/* <video className={style.vidImage} controls>
+              <source src={video.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video> 
+            <p className={style.phTag}>{video.title}</p>
+            <p>{video.description}</p>
+            <p>
+              Trivia Questions: <strong>{video.triviaCount}</strong>
+            </p>
             <button
-              onClick={() => handleSubmitAnswer(trivia._id)}
-              className="w-full p-2 bg-blue-500 text-white rounded mt-4"
+              className={style.mark1}
+              onClick={() => handleVideoClick(video)}
             >
-              Submit Answer
+              Take Quiz
+              <span className="material-symbols-outlined">monitoring</span>
             </button>
-            {feedbacks[trivia._id] && (
-              <p
-                className={`mt-4 text-lg ${
-                  feedbacks[trivia._id].toLowerCase().includes("correct")
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
+          </div>
+        ))}
+      </div> */}
+
+      <div
+        className={style.video}
+        style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
+      >
+        {videoData.map((video) => (
+          <div className={style.featured} key={video._id}>
+            <div className={style.course}>
+              <div>
+                <img src="/images/money.png" alt="games" />
+              </div>
+
+              <div className={style.png}>
+                <p>Course</p>
+                <p className={style.phTag}>{video.title}</p>
+                <p>{video.description}</p>
+              </div>
+            </div>
+
+            <div className={style.leftPro}>
+              <div className={style.rightPro}>
+                <img src="/images/progress.png" alt="progres" />
+                <p>
+                  {" "}
+                  <strong>{video.triviaCount}</strong> Questions{" "}
+                </p>
+              </div>
+
+              <button
+                className={style.mark1}
+                onClick={() => handleVideoClick(video)}
               >
-                {feedbacks[trivia._id]}
-              </p>
-            )}
+                Take Quiz
+                <span className="material-symbols-outlined">monitoring</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
-}
+};
 
-export default UserTrivia;
+export default StudentTriviaList;

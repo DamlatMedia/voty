@@ -109,7 +109,7 @@ function UserSideBar() {
                 <span>Moral Videos</span>
               </NavLink>
             </li>
-            {/* <li className={style.navLi}>
+            <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
                 to="/student/trivia"
@@ -117,7 +117,7 @@ function UserSideBar() {
                 <span className="material-symbols-outlined">monitoring</span>{" "}
                 <span>Trivia Games</span>
               </NavLink>
-            </li> */}
+            </li>
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}

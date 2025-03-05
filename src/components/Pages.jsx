@@ -20,6 +20,8 @@ import AdminLogin from "../admin/adminPages/AdminLogin";
 import AdminDashboard from "../admin/adminPages/AdminHomePage";
 import AdminUserManagement from "../admin/adminPages/AdminUserManagement";
 import AdminContentManagement from "../admin/adminPages/AdminContentManagement";
+import AdminNotification from "../admin/adminPages/AdminNotification";
+import AdminNotificationForm from "../admin/adminComponents/AdminNotificationForm";
 import AdminScholarshipManagement from "../admin/adminPages/AdminScholarshipManagement";
 
 
@@ -32,7 +34,8 @@ import StudentTrivia from "../student/studentPages/StudentTrivia";
 import StudentSetting from "../student/studentPages/StudentSetting";
 import StudentVideos from "../student/studentPages/StudentVideos";
 import StudentNotification from "../student/studentPages/StudentNotification";
-import StudentQuizReview from "../student/studentComponent/StudentQuizReview";
+import StudentQuizReview from "../student/studentComponent/UserQuizReview";
+import StudentTriviaPage from "../student/studentPages/StudentTriviaPage";
 // import Payment from "../components/Payment";
 
 function Pages() {
@@ -57,6 +60,8 @@ function Pages() {
         <Route path="/admin/content-management" element={<AdminContentManagement />}/>
         <Route path="/admin/scholarship-management" element={<AdminScholarshipManagement />}/>
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/notification" element={<AdminNotification />} />
+        <Route path="/admin/notification/form" element={<AdminNotificationForm />} />
         <Route path="/admin/register" element={<AdminRegister />} />
    
         {/* Student Pages*/}
@@ -65,6 +70,7 @@ function Pages() {
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student/videos" element={<StudentVideos />} />
         <Route path="/student/trivia" element={<StudentTrivia />} />
+        <Route path="/student/trivia/page" element={<StudentTriviaPage />} />
         <Route path="/student/scholarship" element={<StudentScholarship />} />
         <Route path="/student/notification" element={<StudentNotification />} />
         <Route path="/student/setting" element={<StudentSetting />} />
