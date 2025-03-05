@@ -4,6 +4,59 @@
   padding: 0;
 }
 
+.navLi a {
+  text-decoration: none;
+
+  color: black;
+  font-weight: 600;
+  position: relative;
+  transition: color 300ms;
+}
+
+.navLi a:hover {
+  color: #363131;
+}
+
+.navLi a:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #363131;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.navLi a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #363131;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.checkme {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.forgt {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* gap: rem; */
+  justify-content: space-between;
+}
+
 .logoHead {
   display: flex;
   align-items: center;

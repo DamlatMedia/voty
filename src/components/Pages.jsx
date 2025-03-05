@@ -3,6 +3,12 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 //Home Routes
+
+import EmailSuccess from "../pages/EmailSuccess";
+import ForgotPassword from "../pages/ForgotPassword";
+import UpdatePassword from "../pages/UpdatePassword";
+import EmailVerify from "../pages/EmailVerify";
+import VerifyEmail from "../pages/VerifyEmail";
 import Home from "../pages/Home";
 import TriviaComponent from "../pages/TriviaComponent";
 import TriviaForm from "../pages/TriviaForm";
@@ -52,6 +58,11 @@ function Pages() {
         <Route path="/trivia-form" element={<TriviaForm/>} />
         <Route path="/user-rank" element={<UserRank/>} />
         <Route path="/leaderboard" element={<Leaderboard/>} />
+        <Route path="/email-verify" element={<EmailVerify />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/email-success" element={<EmailSuccess />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<UpdatePassword />} />
         {/* <Route path="/payment" element={<Payment />} /> */}
 
         {/* Admin Pages*/}

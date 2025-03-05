@@ -148,6 +148,18 @@ const StudentLogin = () => {
                       </span>
                     </div>
 
+                    
+                    <div className={style.forgt}>
+                  <div className={style.checkme}>
+                    <input type="checkbox" name="" id="" />
+                    <p>Remember Me</p>
+                  </div>
+
+                  <li className={style.navLi}>
+                    <NavLink to="/forgot-password">Forgot Password</NavLink>
+                  </li>
+                </div>
+
                     <div className={style.btn}>
                       {/* Submit Button */}
                       <button
@@ -226,6 +238,7 @@ const StudentLogin = () => {
                         <NavLink to="/student/register">Sign Up</NavLink>
                       </h3>
                     </span>
+
                   </Form>
                 </div>
               )}

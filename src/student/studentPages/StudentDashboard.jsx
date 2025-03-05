@@ -41,7 +41,7 @@ function StudentDashboard() {
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
         const response = await axios.get(
-          `${API_BASE_URL}/student/one-student/${studentId}`,
+          `${API_BASE_URL}/student/one-student/${currentUsername}`,
 
           // const response = await axios.get(
           //   `http://localhost:4000/student/one-student?username=${currentUsername}`,

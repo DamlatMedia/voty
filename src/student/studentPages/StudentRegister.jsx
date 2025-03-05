@@ -24,14 +24,10 @@ const REDIRECT_URI = `${window.location.origin}/auth/callback`;
 function Register() {
   const [provider, setProvider] = useState("");
   const [profile, setProfile] = useState(null);
-
   const { setUsername } = useContext(UserContext); // Access setUsername from UserContext
-
-  // State to track password visibility
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  // Hook to navigate programmatically
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -62,7 +58,7 @@ function Register() {
     gender: Yup.string()
       .oneOf(["male", "female"], "Invalid gender")
       .required("Gender is required"),
-    
+
     address: Yup.string()
       .min(5, "Address must be at least 5 characters")
       .required("Address is required"),
@@ -93,8 +89,17 @@ function Register() {
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
       const response = await axios.post(
         `${API_BASE_URL}/student/register`,
-    
+
         studentData
+      );
+
+      const { verificationToken, email } = response.data;
+      localStorage.setItem("VerifyToken", verificationToken);
+      localStorage.setItem("userEmail", email);
+      console.log("Saved email to localStorage:", email);
+      console.log(
+        "Saved verification token to localStorage:",
+        verificationToken
       );
 
       console.log(response.data);
@@ -105,12 +110,15 @@ function Register() {
 
       // Display success message using toastify
       toast.success("Registration successful", { autoClose: 2000 });
+
+      console.log("Submitting data:", values);
+      console.log("API BASE URL:", process.env.REACT_APP_API_BASE_URL);
       // Redirect to the login page after a short delay
       setTimeout(() => {
-        navigate("/student/login");
+        navigate("/verify-email");
       }, 2000); // Delay for 2 seconds before redirecting
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Registration error details:", error.response?.data || error.message);
       toast.error("Registration failed!");
       console.log("Submitting data:", values);
       //   handleApiError(error, setErrors); // Pass setErrors to handle API validation errors

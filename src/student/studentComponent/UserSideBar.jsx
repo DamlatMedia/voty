@@ -10,24 +10,72 @@ import { useContext, useState, useEffect } from "react";
 function UserSideBar() {
   const context = useContext(UserContext) || {};
   const { username, setUsername } = context;
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  // const navigate = useNavigate();
+  // const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     setLoading(true);
+  //     try {
+  //       let currentUsername = username || localStorage.getItem("username");
+
+  //       const studentId = localStorage.getItem("studentId");
+
+  //       if (!currentUsername) {
+  //         toast.error("Username is not available. Redirecting to login...");
+  //         navigate("/student/login");
+  //         return;
+  //       }
+
+  //       const token = localStorage.getItem("authToken");
+  //       if (!token) {
+  //         toast.error("Unauthorized access. Please log in.");
+  //         navigate("/student/login");
+  //         return;
+  //       }
+  //       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  //       const response = await axios.get(
+  //         // `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
+
+  //         // `${API_BASE_URL}/student/one-student/${studentId}`,
+  //         `${API_BASE_URL}/student/one-student/${currentUsername}`,
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+
+  //       if (response.data && response.data.studentData?.username) {
+  //         console.log(response.data.studentData.username);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       toast.error("Failed to fetch user data.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, [username, navigate]);
+
+  // const { username } = useContext(UserContext);
+  
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [newProfilePic, setNewProfilePic] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
+    const fetchUserData = async () => {
       try {
-        let currentUsername = username || localStorage.getItem("username");
-
-        const studentId = localStorage.getItem("studentId");
-
+        const currentUsername = username || localStorage.getItem("username");
         if (!currentUsername) {
           toast.error("Username is not available. Redirecting to login...");
           navigate("/student/login");
           return;
         }
-
         const token = localStorage.getItem("authToken");
         if (!token) {
           toast.error("Unauthorized access. Please log in.");
@@ -35,19 +83,13 @@ function UserSideBar() {
           return;
         }
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
         const response = await axios.get(
-          // `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
-
-          `${API_BASE_URL}/student/one-student/${studentId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          `${API_BASE_URL}/student/one-student/${currentUsername}`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        if (response.data && response.data.studentData?.username) {
-          console.log(response.data.studentData.username);
-        }
+        // We assume the API returns user data in response.data.data or response.data.userData.
+        const data = response.data.data || response.data.userData;
+        setUserData(data);
       } catch (error) {
         console.error("Error fetching user data:", error);
         toast.error("Failed to fetch user data.");
@@ -56,7 +98,7 @@ function UserSideBar() {
       }
     };
 
-    fetchUser();
+    fetchUserData();
   }, [username, navigate]);
 
   const handleLogout = () => {
@@ -78,9 +120,19 @@ function UserSideBar() {
 
       <div className={`${style.bar} ${isSidebarOpen ? style.open : ""}`}>
         <div className={style.lname}>
-          <img
+          {/* <img
             src="/images/default-profile.jpg"
             alt="img"
+            className={style.logos}
+          /> */}
+
+          <img
+            src={
+              newProfilePic
+                ? URL.createObjectURL(newProfilePic)
+                : userData?.profilePicture || "/images/default-profile.jpg"
+            }
+            alt="Profile"
             className={style.logos}
           />
           <div className={style.nameInf}>
