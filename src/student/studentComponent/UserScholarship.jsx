@@ -9,6 +9,46 @@ function UserScholarship() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [ageCategory, setAgeCategory] = useState(
+    localStorage.getItem("ageCategory") || ""
+  );
+
+  const [rank, setRank] = useState(null);
+
+  useEffect(() => {
+    if (!ageCategory) {
+      setError("Your age category is not set. Please update your profile.");
+      setLoading(false);
+      return;
+    }
+
+    const fetchRank = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+          setError("You are not logged in.");
+          return;
+        }
+
+        const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+        const response = await axios.get(
+          `${API_BASE_URL}/api/leaderboard/rank?ageCategory=${ageCategory}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setRank(response.data.rank);
+      } catch (err) {
+        console.error("Error fetching rank:", err);
+        setError("Failed to load your rank.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRank();
+  }, [ageCategory]);
+
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
@@ -35,7 +75,6 @@ function UserScholarship() {
     <>
       <div className={style.all}>
         <img src="/images/advert.png" alt="advert" className={style.adverts} />
-
         <div className={style.leaderWeek}>
           <h2>Leaderboard</h2>
           {/* <select name="" id="" className={style.progressDate}>
@@ -53,7 +92,11 @@ function UserScholarship() {
             11-20
           </button>
         </div>
-
+        <div>
+          <h2>Your Rank in Age Category {ageCategory}</h2>
+          <p>You are ranked #{rank} in the leaderboard.</p>
+        </div>{" "}
+        <br />
         <div className={style.leadersScholarship}>
           {leaderboard.map((student, index) => (
             <div className={style.leaderScho}>
@@ -71,7 +114,6 @@ function UserScholarship() {
             </div>
           ))}
         </div>
-
         {/* <div className={style.leaderScho}>
             <div className={style.profileName}>
               <img src="/images/silver.png" alt="silver" />

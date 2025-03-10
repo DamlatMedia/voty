@@ -42,6 +42,7 @@ import StudentVideos from "../student/studentPages/StudentVideos";
 import StudentNotification from "../student/studentPages/StudentNotification";
 import StudentQuizReview from "../student/studentComponent/UserQuizReview";
 import StudentTriviaPage from "../student/studentPages/StudentTriviaPage";
+import UserPayment from "../student/studentComponent/UserPayment";
 // import Payment from "../components/Payment";
 
 function Pages() {
@@ -76,6 +77,7 @@ function Pages() {
         <Route path="/admin/register" element={<AdminRegister />} />
    
         {/* Student Pages*/}
+        <Route path="/student/payment" element={<UserPayment />} />
         <Route path="/student/register" element={<StudentRegister />} />
         <Route path="/student/login" element={<StudentLogin />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
