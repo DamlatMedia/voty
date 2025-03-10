@@ -232,6 +232,7 @@
 
 // export default UserNotification;
 
+
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import style from "../studentStyles/dashboard.module.css";
@@ -333,7 +334,7 @@ const UserSettings = () => {
         formData.append("profilePicture", newProfilePic);
         // Call your endpoint for updating profile picture. Adjust the URL as needed.
         const picResponse = await axios.put(
-          `${API_BASE_URL}/student/update-profile-picture`,
+          `${API_BASE_URL}/student/update-profile-picture/${currentUsername}`,
           formData,
           {
             headers: {

@@ -184,7 +184,7 @@
 //     setPaymentStage("paystack");
 //   };
 
-//   const handlePaymentSuccess = async (paystackReference) => {
+//   const handlePaymentSuccess = async (reference) => {
 //     // On success, update the user's payment flag on backend:
 //     try {
 //       const currentUsername = username || localStorage.getItem("username");
@@ -251,6 +251,170 @@
 // export default StudentDashboard;
 
 // StudentDashboard.jsx
+// import React, { useContext, useState, useEffect } from "react";
+// import style from "../studentStyles/student.module.css";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import { UserContext } from "../../components/UserContext";
+// import { useNavigate } from "react-router-dom";
+// import UserSideBar from "../studentComponent/UserSideBar";
+// import UserHeader from "../studentComponent/UserHeader";
+// import UserPayment from "../studentComponent/UserPayment";
+// import UserPaystack from "../studentComponent/UserPaystack";
+// import UserSuccessful from "../studentComponent/UserSuccessful";
+// import UserDashboardContent from "../studentComponent/UserDashboard";
+
+// function StudentDashboard() {
+//   const { username, setUsername } = useContext(UserContext);
+//   const navigate = useNavigate();
+//   const [loading, setLoading] = useState(true);
+//   // paymentStage can be: "payment", "paystack", "success", or "dashboard"
+//   const [paymentStage, setPaymentStage] = useState("payment");
+//   const [userData, setUserData] = useState(null);
+
+//   useEffect(() => {
+//     console.log("Fetching user data...");
+//     const fetchUserData = async () => {
+//       setLoading(true);
+//       try {
+//         // When fetching user data, use:
+
+//         const currentUsername = username || localStorage.getItem("username");
+//         // console.log("Current username:", currentUsername);
+//         const token = localStorage.getItem("authToken");
+//         // console.log("Auth token:", token);
+
+//         if (!currentUsername || !token) {
+//           toast.error("Unauthorized. Redirecting to login...");
+//           navigate("/student/login");
+//           return;
+//         }
+
+//         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+//         const endpoint = `${API_BASE_URL}/student/one-student/${currentUsername}`;
+
+//         console.log("User data endpoint:", endpoint);
+
+//         const response = await axios.get(endpoint, {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+
+//         console.log("User data fetched:", response.data);
+
+//         const data = response.data.studentData || response.data.data;
+
+//         setUserData(data);
+
+//         // Check payment status
+//         if (data.isPaid || localStorage.getItem("isPaid") === "true") {
+//           console.log("User is paid. Setting paymentStage to 'dashboard'.");
+//           setPaymentStage("dashboard");
+//           localStorage.setItem("isPaid", "true");
+
+//           console.log("User is marked as paid.");
+//         } else {
+//           console.log("User is not paid. Payment stage remains 'payment'.");
+//         }
+
+//         // if (data.isPaid) {
+//         //   console.log("User is paid. Setting paymentStage to 'dashboard'.");
+//         //   setPaymentStage("dashboard");
+//         //   localStorage.setItem("isPaid", "true");  // Only update local storage if backend confirms payment
+//         // } else {
+//         //   console.log("User is not paid. Payment stage remains 'payment'.");
+//         //   localStorage.removeItem("isPaid");  // Remove incorrect payment flag if necessary
+//         // }
+
+//       } catch (error) {
+//         console.error("Error fetching user data:", error);
+//         toast.error("Failed to fetch user data.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchUserData();
+//   }, [username, navigate]);
+
+//   const handleProceedPayment = () => {
+//     console.log("Proceeding to payment step: switching to 'paystack' stage.");
+//     setPaymentStage("paystack");
+//   };
+
+//   const handlePaymentSuccess = async (reference) => {
+//     console.log("✅ handlePaymentSuccess Triggered!");
+//     console.log("🔹 Received Paystack Reference:", reference);
+
+//     try {
+//       const currentUsername = username || localStorage.getItem("username");
+//       const token = localStorage.getItem("authToken");
+
+//       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+//       console.log("🔹 Sending Payment Update to Backend...");
+
+//       const response = await axios.patch(
+//         `${API_BASE_URL}/student/update-payment/${currentUsername}`,
+
+//         { isPaid: true, reference },
+//         { headers: { Authorization: `Bearer ${token}` } }
+//       );
+
+//       console.log("✅ Backend Payment Update Successful:", response.data);
+
+//       setPaymentStage("success");
+
+//       localStorage.setItem("isPaid", "true");
+
+//     } catch (error) {
+//       console.error(
+//         "❌ Error Updating Payment Status:",
+//         error.response?.data || error.message
+//       );
+//       toast.error("Payment update failed.");
+//     }
+//   };
+
+//   const handleContinue = () => {
+//     console.log("Continuing to dashboard.");
+//     setPaymentStage("dashboard");
+//   };
+
+//   if (loading) return <p>Loading...</p>;
+
+//   return (
+//     <div className={style.dash}>
+//       <div className={style.dashSide}>
+//         <div className={style.side}>
+//           <UserSideBar />
+//         </div>
+//         <div className={style.home}>
+//           <UserHeader />
+
+//           <div className={style.content}>
+//             {paymentStage === "payment" && (
+//               <UserPayment onProceed={handleProceedPayment} />
+//             )}
+
+//             {paymentStage === "paystack" && (
+//               <UserPaystack onPaymentSuccess={handlePaymentSuccess} />
+//             )}
+
+//             {paymentStage === "success" && (
+//               <UserSuccessful onContinue={handleContinue} />
+//             )}
+
+//             {paymentStage === "dashboard" && <UserDashboardContent />}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default StudentDashboard;
+
 import React, { useContext, useState, useEffect } from "react";
 import style from "../studentStyles/student.module.css";
 import axios from "axios";
@@ -269,44 +433,53 @@ function StudentDashboard() {
   const { username, setUsername } = useContext(UserContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  // paymentStage can be: "payment", "paystack", "success", or "dashboard"
   const [paymentStage, setPaymentStage] = useState("payment");
   const [userData, setUserData] = useState(null);
+
+  // Ensure username is set if missing
+  useEffect(() => {
+    if (!username) {
+      const storedUsername = localStorage.getItem("username");
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    }
+  }, [username, setUsername]);
 
   useEffect(() => {
     console.log("Fetching user data...");
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        // When fetching user data, use:
-
         const currentUsername = username || localStorage.getItem("username");
-        console.log("Current username:", currentUsername);
         const token = localStorage.getItem("authToken");
-        console.log("Auth token:", token);
+
         if (!currentUsername || !token) {
           toast.error("Unauthorized. Redirecting to login...");
           navigate("/student/login");
           return;
         }
+
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
         const endpoint = `${API_BASE_URL}/student/one-student/${currentUsername}`;
         console.log("User data endpoint:", endpoint);
+
         const response = await axios.get(endpoint, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         console.log("User data fetched:", response.data);
         const data = response.data.studentData || response.data.data;
+
         setUserData(data);
-        // Check payment status
-        if (data.isPaid || localStorage.getItem("isPaid") === "true") {
+
+        if (data.isPaid) {
           console.log("User is paid. Setting paymentStage to 'dashboard'.");
           setPaymentStage("dashboard");
           localStorage.setItem("isPaid", "true");
-
-          console.log("User is marked as paid.");
         } else {
           console.log("User is not paid. Payment stage remains 'payment'.");
+          localStorage.removeItem("isPaid"); // Clear incorrect payment state
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -317,48 +490,81 @@ function StudentDashboard() {
     };
 
     fetchUserData();
-  }, [username, navigate]);
+  }, [username]); // Removed `navigate` from dependencies
 
   const handleProceedPayment = () => {
     console.log("Proceeding to payment step: switching to 'paystack' stage.");
     setPaymentStage("paystack");
   };
 
-  const handlePaymentSuccess = async (paystackReference) => {
-    console.log(
-      "Payment success callback triggered with reference:",
-      paystackReference
-    );
+  const handlePaymentSuccess = async (reference) => {
+    console.log("✅ handlePaymentSuccess Triggered!");
+    console.log("🔹 Received Paystack Reference:", reference);
+  
     try {
       const currentUsername = username || localStorage.getItem("username");
       const token = localStorage.getItem("authToken");
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
-      console.log("handlePaymentSuccess: currentUsername =", currentUsername);
-      console.log("handlePaymentSuccess: token =", token);
-      console.log(
-        "handlePaymentSuccess: paystackReference =",
-        paystackReference
-      );
-
-      // Call backend endpoint to update payment status
+  
+      console.log("🔹 Sending Payment Update to Backend...");
+  
       const response = await axios.patch(
         `${API_BASE_URL}/student/update-payment/${currentUsername}`,
-        { isPaid: true },
+        { isPaid: true, reference },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      console.log("Payment status updated successfully on backend.");
+  
+      console.log("✅ Backend Payment Update Successful:", response.data);
+  
       setPaymentStage("success");
       localStorage.setItem("isPaid", "true");
+  
+      setUserData((prev) => ({ ...prev, isPaid: true }));
+  
+      console.log("🔹 Updated userData:", userData);
     } catch (error) {
       console.error(
-        "Error updating payment status:",
+        "❌ Error Updating Payment Status:",
         error.response?.data || error.message
       );
       toast.error("Payment update failed.");
     }
   };
+  
+  
+
+  // const handlePaymentSuccess = async (reference) => {
+  //   console.log("✅ handlePaymentSuccess Triggered!");
+  //   console.log("🔹 Received Paystack Reference:", reference);
+
+  //   try {
+  //     const currentUsername = username || localStorage.getItem("username");
+  //     const token = localStorage.getItem("authToken");
+  //     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  //     console.log("🔹 Sending Payment Update to Backend...");
+
+  //     const response = await axios.patch(
+  //       `${API_BASE_URL}/student/update-payment/${currentUsername}`,
+  //       { isPaid: true, reference },
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+
+  //     console.log("✅ Backend Payment Update Successful:", response.data);
+
+  //     setPaymentStage("success");
+  //     localStorage.setItem("isPaid", "true");
+
+  //     // Update userData to reflect payment status
+  //     setUserData((prev) => ({ ...prev, isPaid: true }));
+  //   } catch (error) {
+  //     console.error(
+  //       "❌ Error Updating Payment Status:",
+  //       error.response?.data || error.message
+  //     );
+  //     toast.error("Payment update failed.");
+  //   }
+  // };
 
   const handleContinue = () => {
     console.log("Continuing to dashboard.");

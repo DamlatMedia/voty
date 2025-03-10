@@ -66,6 +66,7 @@ function UserSideBar() {
   const [userData, setUserData] = useState(null);
   const [newProfilePic, setNewProfilePic] = useState(null);
   const [loading, setLoading] = useState(true);
+  const isPaid = userData?.isPaid || localStorage.getItem("isPaid") === "true";
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -147,29 +148,39 @@ function UserSideBar() {
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
                 to="/student/dashboard"
+                
               >
                 <span className="material-symbols-outlined">grid_view</span>
                 <span>Home</span>
               </NavLink>
             </li>
+
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
-                to="/student/videos"
+                to="/student/videos"   style={{
+                  pointerEvents: isPaid ? "auto" : "none",
+                  opacity: isPaid ? 1 : 0.5
+                }}
               >
                 <span className="material-symbols-outlined">apartment</span>{" "}
                 <span>Moral Videos</span>
               </NavLink>
             </li>
+
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
-                to="/student/trivia"
+                to="/student/trivia"   style={{
+                  pointerEvents: isPaid ? "auto" : "none",
+                  opacity: isPaid ? 1 : 0.5
+                }}
               >
                 <span className="material-symbols-outlined">monitoring</span>{" "}
                 <span>Trivia Games</span>
               </NavLink>
             </li>
+
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
@@ -181,10 +192,16 @@ function UserSideBar() {
                 <span>Scholarships</span>
               </NavLink>
             </li>
+
+
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
                 to="/student/notification"
+                style={{
+                  pointerEvents: isPaid ? "auto" : "none",
+                  opacity: isPaid ? 1 : 0.5
+                }}
               >
                 <span className="material-symbols-outlined">
                   business_center
@@ -192,10 +209,11 @@ function UserSideBar() {
                 <span>Notifications</span>
               </NavLink>
             </li>
+
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
-                to="/student/setting"
+                to="/student/setting" 
               >
                 <span className="material-symbols-outlined">settings</span>{" "}
                 <span>Settings</span>
