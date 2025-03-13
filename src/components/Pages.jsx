@@ -11,10 +11,10 @@ import EmailVerify from "../pages/EmailVerify";
 import VerifyEmail from "../pages/VerifyEmail";
 import Home from "../pages/Home";
 import TriviaComponent from "../pages/TriviaComponent";
-import TriviaForm from "../pages/TriviaForm";
+import TriviaForm from "../admin/adminComponents/TriviaForm";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import VideoUpload from "../pages/VideoUpload";
+import VideoUpload from "../admin/adminComponents/VideoUpload";
 import VideoList from "../pages/VideoList";
 import Leaderboard from "../pages/Leaderboard";
 import UserRank from "../pages/UserRank";
@@ -28,6 +28,8 @@ import AdminUserManagement from "../admin/adminPages/AdminUserManagement";
 import AdminContentManagement from "../admin/adminPages/AdminContentManagement";
 import AdminNotification from "../admin/adminPages/AdminNotification";
 import AdminNotificationForm from "../admin/adminComponents/AdminNotificationForm";
+import AdminVideos from "../admin/adminComponents/AdminVideos";
+import AdminTrivias from "../admin/adminComponents/AdminTrivias";
 import AdminScholarshipManagement from "../admin/adminPages/AdminScholarshipManagement";
 
 
@@ -67,14 +69,16 @@ function Pages() {
         {/* <Route path="/payment" element={<Payment />} /> */}
 
         {/* Admin Pages*/}
+       <Route path="/admin/register" element={<AdminRegister />} />
+        <Route path="/admin/login" element={<AdminLogin />} /> 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/user-management" element={<AdminUserManagement />}/>
         <Route path="/admin/content-management" element={<AdminContentManagement />}/>
         <Route path="/admin/scholarship-management" element={<AdminScholarshipManagement />}/>
-        <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/notification" element={<AdminNotification />} />
         <Route path="/admin/notification/form" element={<AdminNotificationForm />} />
-        <Route path="/admin/register" element={<AdminRegister />} />
+        <Route path="/admin/videos" element={<AdminVideos />} />
+        <Route path="/admin/trivias" element={<AdminTrivias />} />
    
         {/* Student Pages*/}
         <Route path="/student/payment" element={<UserPayment />} />

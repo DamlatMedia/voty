@@ -7,7 +7,7 @@ import { useContext, useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import AdminSideBar from "../adminComponents/AdminSideBar";
 import AdminHeader from "../adminComponents/AdminHeader";
-import AdminHom from "../adminComponents/AdminHom";
+import AdminHom from "../adminComponents/AdminTotal";
 import AdminVideo from "../adminComponents/AdminVideo";
 import AdminTrivia from "../adminComponents/AdminTrivia";
 import AdminTable from "../adminComponents/AdminTable";
@@ -84,8 +84,6 @@ function AdminHome() {
 
           <div className={style.content}>
             <div className={style.card}>
-              <AdminHom />
-              <AdminHom />
               <AdminHom />
             </div>
 

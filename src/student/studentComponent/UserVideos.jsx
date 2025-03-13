@@ -359,7 +359,7 @@ function UserVideos() {
   const handleShowTrivia = (video) => {
     navigate("/student/trivia", { state: { video } });
   };
-
+  
   return (
     <div className={style.all}>
       <div className={style.filter}>
@@ -377,6 +377,7 @@ function UserVideos() {
       <h2>Videos</h2>
       {message && <p>{message}</p>}
       <div className={style.video}>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         {videos.map((video) => (
           <div className={style.feature} key={video._id}>
             <video className={style.vidImage} controls>

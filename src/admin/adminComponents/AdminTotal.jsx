@@ -1,6 +1,6 @@
 import style from "../adminStyles/student.module.css";
 
-function AdminHome() {
+function AdminTotal() {
   return (
     <div >
     
@@ -16,4 +16,4 @@ function AdminHome() {
   );
 }
 
-export default AdminHome;
+export default AdminTotal;

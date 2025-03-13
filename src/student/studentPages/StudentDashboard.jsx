@@ -582,7 +582,7 @@ function StudentDashboard() {
         <div className={style.home}>
           <UserHeader />
           <div className={style.content}>
-            {paymentStage === "payment" && (
+            {/* {paymentStage === "payment" && (
               <UserPayment onProceed={handleProceedPayment} />
             )}
             {paymentStage === "paystack" && (
@@ -591,7 +591,9 @@ function StudentDashboard() {
             {paymentStage === "success" && (
               <UserSuccessful onContinue={handleContinue} />
             )}
-            {paymentStage === "dashboard" && <UserDashboardContent />}
+            {paymentStage === "dashboard" && <UserDashboardContent />} */}
+
+            <UserDashboardContent/>
           </div>
         </div>
       </div>

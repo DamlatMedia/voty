@@ -158,10 +158,7 @@ function UserSideBar() {
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
-                to="/student/videos"   style={{
-                  pointerEvents: isPaid ? "auto" : "none",
-                  opacity: isPaid ? 1 : 0.5
-                }}
+                to="/student/videos"  
               >
                 <span className="material-symbols-outlined">apartment</span>{" "}
                 <span>Moral Videos</span>
@@ -171,10 +168,7 @@ function UserSideBar() {
             <li className={style.navLi}>
               <NavLink
                 className={({ isActive }) => (isActive ? style.active : "")}
-                to="/student/trivia"   style={{
-                  pointerEvents: isPaid ? "auto" : "none",
-                  opacity: isPaid ? 1 : 0.5
-                }}
+                to="/student/trivia"  
               >
                 <span className="material-symbols-outlined">monitoring</span>{" "}
                 <span>Trivia Games</span>

@@ -117,6 +117,18 @@
   gap: 1rem;
 } */
 
+.stu{
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.act{
+  border: .1rem solid black;
+  border-radius: 2rem;
+  padding: .5rem 1.5rem;
+}
+
 .video {
   display: grid;
   width: 100%;
@@ -490,6 +502,63 @@
 .school {
   border-bottom: 0.1rem solid #281567;
   padding-bottom: 0.5rem;
+}.allInvest {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newInvest {
+  padding: 0.8rem 2rem;
+  background-color: white;
+  border: 0.1rem solid rgb (40,21,103);
+  color: rgb (40,21,103);
+  border-radius: 0.6rem;
+}
+
+.newInvest a{
+  color:  rgb(40,21,103);
+  text-decoration: none;
+}
+
+.content {
+  transition: filter 0.3s ease-in-out;
+}
+
+.blur {
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useVideo } from "../components/VideoContext"; // Import useVideo hook
+import { useVideo } from "../../components/VideoContext"; // Import useVideo hook
 
 const UploadVideo = () => {
   const [title, setTitle] = useState("");
