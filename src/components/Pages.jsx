@@ -45,6 +45,8 @@ import StudentNotification from "../student/studentPages/StudentNotification";
 import StudentQuizReview from "../student/studentComponent/UserQuizReview";
 import StudentTriviaPage from "../student/studentPages/StudentTriviaPage";
 import UserPayment from "../student/studentComponent/UserPayment";
+import UserPaystack from "../student/studentComponent/UserPaystack";
+import PaymentSuccess from "../student/studentComponent/UserSuccessful";
 // import Payment from "../components/Payment";
 
 function Pages() {
@@ -92,6 +94,8 @@ function Pages() {
         <Route path="/student/notification" element={<StudentNotification />} />
         <Route path="/student/setting" element={<StudentSetting />} />
         <Route path="/student/review" element={<StudentQuizReview />} />
+        <Route path="/student/successss" element={<PaymentSuccess />} />
+        <Route path="/student/stack" element={<UserPaystack />} />
       </Routes>
     </div>
   );
