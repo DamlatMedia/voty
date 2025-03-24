@@ -84,13 +84,13 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password-form">
+    <div className={style.action3}>
       <h2>Reset Your Password</h2>
 
       {error && <p className="error">{error}</p>}
       {message && <p className="success">{message}</p>}
 
-      <form onSubmit={handleResetPassword} className={style.action}>
+      <form onSubmit={handleResetPassword} >
         <input
         className={style.inputs}
           type="password"
