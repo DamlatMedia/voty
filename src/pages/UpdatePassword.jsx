@@ -90,8 +90,9 @@ const ResetPassword = () => {
       {error && <p className="error">{error}</p>}
       {message && <p className="success">{message}</p>}
 
-      <form onSubmit={handleResetPassword}>
+      <form onSubmit={handleResetPassword} className={style.action}>
         <input
+        className={style.inputs}
           type="password"
           placeholder="Enter new password"
           value={newPassword}
@@ -99,13 +100,14 @@ const ResetPassword = () => {
           required
         />
         <input
+          className={style.inputs}
           type="password"
           placeholder="Confirm new password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading}   className={style.investConsult4}>
           {loading ? "Resetting..." : "Reset Password"}
         </button>
       </form>

@@ -44,9 +44,9 @@ function ForgotPassword() {
         <form action="" className={style.action} onSubmit={handleSubmit}>
           <div className={style.input}>
             <label htmlFor="" className={style.registered}>
-              Registered Email
-            </label>{" "}
-            <br />
+              Enter Your Registered Email: 
+            </label>
+          
             <input
               type="email"
               required

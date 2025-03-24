@@ -51,14 +51,14 @@ function VerifyEmail() {
           <p>Enter the verification code we sent to your email:</p>
         </div>
 
-        <form action="" className={style.actionV}>
-          <div className={style.inputV}>
+        <form action="" className={style.action}>
+          <div className={style.input}>
             <input
               type="text"
               value={verificationToken}
               onChange={(e) => setVerificationToken(e.target.value)}
               required
-              className={style.inputsV}
+              className={style.inputs}
             />
           </div>
 

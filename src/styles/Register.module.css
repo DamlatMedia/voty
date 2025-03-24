@@ -28,20 +28,33 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.6rem;
+  margin-top: 2rem;
   /* border: 0.1rem solid black; */
 }
 
-.inputV {
+/* .inputV {
   width: 100%;
   display: flex;
-  /* gap: 0.6rem; */
-  /* border: 0.1rem solid black; */
+  align-items: center;
+  justify-content: center;
+} */
+
+.input {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
 }
 
-.inputsV{
-  width: 10%;
+.inputs {
+  padding: 1rem;
 }
+
+/* .inputsV {
+  width: 100%;
+} */
 
 .cardTitle {
   font-weight: 400;
@@ -273,7 +286,6 @@
   }
 } */
 
-
 /* Responsive Styles */
 @media (max-width: 768px) {
   .registerForm {
@@ -289,7 +301,8 @@
     font-size: 1.4rem;
   }
 
-  .linav, .linav1 {
+  .linav,
+  .linav1 {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
@@ -305,7 +318,8 @@
     justify-content: center;
   }
 
-  .investConsult3, .investConsult4 {
+  .investConsult3,
+  .investConsult4 {
     width: 100%;
   }
 }
