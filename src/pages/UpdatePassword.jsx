@@ -90,7 +90,7 @@ const ResetPassword = () => {
       {error && <p className="error">{error}</p>}
       {message && <p className="success">{message}</p>}
 
-      <form onSubmit={handleResetPassword} >
+      <form onSubmit={handleResetPassword}      className={style.input3}>
         <input
         className={style.inputs}
           type="password"
