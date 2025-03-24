@@ -95,7 +95,7 @@ function Pages() {
         <Route path="/student/setting" element={<StudentSetting />} />
         <Route path="/student/review" element={<StudentQuizReview />} />
         <Route path="/student/successss" element={<PaymentSuccess />} />
-        <Route path="/student/stack" element={<UserPaystack />} />
+        {/* <Route path="/student/stack" element={<UserPaystack />} /> */}
       </Routes>
     </div>
   );

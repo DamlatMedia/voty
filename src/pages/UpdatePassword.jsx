@@ -71,7 +71,7 @@ const ResetPassword = () => {
         toast.success(response.data.message);
         // Redirect to login page after success
 
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/student/login"), 2000);
       } else {
         setError(response.data.message);
         toast.error(response.data.message);
