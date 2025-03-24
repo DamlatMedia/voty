@@ -118,7 +118,10 @@ function Register() {
         navigate("/verify-email");
       }, 2000); // Delay for 2 seconds before redirecting
     } catch (error) {
-      console.error("Registration error details:", error.response?.data || error.message);
+      console.error(
+        "Registration error details:",
+        error.response?.data || error.message
+      );
       toast.error("Registration failed!");
       console.log("Submitting data:", values);
       //   handleApiError(error, setErrors); // Pass setErrors to handle API validation errors
@@ -336,7 +339,7 @@ function Register() {
 
                   <div className={style.container}>
                     <h4 className={style.label}>Gender</h4>
-                    <Field name="gender" as="select" className={style.select}>
+                    <Field name="gender" as="select" className={style.input}>
                       <option value="" label="Select Gender" />
                       <option value="male" label="Male" />
                       <option value="female" label="Female" />
@@ -347,11 +350,6 @@ function Register() {
                       style={{ color: "red" }}
                     />
                   </div>
-
-                  import style from "./form.module.css"; // Import styles
-
-
-
 
                   <div>
                     <h4 className={style.label}>Address</h4>

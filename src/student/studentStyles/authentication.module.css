@@ -4,6 +4,20 @@
   padding: 0;
 }
 
+/* .container {
+  margin-bottom: 15px;
+} */
+
+/* .select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+} */
+
 .navLi a {
   text-decoration: none;
 
@@ -98,8 +112,8 @@
 .input {
   width: 100%;
   padding: 1rem;
-  border-radius: .5rem;
-  border: .1rem solid black;
+  border-radius: 0.5rem;
+  border: 0.1rem solid black;
   outline: none;
 }
 
@@ -135,11 +149,11 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login1{
+.login1 {
   padding: 1rem;
   border-radius: 1rem;
   display: flex;
