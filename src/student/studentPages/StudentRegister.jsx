@@ -334,9 +334,9 @@ function Register() {
                     />
                   </div>
 
-                  <div>
+                  <div className={style.container}>
                     <h4 className={style.label}>Gender</h4>
-                    <Field name="gender" as="select">
+                    <Field name="gender" as="select" className={style.select}>
                       <option value="" label="Select Gender" />
                       <option value="male" label="Male" />
                       <option value="female" label="Female" />
@@ -347,6 +347,11 @@ function Register() {
                       style={{ color: "red" }}
                     />
                   </div>
+
+                  import style from "./form.module.css"; // Import styles
+
+
+
 
                   <div>
                     <h4 className={style.label}>Address</h4>
