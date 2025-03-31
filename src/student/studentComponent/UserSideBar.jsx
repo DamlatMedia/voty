@@ -14,54 +14,7 @@ function UserSideBar() {
   // const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     setLoading(true);
-  //     try {
-  //       let currentUsername = username || localStorage.getItem("username");
 
-  //       const studentId = localStorage.getItem("studentId");
-
-  //       if (!currentUsername) {
-  //         toast.error("Username is not available. Redirecting to login...");
-  //         navigate("/student/login");
-  //         return;
-  //       }
-
-  //       const token = localStorage.getItem("authToken");
-  //       if (!token) {
-  //         toast.error("Unauthorized access. Please log in.");
-  //         navigate("/student/login");
-  //         return;
-  //       }
-  //       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
-  //       const response = await axios.get(
-  //         // `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
-
-  //         // `${API_BASE_URL}/student/one-student/${studentId}`,
-  //         `${API_BASE_URL}/student/one-student/${currentUsername}`,
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-
-  //       if (response.data && response.data.studentData?.username) {
-  //         console.log(response.data.studentData.username);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       toast.error("Failed to fetch user data.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, [username, navigate]);
-
-  // const { username } = useContext(UserContext);
-  
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [newProfilePic, setNewProfilePic] = useState(null);
@@ -106,6 +59,7 @@ function UserSideBar() {
     localStorage.removeItem("username");
     localStorage.removeItem("authToken");
     setUsername(""); // Clear context
+    alert("Logout Successful")
     navigate("/student/login");
   };
 

@@ -1,55 +1,57 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import style from "../studentStyles/dashboard.module.css";
+import style from "../adminStyles/dashboard.module.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UserContext } from "../../components/UserContext";
+import { useAdmin } from "../../components/AdminContext";
 import { useNavigate } from "react-router-dom";
 
-const UserSettings = () => {
-  const { username, setUsername } = useContext(UserContext);
-  const navigate = useNavigate();
+const AdminSettings = () => {
+    const context = useContext(useAdmin) || {};
+    const { username, setUsername } = context;
+    const navigate = useNavigate();
+    
+    // Local state to hold fetched user data
+    const [adminData, setadminData] = useState(null);
 
-  // Local state to hold fetched user data
-  const [userData, setUserData] = useState(null);
-  // Local state for editable fields
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [school, setSchool] = useState("");
-  const [grade, setGrade] = useState("");
-  const [newProfilePic, setNewProfilePic] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch user data on mount
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        let currentUsername = username || localStorage.getItem("username");
+    const [newProfilePic, setNewProfilePic] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
+    // Fetch user data on mount
+    useEffect(() => {
+      const fetchadminData = async () => {
+        try {
+        let currentUsername = username || localStorage.getItem("adminUsername");
+    
         if (!currentUsername) {
           toast.error("Username is not available. Redirecting to login...");
-          navigate("/student/login");
+          navigate("/admin/login");
           return;
         }
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("adminAuthToken");
         if (!token) {
           toast.error("Unauthorized access. Please log in.");
-          navigate("/student/login");
+          navigate("/admin/login");
           return;
         }
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+        // const response = await axios.get(
+        //   `${API_BASE_URL}/admin/one-admin?username=${currentUsername}`,
+       
+        //   { headers: { Authorization: `Bearer ${token}` } }
+        // );
+        
         const response = await axios.get(
-          // `${API_BASE_URL}/student/one-student?username=${currentUsername}`,
-          `${API_BASE_URL}/student/one-student/${currentUsername}`,
-          // `${API_BASE_URL}/student/one-student`,
-          { headers: { Authorization: `Bearer ${token}` } }
+          `${API_BASE_URL}/admin/one-admin?username=${currentUsername}`,
+      
+       {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
-        const data = response.data.data;
-        setUserData(data);
-        // Set editable fields from data
-        setPhone(data.number || "");
-        setAddress(data.address || "");
-        setSchool(data.school || "");
-        setGrade(data.grade || "");
+
+        const data = response.data;
+        setadminData(data);
+       
       } catch (error) {
         console.error("Error fetching user data:", error);
         toast.error("Failed to fetch user data.");
@@ -58,7 +60,7 @@ const UserSettings = () => {
       }
     };
 
-    fetchUserData();
+    fetchadminData();
   }, [username, navigate]);
 
   // Handle profile picture file change
@@ -72,10 +74,10 @@ const UserSettings = () => {
   const handleSaveChanges = async (e) => {
     e.preventDefault();
     try {
-      let currentUsername = username || localStorage.getItem("username");
+      let currentUsername = username || localStorage.getItem("adminUsername");
       console.log("Current username:", currentUsername);
 
-      const token = localStorage.getItem("authToken");
+      const token = localStorage.getItem("adminAuthToken");
 
       console.log(" Token:", token);
 
@@ -87,10 +89,7 @@ const UserSettings = () => {
 
       // Prepare payload for updating editable fields
       const updatePayload = {
-        number: phone,
-        address,
-        school,
-        grade,
+     
       };
 
       // If a new profile picture is provided, create a FormData and upload it first.
@@ -99,7 +98,7 @@ const UserSettings = () => {
         formData.append("profilePicture", newProfilePic);
         // Call your endpoint for updating profile picture. Adjust the URL as needed.
         const picResponse = await axios.put(
-          `${API_BASE_URL}/student/update-profile-picture/${currentUsername}`,
+          `${API_BASE_URL}/admin/update-profile-picture/${currentUsername}`,
           formData,
           {
             headers: {
@@ -112,17 +111,9 @@ const UserSettings = () => {
         updatePayload.profilePicture = picResponse.data.profilePicture;
       }
 
-      // Now update the rest of the profile details.
-      const response = await axios.patch(
-        `${API_BASE_URL}/student/update-profile/${currentUsername}`,
-        updatePayload,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
       toast.success("Profile updated successfully!");
-      // Optionally update local state
-      setUserData((prev) => ({ ...prev, ...response.data.updatedData }));
+      // // Optionally update local state
+      // setadminData((prev) => ({ ...prev, ...response.data.updatedData }));
     } catch (error) {
       console.error(
         "Error updating profile:",
@@ -133,7 +124,7 @@ const UserSettings = () => {
   };
 
   if (loading) return <p>Loading profile...</p>;
-  if (!userData) return <p>No user data found.</p>;
+  if (!adminData) return <p>No user data found.</p>;
 
   return (
     <div className={style.all}>
@@ -146,7 +137,7 @@ const UserSettings = () => {
             src={
               newProfilePic
                 ? URL.createObjectURL(newProfilePic)
-                : userData.profilePicture || "/images/default-profile.jpg"
+                : adminData.profilePicture || "/images/default-profile.jpg"
             }
             alt="Profile"
             className={style.person}
@@ -171,7 +162,7 @@ const UserSettings = () => {
           <label className={style.lab}>Username</label>
           <input
             type="text"
-            value={userData.username}
+            value={adminData.username}
             readOnly
             className={style.input}
           />
@@ -181,28 +172,7 @@ const UserSettings = () => {
           <label className={style.lab}>Email</label>
           <input
             type="email"
-            value={userData.email}
-            readOnly
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.labe}>
-          <label className={style.lab}>Date of Birth</label>
-          {/* <input
-            type="date"
-            value={new Date(userData.birth).toISOString().split("T")[0]}
-            readOnly
-            className={style.input}
-          /> */}
-
-          <input
-            type="date"
-            value={
-              userData?.birth && !isNaN(new Date(userData.birth))
-                ? new Date(userData.birth).toISOString().split("T")[0]
-                : ""
-            }
+            value={adminData.email}
             readOnly
             className={style.input}
           />
@@ -218,47 +188,6 @@ const UserSettings = () => {
           />
         </div>
 
-        {/* Editable fields */}
-        <div className={style.labe}>
-          <label className={style.lab}>Phone Number</label>
-          <input
-            type="number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.labe}>
-          <label className={style.lab}>Address</label>
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.labe}>
-          <label className={style.lab}>Current School Name</label>
-          <input
-            type="text"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.labe}>
-          <label className={style.lab}>Class</label>
-          <input
-            type="text"
-            value={grade}
-            onChange={(e) => setGrade(e.target.value)}
-            className={style.input}
-          />
-        </div>
-
         <button type="submit" className={style.save}>
           Save Changes
         </button>
@@ -267,4 +196,4 @@ const UserSettings = () => {
   );
 };
 
-export default UserSettings;
+export default AdminSettings;

@@ -9,6 +9,14 @@ export const UserProvider = ({ children }) => {
     return savedUsername || "";
   });
 
+  const [email, setEmail] = useState(() => {
+    // Check if the username is saved in localStorage
+    const savedEmail = localStorage.getItem("email");
+    return savedEmail || "";
+  });
+
+
+
   // Sync username to localStorage whenever it changes
   useEffect(() => {
     if (username) {
@@ -16,8 +24,15 @@ export const UserProvider = ({ children }) => {
     }
   }, [username]);
 
+    // Sync username to localStorage whenever it changes
+    useEffect(() => {
+      if (email) {
+        localStorage.setItem("email", email);  // Save username to localStorage
+      }
+    }, [email]);
+
   return (
-    <UserContext.Provider value={{ username, setUsername }}>
+    <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
       {children}
     </UserContext.Provider>
   );

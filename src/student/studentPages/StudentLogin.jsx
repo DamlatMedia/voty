@@ -64,6 +64,7 @@ const StudentLogin = () => {
 
         localStorage.setItem("authToken", token);
         localStorage.setItem("username", studentData.username);
+        localStorage.setItem("email", studentData.email);
 
         localStorage.setItem("studentId", studentData._id);
 

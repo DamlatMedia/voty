@@ -31,6 +31,7 @@ import AdminNotificationForm from "../admin/adminComponents/AdminNotificationFor
 import AdminVideos from "../admin/adminComponents/AdminVideos";
 import AdminTrivias from "../admin/adminComponents/AdminTrivias";
 import AdminScholarshipManagement from "../admin/adminPages/AdminScholarshipManagement";
+import AdminSetting from "../admin/adminPages/AdminSetting";
 
 
 //Student Routes
@@ -81,6 +82,7 @@ function Pages() {
         <Route path="/admin/notification/form" element={<AdminNotificationForm />} />
         <Route path="/admin/videos" element={<AdminVideos />} />
         <Route path="/admin/trivias" element={<AdminTrivias />} />
+        <Route path="/admin/setting" element={<AdminSetting />} />
    
         {/* Student Pages*/}
         <Route path="/student/payment" element={<UserPayment />} />

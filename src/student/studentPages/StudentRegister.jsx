@@ -95,7 +95,7 @@ function Register() {
 
       const { verificationToken, email } = response.data;
       localStorage.setItem("VerifyToken", verificationToken);
-      localStorage.setItem("userEmail", email);
+      localStorage.setItem("email", email);
       console.log("Saved email to localStorage:", email);
       console.log(
         "Saved verification token to localStorage:",

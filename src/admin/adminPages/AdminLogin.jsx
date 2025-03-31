@@ -120,10 +120,10 @@ const App = () => {
                       <NavLink to="/admin/register">Sign Up</NavLink>
                     </h3>
                   </span>
-                  
+                  <div className={style.btn}>
                   <button
                     type="submit"
-                    className={style.button}
+                    className={style.btnFeedback}
                     aria-label="Login"
                     disabled={isSubmitting}
                   >
@@ -138,6 +138,7 @@ const App = () => {
                       "LOGIN"
                     )}
                   </button>
+                  </div>
                 </Form>
               )}
             </Formik>

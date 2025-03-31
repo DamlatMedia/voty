@@ -72,7 +72,10 @@ function Register() {
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
       .matches(/\d/, "Password must contain at least one digit")
-      .matches(/[@$!%*?&]/, "Password must contain at least one special character")
+      .matches(
+        /[@$!%*?&]/,
+        "Password must contain at least one special character"
+      ),
   });
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -80,7 +83,7 @@ function Register() {
       setUsername(storedUsername);
     }
   }, [setUsername]); // Add dependency
-  
+
   // useEffect(() => {
   //   const storedUsername = localStorage.getItem("username");
   //   if (storedUsername) {
@@ -89,7 +92,7 @@ function Register() {
   // }, []); // This will run only once when the component mounts
 
   // Handle form submission
- 
+
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       // const API_URL = process.env.REACT_APP_API_URL;
@@ -120,7 +123,7 @@ function Register() {
       } else {
         toast.error("Something went wrong! Please try again.");
       }
-      
+
       console.log("Submitting data:", values);
       //   handleApiError(error, setErrors); // Pass setErrors to handle API validation errors
     } finally {
@@ -157,6 +160,10 @@ function Register() {
 
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
       <div className={style.dashboard}>
         <div className={style.settings}>
           <div className={style.login}>
@@ -215,7 +222,7 @@ function Register() {
                         ariaLabel="Enter Your Password"
                       />
 
-                      <span
+                      {/* <span
                         onClick={togglePasswordVisibility}
                         style={{
                           position: "absolute",
@@ -226,6 +233,21 @@ function Register() {
                         }}
                       >
                         {showPassword ? "👁️" : "🙈"}
+                      </span> */}
+
+                      <span
+                        onClick={togglePasswordVisibility}
+                        style={{
+                          position: "absolute",
+                          right: "10px",
+                          top: "60%",
+                          transform: "translateY(-50%)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span className="material-symbols-outlined">
+                          {showPassword ? "visibility" : "visibility_off"}
+                        </span>
                       </span>
                     </div>
                     <ErrorMessage
@@ -244,10 +266,10 @@ function Register() {
                       <NavLink to="/admin/login">Login</NavLink>{" "}
                     </p>
                   </span>
-
+                  <div className={style.btn}>
                   <button
                     type="submit"
-                    className={style.button}
+                    className={style.btnFeedback}
                     aria-label="Register"
                     disabled={isSubmitting}
                   >
@@ -264,6 +286,7 @@ function Register() {
                       "REGISTER"
                     )}
                   </button>
+                  </div>
                 </Form>
               )}
             </Formik>

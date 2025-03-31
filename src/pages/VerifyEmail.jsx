@@ -14,7 +14,7 @@ function VerifyEmail() {
   const handleVerification = async () => {
     setLoading(true);
     try {
-      const email = localStorage.getItem("userEmail");
+      const email = localStorage.getItem("email");
 
       if (!email || !verificationToken) {
         throw new Error("Missing email or verification token.");
@@ -48,7 +48,7 @@ function VerifyEmail() {
       <div className={style.register}>
         <div className={style.Para}>
           <p className={style.cardTitle}>Email Verification Code</p>
-          <p>Enter the verification code we sent to your email:</p>
+          <p>Enter the verification code we sent to your email, check your spam folder if it is not in your inbox:</p>
         </div>
 
         <form action="" className={style.action}>

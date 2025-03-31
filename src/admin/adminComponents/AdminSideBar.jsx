@@ -59,6 +59,7 @@ function UserSideBar() {
     localStorage.removeItem("adminUsername");
     localStorage.removeItem("adminAuthToken");
     setUsername(""); // Clear context
+    alert("Logout Successful")
     navigate("/admin/login");
   };
 
@@ -127,6 +128,16 @@ function UserSideBar() {
                   account_balance_wallet
                 </span>{" "}
                 <span>Scholarship Management</span>
+              </NavLink>
+            </li>
+
+            <li className={style.navLi}>
+              <NavLink
+                className={({ isActive }) => (isActive ? style.active : "")}
+                to="/admin/setting"
+              >
+                <span class="material-symbols-outlined">monitoring</span>{" "}
+                <span>Setting</span>
               </NavLink>
             </li>
           </ul>
