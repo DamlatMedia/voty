@@ -39,14 +39,14 @@ function Header() {
               </NavLink>
             </li>
 
-            <li className={style.navLi}>
+            {/* <li className={style.navLi}>
               <NavLink
                 to="/resources"
                 className={({ isActive }) => (isActive ? style.active : "")}
               >
                 Resources
               </NavLink>
-            </li>
+            </li> */}
 
             <li className={style.navLi}>
               <NavLink

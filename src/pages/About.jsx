@@ -93,7 +93,7 @@ function About() {
                 <div>
                   <p className={style.head1}>Register on the platform</p>
                   <p className={style.para2}>
-                    Sign up by providing your details and creating an account
+                    Sign up by providing your details and creating an account.
                   </p>
                 </div>
               </div>
@@ -107,9 +107,9 @@ function About() {
                 </div>
 
                 <div>
-                  <p className={style.head1}>Register on the platform</p>
+                  <p className={style.head1}>Watch Moral Videos</p>
                   <p className={style.para2}>
-                    Sign up by providing your details and creating an account
+                   Explore our library of engaging moral videos and learn valuable lifelessons.
                   </p>
                 </div>
               </div>
@@ -119,9 +119,9 @@ function About() {
                 </div>
 
                 <div>
-                  <p className={style.head1}>Register on the platform</p>
+                  <p className={style.head1}>Answer Trivia Questions</p>
                   <p className={style.para2}>
-                    Sign up by providing your details and creating an account
+                    After watching a video, answer related trivia questions to test your understanding.
                   </p>
                 </div>
               </div>
@@ -135,9 +135,9 @@ function About() {
                 </div>
 
                 <div>
-                  <p className={style.head1}>Register on the platform</p>
+                  <p className={style.head1}>Climb the Leaderboard</p>
                   <p className={style.para2}>
-                    Sign up by providing your details and creating an account
+                   Earn points for correct answers and secure your spot among the Top 1,000 students.
                   </p>
                 </div>
               </div>
@@ -147,9 +147,9 @@ function About() {
                 </div>
 
                 <div>
-                  <p className={style.head1}>Register on the platform</p>
+                  <p className={style.head1}>Win a Monthly Scholarship</p>
                   <p className={style.para2}>
-                    Sign up by providing your details and creating an account
+                    The top 1,000 students are eligible for the scholarship, and a winner is randomly selcted each month.
                   </p>
                 </div>
               </div>

@@ -29,9 +29,9 @@ function Footer() {
             <NavLink to="/contact">Contact us</NavLink>
           </li>
 
-          <li className={style.navLi}>
+          {/* <li className={style.navLi}>
             <NavLink to="/faq">FAQ</NavLink>
-          </li>
+          </li> */}
         </div>
 
         <div className={style.resources}>
@@ -54,12 +54,12 @@ function Footer() {
          
         </div>
 
-        <div className={style.newsletter}>
+        {/* <div className={style.newsletter}>
           <p  className={style.pmTag2}>Subscribe to our newsletter</p>
 
           <input type="text" placeholder="Enter your email" className={style.inp} />
           <button className={style.subscribe}>Subscribe</button>
-        </div>
+        </div> */}
       </div>
 
       <div className={style.copyright}>

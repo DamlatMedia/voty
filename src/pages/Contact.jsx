@@ -2,12 +2,46 @@ import HeaderTwo from "../components/HeaderTwo";
 import Footer from "../components/Footer";
 import style from "../styles/About.module.css";
 import React, { useState } from "react";
+import axios from "axios"
 
 function About() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    // phone: "",
+    email: "",
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("http://localhost:7000/contact/api/contact", formData);  // Point to your backend
+      alert(response.data.message); // success feedback
+   
+     // Clear the form
+     setFormData({
+      firstName: "",
+      lastName: "",
+      // phone: "",
+      email: "",
+      message: ""
+  });
+  
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send message. Please try again later.");
+    }
+  };
+
   return (
     <>
       <div className={style.body}>
-        <div className={style.color}>
+        <div className={style.colo}>
           <HeaderTwo />
           <p className={style.about}>Contact Us</p>
         </div>
@@ -46,31 +80,46 @@ function About() {
 
           <form action="" className={style.form}>
             <div className={style.name}>
-              <input
-                type="text"
-                placeholder="First Name"
-                className={style.input}
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                className={style.input}
-              />
+            <input
+                  className={style.input}
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  required
+                />
+               <input
+                  className={style.input}
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Enter your last name"
+                  required
+                />
             </div>
 
             <input
-              type="text"
-              placeholder="Email Address"
-              className={style.input1}
-            />
-            <textarea
-              name=""
-              id=""
-              placeholder="Message"
-              className={style.textare}
-            ></textarea>
+                className={style.input}
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+             <textarea
+                className={style.input}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                id=""
+                placeholder="Enter your message"
+                required
+              ></textarea>
 
-            <button className={style.send}>Send Message</button>
+            <button className={style.send}  onClick={handleSubmit}>Send Message</button>
           </form>
         </div>
 
