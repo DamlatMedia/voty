@@ -21,7 +21,7 @@ const NotificationForm = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // If using auth
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // If using authentication
           },
           body: JSON.stringify(notificationData),
         }
