@@ -84,18 +84,18 @@ function UserScholarship() {
             <option value="">This Week</option>
           </select> */}
 
-          <button
+          {/* <button
             onClick={() => setAgeCategorys("11-20")}
             className={ageCategorys === "11-20" ? "active-button" : ""}
             style={{ marginLeft: "1rem" }}
           >
             11-20
-          </button>
+          </button> */}
         </div>
-        <div>
+        {/* <div>
           <h2>Your Rank in Age Category {ageCategory}</h2>
           <p>You are ranked #{rank} in the leaderboard.</p>
-        </div>{" "}
+        </div>{" "} */}
         <br />
         <div className={style.leadersScholarship}>
           {leaderboard.map((student, index) => (

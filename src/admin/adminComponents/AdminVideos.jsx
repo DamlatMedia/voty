@@ -229,7 +229,7 @@ function AdminVideos() {
         <div className={style.filt}>
           <div className={`${style.content} ${showForm ? style.blur : ""}`}>
             <div className={style.allInvest}>
-              <h2>Moral Video</h2>
+              <h2>Moral Videos</h2>
               <button
                 className={style.newInvest}
                 onClick={() => setShowForm(true)}
@@ -239,7 +239,7 @@ function AdminVideos() {
             </div>
 
             {/* Age ageCategory Filters */}
-            <div className={style.stu}>
+            {/* <div className={style.stu}>
               <p
                 className={`${style.act} ${
                   selectedAgeCategory === "5 - 10" ? style.active : ""
@@ -256,7 +256,7 @@ function AdminVideos() {
               >
                 11 - 20
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Video List */}

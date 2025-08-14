@@ -9,7 +9,7 @@ function Footer() {
       <div className={style.foot}>
         <div className={style.logTag}>
           <div className={style.logoHead}>
-            <img src="./images/logo.jpg" alt="logo" className={style.logo} />
+            <img src="./images/damlatLogo.jpg" alt="logo" className={style.logo} />
           </div>
           <p className={style.phTag}>
             Unlock Your Potential Shape Your Tomorrow
@@ -64,6 +64,9 @@ function Footer() {
 
       <div className={style.copyright}>
         <p>c 2024 Damlat Media Concept Limited All rights reserved</p>
+
+<p>Developed By ThriveCity</p>
+
         <div className={style.termPolicy}>
           <p className={style.navLis}>
             <NavLink to="/terms">Terms</NavLink>

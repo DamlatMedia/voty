@@ -78,38 +78,41 @@ function UserTrivia() {
       <div className={style.all}>
         <h2>Popular Games</h2>
 
+        <div className={style.featu}>
         {filteredVideos.slice(0, 2).map((video) => (
           <div className={style.featured} key={video._id}>
-            <div className={style.course}>
+            <div className={style.courser}>
               <div>
                 <img src="/images/money.png" alt="games" />
               </div>
 
-              <div className={style.png}>
+              <div className={style.pngc}>
                 <p>Course</p>
                 <p className={style.phTag}>{video.title}</p>
-                <p>{video.description}</p>
+                <p className={style.description}>{video.description}</p>
               </div>
             </div>
 
-            <div className={style.leftPro}>
-              <div className={style.rightPro}>
+            <div className={style.leftPror}>
+              <div className={style.rightPror}>
                 <img src="/images/progress.png" alt="progres" />
+                  <strong>{video.triviaCount}</strong> 
                 <p>
-                  <strong>{video.triviaCount}</strong> Questions
+                Questions
                 </p>
               </div>
 
-              <button
+              {/* <button
                 className={style.mark1}
                 onClick={() => handleVideoClick(video)}
               >
                 Take Quiz
                 <span className="material-symbols-outlined">monitoring</span>
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
+        </div>
       </div>
     </>
   );

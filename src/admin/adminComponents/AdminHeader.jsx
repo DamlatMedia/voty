@@ -76,7 +76,7 @@ function AdminHeader() {
 
         <div className={style.dashName}>
           {/* <p>Hello {username} 👋🏿</p> */}
-          <p>what are you today?</p>
+          {/* <p>what are you today?</p> */}
         </div>
 
         <div className={style.dashLogos}>

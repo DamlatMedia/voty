@@ -48,14 +48,14 @@ function UserNotification() {
   return (
     <>
       <div className={style.all}>
-        <div className={style.notiWeeks}>
+        {/* <div className={style.notiWeeks}>
           <select name="" id="" className={style.notiWeek}>
             <option value="">This Week</option>
             <option value="">This Week</option>
             <option value="">This Week</option>
             <option value="">This Week</option>
           </select>
-        </div>
+        </div> */}
 
         {notifications.length > 0 ? (
           notifications.map((notification, index) => (
@@ -64,7 +64,7 @@ function UserNotification() {
                 <div className={style.leaderN}>
                   <div className={style.profileName}>
                     <img
-                      src="/images/logo.jpg"
+                      src="/images/damlatLogo.jpg"
                       alt="logo"
                       className={style.logs}
                     />

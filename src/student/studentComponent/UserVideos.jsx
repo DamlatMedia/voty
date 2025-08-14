@@ -362,7 +362,7 @@ function UserVideos() {
   
   return (
     <div className={style.all}>
-      <div className={style.filter}>
+      {/* <div className={style.filter}>
         <div className={style.allCourse}>
           <p className={style.filter1}>All</p>
           <select name="" id="" className={style.filter2}>
@@ -372,9 +372,9 @@ function UserVideos() {
           </select>
         </div>
         <img src="/images/filter.png" alt="games" className={style.filter3} />
-      </div>
+      </div> */}
 
-      <h2>Videos</h2>
+      <h2>All Videos</h2>
       {message && <p>{message}</p>}
       <div className={style.video}>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />

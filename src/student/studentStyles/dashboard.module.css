@@ -43,6 +43,8 @@
   color: #848484;
 }
 
+
+
 .videos {
   background-color: #848484;
   padding: 0.5rem;
@@ -143,10 +145,28 @@
   align-items: center;
 }
 
+.leftPror {
+  padding: .5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* border: .1rem solid black; */
+}
+
 .rightPro {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.rightPror {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: .1rem solid black; */
+  gap: .5rem;
 }
 
 .vidImage {
@@ -221,6 +241,12 @@
   width: 48%;
 }
 
+.featu{
+  display: flex;
+  /* border: .1rem solid black; */
+  justify-content: space-between;
+}
+
 .phTag {
   font-size: 1.1rem;
   font-weight: 700;
@@ -242,6 +268,15 @@
   margin: 1rem 0;
 }
 
+.courser {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: left;
+  justify-content: left;
+  /* border: .1rem solid black; */
+}
+
 .course {
   display: flex;
   flex-direction: column;
@@ -254,6 +289,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
+}
+
+.pngc{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  /* justify-content: center; */
+}
+
+
+.description{
+  /* text-align: center; */
+  /* border: .1rem solid black; */
 }
 
 .advertProgress {
@@ -468,7 +517,7 @@
 
 .person {
   aspect-ratio: 1/1;
-  /* height: 100px;  */
+  height: 100px; 
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ccc;

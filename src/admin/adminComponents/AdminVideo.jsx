@@ -63,7 +63,7 @@ function AdminVideos() {
                   <p className={style.phTag}>{video.title}</p>
                   <p>{video.description}</p>
 
-                  <div className={style.markBtn}>
+                  {/* <div className={style.markBtn}>
                     <button
                       className={style.mark1}
                       onClick={() => handleShowTrivia(video)}
@@ -73,7 +73,7 @@ function AdminVideos() {
                         monitoring
                       </span>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               ))}
         </div>

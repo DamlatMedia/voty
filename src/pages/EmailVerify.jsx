@@ -47,7 +47,7 @@ function Login() {
         <div className={style.logoH}>
         <NavLink to="/">
           <img
-            src="./images/gVestLogo.png"
+            src="./images/damlatLogo.png"
             alt="gVest Logo"
             className={style.logo}
           />

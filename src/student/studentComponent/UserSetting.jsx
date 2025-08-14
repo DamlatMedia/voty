@@ -15,8 +15,8 @@ const UserSettings = () => {
   // Local state for editable fields
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [school, setSchool] = useState("");
-  const [grade, setGrade] = useState("");
+  // const [school, setSchool] = useState("");
+  // const [grade, setGrade] = useState("");
   const [newProfilePic, setNewProfilePic] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -48,8 +48,8 @@ const UserSettings = () => {
         // Set editable fields from data
         setPhone(data.number || "");
         setAddress(data.address || "");
-        setSchool(data.school || "");
-        setGrade(data.grade || "");
+        // setSchool(data.school || "");
+        // setGrade(data.grade || "");
       } catch (error) {
         console.error("Error fetching user data:", error);
         toast.error("Failed to fetch user data.");
@@ -89,8 +89,8 @@ const UserSettings = () => {
       const updatePayload = {
         number: phone,
         address,
-        school,
-        grade,
+        // school,
+        // grade,
       };
 
       // If a new profile picture is provided, create a FormData and upload it first.
@@ -151,6 +151,7 @@ const UserSettings = () => {
             alt="Profile"
             className={style.person}
           />
+          
           <div className={style.texts}>
             <label className={style.text1} htmlFor="profilePic">
               Upload New
@@ -239,7 +240,7 @@ const UserSettings = () => {
           />
         </div>
 
-        <div className={style.labe}>
+        {/* <div className={style.labe}>
           <label className={style.lab}>Current School Name</label>
           <input
             type="text"
@@ -247,9 +248,9 @@ const UserSettings = () => {
             onChange={(e) => setSchool(e.target.value)}
             className={style.input}
           />
-        </div>
+        </div> */}
 
-        <div className={style.labe}>
+        {/* <div className={style.labe}>
           <label className={style.lab}>Class</label>
           <input
             type="text"
@@ -257,7 +258,7 @@ const UserSettings = () => {
             onChange={(e) => setGrade(e.target.value)}
             className={style.input}
           />
-        </div>
+        </div> */}
 
         <button type="submit" className={style.save}>
           Save Changes

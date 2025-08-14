@@ -262,7 +262,7 @@ function Home() {
 
          
         </div>
-
+<br />
         <p  className={style.partTag}>Frequently Asked Question</p>
 
         <div className={style.faqContainer}>

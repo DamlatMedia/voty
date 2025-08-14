@@ -236,7 +236,7 @@ function AdminTrivia() {
           </div>
 
           {/* 🛠 Age Filtering Buttons */}
-          <div className={style.stu}>
+          {/* <div className={style.stu}>
             <p
               className={`${style.act} ${
                 selectedAgeCategory === "10 - 15" ? style.active : ""
@@ -253,7 +253,7 @@ function AdminTrivia() {
             >
               16 - 20
             </p>
-          </div>
+          </div> */}
 
           {/* 🛠 Display Filtered Videos */}
           <div
@@ -263,12 +263,12 @@ function AdminTrivia() {
             {filteredVideos.length > 0 ? (
               filteredVideos.map((video) => (
                 <div className={style.featured} key={video._id}>
-                  <div className={style.course}>
+                  <div className={style.courser}>
                     <div>
                       <img src="/images/money.png" alt="games" />
                     </div>
 
-                    <div className={style.png}>
+                    <div className={style.pngc}>
                       <p>Course</p>
                       <p className={style.phTag}>{video.title}</p>
                       <p>{video.description}</p>

@@ -179,6 +179,8 @@ function Register() {
               {({ isSubmitting }) => (
                 <Form>
                   <div>
+                  <h4 className={style.label}>Username</h4>
+
                     <Field
                       type="text"
                       name="username"
@@ -194,6 +196,8 @@ function Register() {
                   </div>
 
                   <div>
+                  <h4 className={style.label}>Email</h4>
+
                     <Field
                       type="email"
                       name="email"
@@ -209,6 +213,8 @@ function Register() {
                   </div>
 
                   <div>
+                  <h4 className={style.label}>Password</h4>
+
                     <div
                       className={style.textInputs}
                       style={{ position: "relative" }}
@@ -261,10 +267,9 @@ function Register() {
                     <h3 className={style.register}>
                       Already Have An Account?{" "}
                     </h3>
-                    <p className={style.register}>
-                      {" "}
-                      <NavLink to="/admin/login">Login</NavLink>{" "}
-                    </p>
+                    <h3 className={style.register}>
+                      <NavLink to="/admin/login" >Login</NavLink>{" "}
+                    </h3>
                   </span>
                   <div className={style.btn}>
                   <button
@@ -295,174 +300,174 @@ function Register() {
           </div>
         </div>
       </div>
-
-      {provider && profile ? (
-        <User
-          provider={provider}
-          profile={profile}
-          onLogout={onLogoutSuccess}
-        />
-      ) : (
-        <div className={`App ${provider && profile ? "hide" : ""}`}>
-          <h1 className="title">or sign up with</h1>
-
-          <LoginSocialFacebook
-            isOnlyGetToken
-            appId={process.env.REACT_APP_FB_APP_ID || ""}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <FacebookLoginButton />
-          </LoginSocialFacebook>
-
-          <LoginSocialGoogle
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_GG_APP_ID || ""}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <GoogleLoginButton />
-          </LoginSocialGoogle>
-
-          <LoginSocialInstagram
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_INSTAGRAM_APP_ID || ""}
-            client_secret={process.env.REACT_APP_INSTAGRAM_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <InstagramLoginButton />
-          </LoginSocialInstagram>
-
-          <LoginSocialMicrosoft
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_MICROSOFT_APP_ID || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <MicrosoftLoginButton />
-          </LoginSocialMicrosoft>
-
-          <LoginSocialLinkedin
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_LINKEDIN_APP_ID || ""}
-            client_secret={process.env.REACT_APP_LINKEDIN_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <LinkedInLoginButton />
-          </LoginSocialLinkedin>
-
-          <LoginSocialGithub
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_GITHUB_APP_ID || ""}
-            client_secret={process.env.REACT_APP_GITHUB_APP_SECRET || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <GithubLoginButton />
-          </LoginSocialGithub>
-
-          <LoginSocialTwitter
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ""}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={handleLoginResolve}
-            onReject={handleLoginReject}
-          >
-            <TwitterLoginButton />
-          </LoginSocialTwitter>
-
-          {/* <LoginSocialApple
-            client_id={process.env.REACT_APP_APPLE_ID || ''}
-            scope={'name email'}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider);
-              setProfile(data);
-            }}
-            onReject={err => {
-              console.log(err);
-            }}
-          >
-            <AppleLoginButton />
-          </LoginSocialApple> */}
-
-          {/* <LoginSocialAmazon
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_AMAZON_APP_ID || ''}
-            redirect_uri={REDIRECT_URI}
-            onResolve={({ provider, data }) => {
-              setProvider(provider)
-              setProfile(data)
-            }}
-            onReject={(err) => {
-              console.log(err)
-            }}
-            onLoginStart={onLoginStart}
-          >
-            <AmazonLoginButton />
-          </LoginSocialAmazon> */}
-
-          {/* <LoginSocialPinterest
-            isOnlyGetToken
-            client_id={process.env.REACT_APP_PINTEREST_APP_ID || ''}
-            client_secret={process.env.REACT_APP_PINTEREST_APP_SECRET || ''}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider)
-              setProfile(data)
-            }}
-            onReject={(err) => {
-              console.log(err)
-            }}
-            className='pinterest-btn'
-          >
-            <div className='content'>
-              <div className='icon'>
-                <PinterestLogo />
-              </div>
-              <span className='txt'>Login With Pinterest</span>
-            </div>
-          </LoginSocialPinterest> */}
-
-          {/* <LoginSocialTiktok
-            client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
-            redirect_uri={REDIRECT_URI}
-            onLoginStart={onLoginStart}
-            onResolve={({ provider, data }) => {
-              setProvider(provider);
-              setProfile(data);
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-            className="pinterest-btn"
-          >
-            <div className="content">
-              <div className="icon">
-                <TiktokLogo />
-              </div>
-              <span className="txt">Login With Tiktok</span>
-            </div>
-          </LoginSocialTiktok> */}
-        </div>
-      )}
     </>
   );
 }
 
 export default Register;
+
+// {provider && profile ? (
+//   <User
+//     provider={provider}
+//     profile={profile}
+//     onLogout={onLogoutSuccess}
+//   />
+// ) : (
+  // <div className={`App ${provider && profile ? "hide" : ""}`}>
+  //   <h1 className="title">or sign up with</h1>
+
+  //   <LoginSocialFacebook
+  //     isOnlyGetToken
+  //     appId={process.env.REACT_APP_FB_APP_ID || ""}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <FacebookLoginButton />
+  //   </LoginSocialFacebook>
+
+  //   <LoginSocialGoogle
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_GG_APP_ID || ""}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <GoogleLoginButton />
+  //   </LoginSocialGoogle>
+
+  //   <LoginSocialInstagram
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_INSTAGRAM_APP_ID || ""}
+  //     client_secret={process.env.REACT_APP_INSTAGRAM_APP_SECRET || ""}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <InstagramLoginButton />
+  //   </LoginSocialInstagram>
+
+  //   <LoginSocialMicrosoft
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_MICROSOFT_APP_ID || ""}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <MicrosoftLoginButton />
+  //   </LoginSocialMicrosoft>
+
+  //   <LoginSocialLinkedin
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_LINKEDIN_APP_ID || ""}
+  //     client_secret={process.env.REACT_APP_LINKEDIN_APP_SECRET || ""}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <LinkedInLoginButton />
+  //   </LoginSocialLinkedin>
+
+  //   <LoginSocialGithub
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_GITHUB_APP_ID || ""}
+  //     client_secret={process.env.REACT_APP_GITHUB_APP_SECRET || ""}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <GithubLoginButton />
+  //   </LoginSocialGithub>
+
+  //   <LoginSocialTwitter
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_TWITTER_V2_APP_KEY || ""}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={handleLoginResolve}
+  //     onReject={handleLoginReject}
+  //   >
+  //     <TwitterLoginButton />
+  //   </LoginSocialTwitter>
+
+  //   {/* <LoginSocialApple
+  //     client_id={process.env.REACT_APP_APPLE_ID || ''}
+  //     scope={'name email'}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={({ provider, data }) => {
+  //       setProvider(provider);
+  //       setProfile(data);
+  //     }}
+  //     onReject={err => {
+  //       console.log(err);
+  //     }}
+  //   >
+  //     <AppleLoginButton />
+  //   </LoginSocialApple> */}
+
+  //   {/* <LoginSocialAmazon
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_AMAZON_APP_ID || ''}
+  //     redirect_uri={REDIRECT_URI}
+  //     onResolve={({ provider, data }) => {
+  //       setProvider(provider)
+  //       setProfile(data)
+  //     }}
+  //     onReject={(err) => {
+  //       console.log(err)
+  //     }}
+  //     onLoginStart={onLoginStart}
+  //   >
+  //     <AmazonLoginButton />
+  //   </LoginSocialAmazon> */}
+
+  //   {/* <LoginSocialPinterest
+  //     isOnlyGetToken
+  //     client_id={process.env.REACT_APP_PINTEREST_APP_ID || ''}
+  //     client_secret={process.env.REACT_APP_PINTEREST_APP_SECRET || ''}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={({ provider, data }) => {
+  //       setProvider(provider)
+  //       setProfile(data)
+  //     }}
+  //     onReject={(err) => {
+  //       console.log(err)
+  //     }}
+  //     className='pinterest-btn'
+  //   >
+  //     <div className='content'>
+  //       <div className='icon'>
+  //         <PinterestLogo />
+  //       </div>
+  //       <span className='txt'>Login With Pinterest</span>
+  //     </div>
+  //   </LoginSocialPinterest> */}
+
+  //   {/* <LoginSocialTiktok
+  //     client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
+  //     redirect_uri={REDIRECT_URI}
+  //     onLoginStart={onLoginStart}
+  //     onResolve={({ provider, data }) => {
+  //       setProvider(provider);
+  //       setProfile(data);
+  //     }}
+  //     onReject={(err) => {
+  //       console.log(err);
+  //     }}
+  //     className="pinterest-btn"
+  //   >
+  //     <div className="content">
+  //       <div className="icon">
+  //         <TiktokLogo />
+  //       </div>
+  //       <span className="txt">Login With Tiktok</span>
+  //     </div>
+  //   </LoginSocialTiktok> */}
+  // </div>
+// )}

@@ -62,12 +62,12 @@ function Register() {
     address: Yup.string()
       .min(5, "Address must be at least 5 characters")
       .required("Address is required"),
-    school: Yup.string()
-      .min(2, "School name must be at least 2 characters")
-      .required("School name is required"),
-    grade: Yup.string()
-      .min(1, "Grade must be at least 1 character")
-      .required("Grade is required"),
+    // school: Yup.string()
+    //   .min(2, "School name must be at least 2 characters")
+    //   .required("School name is required"),
+    // grade: Yup.string()
+    //   .min(1, "Grade must be at least 1 character")
+    //   .required("Grade is required"),
   });
 
   useEffect(() => {
@@ -188,8 +188,8 @@ function Register() {
                 birth: "",
                 gender: "",
                 address: "",
-                school: "",
-                grade: "",
+                // school: "",
+                // grade: "",
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
@@ -367,7 +367,7 @@ function Register() {
                     />
                   </div>
 
-                  <div>
+                  {/* <div>
                     <h4 className={style.label}>Current School Name</h4>
                     <Field
                       type="text"
@@ -381,9 +381,9 @@ function Register() {
                       component="div"
                       style={{ color: "red" }}
                     />
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                     <h4 className={style.label}>Grade/Class</h4>
                     <Field
                       type="text"
@@ -397,7 +397,7 @@ function Register() {
                       component="div"
                       style={{ color: "red" }}
                     />
-                  </div>
+                  </div> */}
 
                   <div className={style.btn}>
                     <button

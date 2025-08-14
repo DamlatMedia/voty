@@ -283,7 +283,7 @@ function AdminUserManagement() {
                       <th>School</th>
                       <th>Date</th>
                       <th>Leaderboard</th>
-                      <th></th>
+                      {/* <th></th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -297,14 +297,14 @@ function AdminUserManagement() {
                           <td>{student.school}</td>
                           <td>{student.birth}</td>
                           <td>{student.score}</td>
-                          <td>
+                          {/* <td>
                             <button
                               className={style.edi}
                               onClick={() => setSelectedUser(student)}
                             >
                               View Details
                             </button>
-                          </td>
+                          </td> */}
                         </tr>
                       ))
                     ) : (

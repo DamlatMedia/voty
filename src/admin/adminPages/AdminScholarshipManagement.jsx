@@ -20,7 +20,7 @@ function AdminHome() {
           <AdminHeader />
 
           <div className={style.content}>
-            <p className={style.new}>Upload A New Scholarship Flyer +</p>
+            {/* <p className={style.new}>Upload A New Scholarship Flyer +</p> */}
           </div>
 
           {/* 

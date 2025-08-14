@@ -17,7 +17,7 @@ function Header() {
       />
       <div className={style.header}>
         <div className={style.logoHead}>
-          <img src="./images/logo.jpg" alt="logo" className={style.logo} />
+          <img src="./images/damlatLogo.jpg" alt="logo" className={style.logo} />
         </div>
 
         {/* Menu Button for Mobile */}

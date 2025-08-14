@@ -82,18 +82,17 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-h4{
-margin: 1rem 0 0 0;
+h4 {
+  margin: 1rem 0 0 0;
 }
 
-.register{
+.register {
 }
 
 .register a {
-    text-decoration: none;
-    text-align: center;
+  text-decoration: none;
+  text-align: center;
   color: black;
-
 }
 
 .option {
@@ -113,30 +112,30 @@ margin: 1rem 0 0 0;
   cursor: pointer;
 } */
 
-.btn{
-    display: flex;
-    justify-content: center;
+.btn {
+  display: flex;
+  justify-content: center;
 }
 
-.btnFeedback{
-    padding: .8rem .9rem;
-    border-radius: .5rem;
-    background-color: black;
-    color: white;
-    width: 20%;
-    margin: .5rem auto;
-    cursor: pointer; /* Pointer cursor for hover effect */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
+.btnFeedback {
+  padding: 0.8rem 0.9rem;
+  border-radius: 0.5rem;
+  background-color: black;
+  color: white;
+  width: 20%;
+  margin: 0.5rem auto;
+  cursor: pointer; /* Pointer cursor for hover effect */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
 }
 
 .btnFeedback:hover {
-    background-color: white; /* Light shade on hover */
-    color: black;
-    }
+  background-color: white; /* Light shade on hover */
+  color: black;
+}
 
-    .field{
-border-radius:3rem ;
-    }
+.field {
+  border-radius: 3rem;
+}
 
 .loginImage {
   width: 50%;
@@ -179,6 +178,14 @@ border-radius:3rem ;
   .button {
     width: 80%; /* Expands button for smaller screens */
     padding: 0.6rem;
+  }
+
+  .btnFeedback {
+    width: 100%;
+  }
+
+  .register {
+    font-size: .8rem;
   }
 }
 
