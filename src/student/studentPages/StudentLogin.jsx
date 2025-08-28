@@ -188,7 +188,7 @@ const StudentLogin = () => {
                       <hr className={style.horiz} />
                     </div>
 
-                    {provider && profile ? (
+                    {/* {provider && profile ? (
                       <User
                         provider={provider}
                         profile={profile}
@@ -230,7 +230,7 @@ const StudentLogin = () => {
                           </div>
                         </LoginSocialFacebook>
                       </div>
-                    )}
+                    )} */}
 
                     {/* Register Link */}
                     <span className={style.option1}>

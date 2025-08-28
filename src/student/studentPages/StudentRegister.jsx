@@ -432,7 +432,7 @@ function Register() {
               <hr className={style.horiz} />
             </div>
 
-            {provider && profile ? (
+            {/* {provider && profile ? (
               <User
                 provider={provider}
                 profile={profile}
@@ -455,7 +455,7 @@ function Register() {
                     />
                     <p>Google</p>
                   </div>
-                  {/* <GoogleLoginButton /> */}
+            
                 </LoginSocialGoogle>
 
                 <LoginSocialFacebook
@@ -473,10 +473,10 @@ function Register() {
                     />
                     <p>Facebook</p>
                   </div>
-                  {/* <FacebookLoginButton /> */}
+                 
                 </LoginSocialFacebook>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
