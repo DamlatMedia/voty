@@ -1,0 +1,42 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+ ⚠ `eslint` configuration in next.config.mjs is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'eslint'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://172.29.172.214:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+ ✓ Ready in 2s
+ ○ Compiling /sign-up ...
+ ⚠ Unsupported metadata viewport is configured in metadata export in /sign-up. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /sign-up 200 in 10.4s (compile: 9.8s, proxy.ts: 160ms, render: 477ms)
+ ⚠ Cross origin request detected from 172.29.172.214 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+🔍 Send OTP request received
+🔍 Sending OTP to: +2348146325000
+🔍 Generated OTP: 773084
+✅ SMS sent via Twilio
+❌ Database error: {
+  code: 'PGRST204',
+  details: null,
+  hint: null,
+  message: "Could not find the 'otp_code' column of 'phone_verifications' in the schema cache"
+}
+ POST /api/auth/send-otp 500 in 6.0s (compile: 1941ms, proxy.ts: 15ms, render: 4.0s)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /sign-up. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /sign-up 200 in 426ms (compile: 78ms, proxy.ts: 130ms, render: 218ms)
+🔍 Send OTP request received
+🔍 Sending OTP to: +2348146325000
+🔍 Generated OTP: 833641
+✅ SMS sent via Twilio
+✅ OTP stored in database
+ POST /api/auth/send-otp 200 in 4.8s (compile: 330ms, proxy.ts: 33ms, render: 4.4s)
