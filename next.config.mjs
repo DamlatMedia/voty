@@ -8,6 +8,7 @@ const nextConfig = {
   },
   experimental: {
     staticGenerationRetryCount: 0,
+    middlewareWarning: false,
   },
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
