@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function GET(request: NextRequest) {
   try {
     // Get all trivia questions
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseServerClient()
       .from("trivia_questions")
       .select("*")
       .order("created_at", { ascending: false })
@@ -58,7 +53,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Insert trivia question
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseServerClient()
       .from("trivia_questions")
       .insert([
         {
@@ -118,7 +113,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Update trivia question
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseServerClient()
       .from("trivia_questions")
       .update({
         question,
@@ -162,7 +157,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete trivia question
-    const { error } = await supabase
+    const { error } = await getSupabaseServerClient()
       .from("trivia_questions")
       .delete()
       .eq("id", id)

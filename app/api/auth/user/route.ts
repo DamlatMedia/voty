@@ -1,11 +1,5 @@
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import { NextResponse } from "next/server"
-
-// Create client at module level - Node.js caches this instance
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 export async function GET(request: Request) {
   try {
@@ -49,7 +43,7 @@ export async function GET(request: Request) {
     console.log("Extracted userId:", userId)
 
     // Fetch user data from Supabase
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseServerClient()
       .from("users")
       .select("id, email, full_name, phone_number, country_code, date_of_birth, phone_verified, email_verified, agreed_to_terms, subscription_status, created_at, updated_at")
       .eq("id", userId)

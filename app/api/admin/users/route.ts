@@ -1,14 +1,9 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function GET(request: Request) {
   try {
-    const { data: users, error } = await supabase
+    const { data: users, error } = await getSupabaseServerClient()
       .from("users")
       .select("id, full_name, email, phone_number, subscription_status, created_at, updated_at, pic")
       .order("created_at", { ascending: false })
@@ -55,7 +50,7 @@ export async function DELETE(request: Request) {
       )
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabaseServerClient()
       .from("users")
       .delete()
       .eq("id", userId)

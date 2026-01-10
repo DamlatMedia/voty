@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import bcrypt from "bcryptjs"
-
-// Create client at module level - Node.js caches this instance
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
 
 export async function POST(request: Request) {
   try {
@@ -34,7 +28,7 @@ export async function POST(request: Request) {
     }
 
     // Fetch admin from Supabase by email
-    const { data: admins, error } = await supabase
+    const { data: admins, error } = await getSupabaseServerClient()
       .from("admins")
       .select("*")
       .eq("email", email)

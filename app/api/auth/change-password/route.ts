@@ -1,13 +1,7 @@
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import crypto from "crypto"
-
-// Create client at module level - Node.js caches this instance
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
 
 export async function POST(request: Request) {
   try {
@@ -74,7 +68,7 @@ export async function POST(request: Request) {
       console.log("[change-password] Service Role Key available:", !!process.env.SUPABASE_SERVICE_ROLE_KEY)
 
       // Fetch user from database - select all columns (same as login endpoint)
-      const { data: users, error: fetchError } = await supabase
+      const { data: users, error: fetchError } = await getSupabaseServerClient()
         .from("users")
         .select("*")
         .eq("id", userId)
@@ -129,7 +123,7 @@ export async function POST(request: Request) {
       console.log("[change-password] New password hash:", newPasswordHash)
 
       // Update user password in database
-      const { data: updatedUser, error: updateError } = await supabase
+      const { data: updatedUser, error: updateError } = await getSupabaseServerClient()
         .from("users")
         .update({
           password_hash: newPasswordHash,

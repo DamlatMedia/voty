@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import bcrypt from "bcryptjs"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
 
 export async function GET(request: Request) {
   try {
@@ -22,7 +17,7 @@ export async function GET(request: Request) {
       )
     }
 
-    const { data: admin, error } = await supabase
+    const { data: admin, error } = await getSupabaseServerClient()
       .from("admins")
       .select("id, email, full_name, pic, created_at, updated_at")
       .eq("id", adminId)
@@ -120,7 +115,7 @@ export async function PATCH(request: Request) {
     }
 
     // Update admin profile in database
-    const { data: updatedAdmin, error } = await supabase
+    const { data: updatedAdmin, error } = await getSupabaseServerClient()
       .from("admins")
       .update(updateData)
       .eq("id", adminId)

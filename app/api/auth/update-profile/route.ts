@@ -1,12 +1,6 @@
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
-
-// Create client at module level - Node.js caches this instance
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
 
 export async function PUT(request: Request) {
   try {
@@ -50,7 +44,7 @@ export async function PUT(request: Request) {
       console.log("Updating user:", userId, { fullName, email, profilePic, subscription_status })
 
       // Update user data in Supabase
-      const { data, error } = await supabase
+      const { data, error } = await getSupabaseServerClient()
         .from("users")
         .update({
           full_name: fullName,

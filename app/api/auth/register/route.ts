@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import crypto from "crypto"
-
-// Create client at module level - Node.js caches this instance
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
 
 export async function POST(request: Request) {
   try {
@@ -50,7 +44,7 @@ export async function POST(request: Request) {
     console.log("[register] 🔐 Password hash:", password_hash)
 
     // Insert user
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseServerClient()
       .from("users")
       .insert([
         {

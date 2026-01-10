@@ -1,17 +1,12 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get("status")
 
-    let query = supabase
+    let query = getSupabaseServerClient()
       .from("videos")
       .select("*")
       .order("created_at", { ascending: false })
@@ -73,7 +68,7 @@ export async function POST(request: Request) {
     let systemUserId: string | null = null
 
     // First, try to find existing system admin user
-    const { data: existingAdmin } = await supabase
+    const { data: existingAdmin } = await getSupabaseServerClient()
       .from("users")
       .select("id")
       .eq("email", "system-admin@votyngsystem.local")
@@ -86,7 +81,7 @@ export async function POST(request: Request) {
       // If no system admin user exists, create one
       console.log("System admin user not found, creating one...")
       
-      const { data: newUser, error: createError } = await supabase
+      const { data: newUser, error: createError } = await getSupabaseServerClient()
         .from("users")
         .insert([
           {
@@ -101,7 +96,7 @@ export async function POST(request: Request) {
       if (createError) {
         console.error("Error creating system admin user:", createError)
         // Fall back to finding any user
-        const { data: anyUser, error: anyError } = await supabase
+        const { data: anyUser, error: anyError } = await getSupabaseServerClient()
           .from("users")
           .select("id")
           .limit(1)
@@ -134,7 +129,7 @@ export async function POST(request: Request) {
     }
 
     // Insert the video with the valid user ID
-    const { data: video, error } = await supabase
+    const { data: video, error } = await getSupabaseServerClient()
       .from("videos")
       .insert([
         {

@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function POST(request: Request) {
   try {
@@ -69,7 +64,7 @@ export async function POST(request: Request) {
     const buffer = await file.arrayBuffer()
 
     // Upload to Supabase Storage
-    const { data, error } = await supabase.storage
+    const { data, error } = await getSupabaseServerClient().storage
       .from(bucket)
       .upload(path, buffer, {
         contentType: file.type,
@@ -85,7 +80,7 @@ export async function POST(request: Request) {
     }
 
     // Get the public URL
-    const { data: publicData } = supabase.storage
+    const { data: publicData } = getSupabaseServerClient().storage
       .from(bucket)
       .getPublicUrl(data.path)
 
