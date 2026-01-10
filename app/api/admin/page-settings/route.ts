@@ -3,10 +3,16 @@ import { createClient } from '@supabase/supabase-js'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!url || !key) {
+    throw new Error('Supabase env vars missing')
+  }
+
+  return createClient(url, key)
+}
 
 export async function POST(request: Request) {
   try {
@@ -88,7 +94,7 @@ export async function POST(request: Request) {
     }
 
     // Get existing settings to update or insert
-    const { data: existingSettings } = await supabase
+    const { data: existingSettings } = await getSupabaseClient()
       .from('page_settings')
       .select('*')
       .eq('admin_id', adminId)
@@ -104,7 +110,7 @@ export async function POST(request: Request) {
         hero_image: dbSettings.hero_image || existingSettings.hero_image,
       }
       // Update existing
-      result = await supabase
+      result = await getSupabaseClient()
         .from('page_settings')
         .update(updateSettings)
         .eq('id', existingSettings.id)
@@ -112,7 +118,7 @@ export async function POST(request: Request) {
         .single()
     } else {
       // Insert new
-      result = await supabase
+      result = await getSupabaseClient()
         .from('page_settings')
         .insert([dbSettings])
         .select()
@@ -145,7 +151,7 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     // Get latest page settings (public read)
-    const { data: settings } = await supabase
+    const { data: settings } = await getSupabaseClient()
       .from('page_settings')
       .select('*')
       .order('created_at', { ascending: false })
