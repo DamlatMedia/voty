@@ -1,6 +1,8 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import { NextResponse } from "next/server"
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
   try {
     // Get token from Authorization header

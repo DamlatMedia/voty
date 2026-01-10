@@ -3,6 +3,8 @@ import { getSupabaseServerClient } from '@/lib/supabase/server-client'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: Request) {
   try {
 

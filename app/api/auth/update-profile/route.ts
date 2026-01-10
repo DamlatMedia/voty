@@ -2,6 +2,8 @@ import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
 
+export const dynamic = 'force-dynamic'
+
 export async function PUT(request: Request) {
   try {
     // Try to get token from Authorization header first

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
+export const dynamic = 'force-dynamic'
+
 // GET: Fetch all trivia questions for a specific video
 export async function GET(request: Request) {
   try {
@@ -8,11 +10,13 @@ export async function GET(request: Request) {
     const videoId = searchParams.get("videoId")
 
     if (!videoId) {
-      const { data: trivia } = await getSupabaseServerClient()
+      return NextResponse.json(
         { success: false, message: "videoId is required" },
         { status: 400 }
       )
     }
+
+    const supabase = await getSupabaseServerClient()
 
     // Fetch trivia questions linked to this video, ordered by display order
     const { data, error } = await supabase
@@ -77,6 +81,8 @@ export async function POST(request: Request) {
       )
     }
 
+    const supabase = await getSupabaseServerClient()
+
     // Check if video exists
     const { data: videoExists, error: videoError } = await supabase
       .from("videos")
@@ -138,6 +144,8 @@ export async function DELETE(request: Request) {
         { status: 400 }
       )
     }
+
+    const supabase = await getSupabaseServerClient()
 
     const { error } = await supabase
       .from("video_trivia")
