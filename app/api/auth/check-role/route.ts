@@ -1,9 +1,9 @@
-import { createServerClient } from "@supabase/ssr"
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
 
 export async function GET() {
   const cookieStore = await cookies()
+  const { createServerClient } = await import("@supabase/ssr")
   const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     cookies: {
       getAll() {
