@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 // GET: Fetch all trivia questions for a specific video
 export async function GET(request: Request) {
@@ -13,7 +8,7 @@ export async function GET(request: Request) {
     const videoId = searchParams.get("videoId")
 
     if (!videoId) {
-      return NextResponse.json(
+      const { data: trivia } = await getSupabaseServerClient()
         { success: false, message: "videoId is required" },
         { status: 400 }
       )

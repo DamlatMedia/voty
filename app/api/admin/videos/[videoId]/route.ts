@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function GET(
   request: Request,
@@ -13,7 +8,7 @@ export async function GET(
   try {
     const { videoId } = await params
 
-    const { data: video, error } = await supabase
+    const { data: video, error } = await getSupabaseServerClient()
       .from("videos")
       .select("*")
       .eq("id", videoId)
@@ -91,7 +86,7 @@ export async function PATCH(
     console.log("Update data to be applied:", updateData)
 
     // First check if video exists
-    const { data: existingVideo, error: fetchError } = await supabase
+    const { data: existingVideo, error: fetchError } = await getSupabaseServerClient()
       .from("videos")
       .select("id")
       .eq("id", videoId)
@@ -109,7 +104,7 @@ export async function PATCH(
     }
 
     // Perform the update
-    const { data: updatedVideo, error } = await supabase
+    const { data: updatedVideo, error } = await getSupabaseServerClient()
       .from("videos")
       .update(updateData)
       .eq("id", videoId)
@@ -153,7 +148,7 @@ export async function DELETE(
   try {
     const { videoId } = await params
 
-    const { error } = await supabase
+    const { error } = await getSupabaseServerClient()
       .from("videos")
       .delete()
       .eq("id", videoId)

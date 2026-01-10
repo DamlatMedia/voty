@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseServerClient } from "@/lib/supabase/server-client"
 
 export async function GET(
   request: Request,
@@ -13,7 +8,7 @@ export async function GET(
   try {
     const userId = params.userId
 
-    const { data: user, error } = await supabase
+    const { data: user, error } = await getSupabaseServerClient()
       .from("users")
       .select("*")
       .eq("id", userId)
@@ -53,7 +48,7 @@ export async function PATCH(
     const userId = params.userId
     const body = await request.json()
 
-    const { data: updatedUser, error } = await supabase
+    const { data: updatedUser, error } = await getSupabaseServerClient()
       .from("users")
       .update({
         full_name: body.full_name,
@@ -100,7 +95,7 @@ export async function DELETE(
   try {
     const userId = params.userId
 
-    const { error } = await supabase
+    const { error } = await getSupabaseServerClient()
       .from("users")
       .delete()
       .eq("id", userId)
