@@ -42,7 +42,11 @@ export default function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayer
   const [isLoading, setIsLoading] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const progressUpdateInterval = useRef<NodeJS.Timeout | null>(null)
-  const supabase = createClient()
+  const [supabase, setSupabase] = useState<any>(null)
+
+  useEffect(() => {
+    setSupabase(createClient())
+  }, [])
 
   useEffect(() => {
     if (isOpen) {
@@ -56,6 +60,8 @@ export default function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayer
   // Save video progress to database
   const saveProgress = async (currentSeconds: number, duration: number) => {
     try {
+      if (!supabase) return
+      
       // Get current user from Supabase auth, fall back to localStorage `votyUser`
       let user: any = null
       try {

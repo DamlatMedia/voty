@@ -30,11 +30,16 @@ interface ProgressData {
 export default function VideoCard({ video, onSelect, refreshTrigger }: VideoCardProps) {
   const participantCount = video.participants ?? 0
   const thumbnailUrl = video.thumbnail || video.thumb || "/placeholder.svg"
-  const supabase = createClient()
+  const [supabase, setSupabase] = useState<any>(null)
   const [progress, setProgress] = useState<ProgressData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setSupabase(createClient())
+  }, [])
+
+  useEffect(() => {
+    if (!supabase) return
     const fetchProgress = async () => {
       try {
         // Get current user from Supabase auth, fall back to localStorage `votyUser`

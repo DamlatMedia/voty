@@ -39,9 +39,14 @@ export default function VideosGrid({ onVideoClose }: { onVideoClose?: () => void
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [categories, setCategories] = useState<string[]>([])
   const [refreshTrigger, setRefreshTrigger] = useState(0)
-  const supabase = createClient()
+  const [supabase, setSupabase] = useState<any>(null)
 
   useEffect(() => {
+    setSupabase(createClient())
+  }, [])
+
+  useEffect(() => {
+    if (!supabase) return
     const fetchVideos = async () => {
       try {
         setLoading(true)
