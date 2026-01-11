@@ -54,7 +54,11 @@ export default function DashboardPage() {
   const [triviaCategory, setTriviaCategory] = useState<string>("all")
   const [stats, setStats] = useState({ watching: 0, completed: 0, votes: 0 })
   const [statsLoading, setStatsLoading] = useState(true)
-  const supabase = createClient()
+  const [supabase, setSupabase] = useState<any>(null)
+
+  useEffect(() => {
+    setSupabase(createClient())
+  }, [])
 
   useEffect(() => {
     const tabParam = searchParams.get("tab")

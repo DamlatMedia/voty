@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"  
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
@@ -17,9 +17,9 @@ import { ToastDisplay } from "@/components/toast-display"
 export const dynamic = 'force-dynamic'
 
 export default function SignUp() {
-  const supabase = createClient()
   const router = useRouter()
   const { toasts, showToast, removeToast } = useToastSimple()
+  const [supabase, setSupabase] = useState<any>(null)
 
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
@@ -41,6 +41,10 @@ export default function SignUp() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setSupabase(createClient())
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target
