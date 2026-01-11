@@ -14,24 +14,24 @@ import {
   Settings,
   Zap,
 } from "lucide-react"
-import dynamic as dynamicImport from "next/dynamic"
+import NextDynamic from "next/dynamic"
 import { LoadingSkeleton } from "@/components/loading-skeleton"
 import { createClient } from "@/lib/supabase/client"
 
 // Lazy load components
-const VideosGrid = dynamicImport(() => import("@/components/dashboard/videos-grid"), {
+const VideosGrid = NextDynamic(() => import("@/components/dashboard/videos-grid"), {
   loading: () => <LoadingSkeleton />,
 })
 
-const QuizGrid = dynamicImport(() => import("@/components/dashboard/quiz-grid"), {
+const QuizGrid = NextDynamic(() => import("@/components/dashboard/quiz-grid"), {
   loading: () => <LoadingSkeleton />,
 })
 
-const VotingSection = dynamicImport(() => import("@/components/dashboard/voting-section"), {
+const VotingSection = NextDynamic(() => import("@/components/dashboard/voting-section"), {
   loading: () => <LoadingSkeleton />,
 })
 
-const TriviaQuestions = dynamicImport(() => import("@/components/dashboard/trivia-questions"), {
+const TriviaQuestions = NextDynamic(() => import("@/components/dashboard/trivia-questions"), {
   loading: () => <LoadingSkeleton />,
 })
 
