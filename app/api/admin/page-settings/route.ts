@@ -79,6 +79,7 @@ export async function POST(request: Request) {
       social_facebook: config.social_facebook || config.socialFacebook,
       social_twitter: config.social_twitter || config.socialTwitter,
       social_instagram: config.social_instagram || config.socialInstagram,
+      social_youtube: config.social_youtube || config.socialYouTube,
       privacy_policy_content: config.privacy_policy_content || config.privacyPolicyContent,
       terms_of_service_content: config.terms_of_service_content || config.termsOfServiceContent,
       admin_id: adminId

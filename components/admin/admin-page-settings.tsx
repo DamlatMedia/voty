@@ -43,6 +43,7 @@ interface PageConfig {
   socialFacebook: string | null
   socialTwitter: string | null
   socialInstagram: string | null
+  socialYouTube: string | null
 
   // General/SEO
   siteTitle: string
@@ -94,6 +95,7 @@ export default function PageSettings({ adminId }: PageSettingsProps) {
     socialFacebook: null,
     socialTwitter: null,
     socialInstagram: null,
+    socialYouTube: null,
 
     // General/SEO
     siteTitle: '',
@@ -141,6 +143,7 @@ export default function PageSettings({ adminId }: PageSettingsProps) {
             socialFacebook: settings.social_facebook || prev.socialFacebook,
             socialTwitter: settings.social_twitter || prev.socialTwitter,
             socialInstagram: settings.social_instagram || prev.socialInstagram,
+            socialYouTube: settings.social_youtube || prev.socialYouTube,
             privacyPolicyContent: settings.privacy_policy_content || prev.privacyPolicyContent,
             termsOfServiceContent: settings.terms_of_service_content || prev.termsOfServiceContent,
           }))
@@ -251,6 +254,7 @@ export default function PageSettings({ adminId }: PageSettingsProps) {
         socialFacebook: config.socialFacebook,
         socialTwitter: config.socialTwitter,
         socialInstagram: config.socialInstagram,
+        socialYouTube: config.socialYouTube,
         privacyPolicyContent: config.privacyPolicyContent,
         termsOfServiceContent: config.termsOfServiceContent,
       }
@@ -685,6 +689,18 @@ export default function PageSettings({ adminId }: PageSettingsProps) {
               onChange={handleInputChange}
               className="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg text-white placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30"
               placeholder="https://instagram.com/yourprofile"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">YouTube URL</label>
+            <input
+              type="url"
+              name="socialYouTube"
+              value={config.socialYouTube || ''}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 bg-background border border-primary/20 rounded-lg text-white placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30"
+              placeholder="https://youtube.com/@yourchannel"
             />
           </div>
         </motion.div>

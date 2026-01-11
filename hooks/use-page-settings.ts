@@ -25,6 +25,7 @@ interface PageSettings {
   social_facebook: string | null
   social_twitter: string | null
   social_instagram: string | null
+  social_youtube: string | null
   privacy_policy_content: string | null
   terms_of_service_content: string | null
   updated_at: string | null
@@ -82,6 +83,7 @@ const emptySettings: PageSettings = {
   social_facebook: null,
   social_twitter: null,
   social_instagram: null,
+  social_youtube: null,
   privacy_policy_content: null,
   terms_of_service_content: null,
   updated_at: null,

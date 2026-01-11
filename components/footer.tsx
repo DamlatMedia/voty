@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePageSettings } from "@/hooks/use-page-settings"
@@ -153,6 +153,15 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
+              </a>
+              <a
+                href={settings.social_youtube || "#"}
+                target={settings.social_youtube ? "_blank" : undefined}
+                rel={settings.social_youtube ? "noopener noreferrer" : undefined}
+                className="w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary/10 transition-all hover:scale-110"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
               </a>
             </div>
           </motion.div>
