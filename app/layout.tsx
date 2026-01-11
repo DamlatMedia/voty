@@ -7,6 +7,10 @@ import "./globals.css"
 
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "600", "700", "800"] })
 
+// Make all pages dynamic - don't pre-render at build time
+// This is needed because the app uses authentication and personalized dashboards
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "VOTY - Voice of the Teenagers and the Youths",
   description:
