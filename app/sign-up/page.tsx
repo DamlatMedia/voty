@@ -14,6 +14,8 @@ import { createClient } from "@/lib/supabase/client"
 import { useToastSimple } from "@/hooks/use-toast-simple"
 import { ToastDisplay } from "@/components/toast-display"
 
+export const dynamic = 'force-dynamic'
+
 export default function SignUp() {
   const supabase = createClient()
   const router = useRouter()

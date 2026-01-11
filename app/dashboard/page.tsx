@@ -43,6 +43,8 @@ interface User {
   subscription_status?: string
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function DashboardPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
