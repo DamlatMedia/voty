@@ -8,6 +8,9 @@ const nextConfig = {
   },
   experimental: {
     staticGenerationRetryCount: 0,
+    serverActions: {               // ← ADD THIS!
+      bodySizeLimit: '2mb',        // ← ADD THIS!
+    },                             // ← ADD THIS!
   },
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
