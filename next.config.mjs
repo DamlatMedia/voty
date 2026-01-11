@@ -7,15 +7,17 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
-    staticGenerationRetryCount: 0,
-    serverActions: {               // ← ADD THIS!
-      bodySizeLimit: '2mb',        // ← ADD THIS!
-    },                             // ← ADD THIS!
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
   },
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
     pagesBufferLength: 2,
   },
 }
+
+export default nextConfig
+
 
 export default nextConfig
