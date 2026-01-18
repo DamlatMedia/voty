@@ -6,6 +6,7 @@ import { Search, Trash2, Edit2, CheckCircle, XCircle, Upload, Eye, PlayCircle, C
 import Image from "next/image"
 import { useToastSimple } from "@/hooks/use-toast-simple"
 import { ToastDisplay } from "@/components/toast-display"
+import { createClient } from "@/lib/supabase/client"
 
 interface Video {
   id: string
@@ -122,6 +123,36 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
     fetchVideoTrivia(video.id)
   }
 
+  // Direct Supabase upload to bypass Vercel's 4.5MB limit
+  const uploadToSupabase = async (file: File, bucket: string) => {
+    try {
+      const supabase = createClient()
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${bucket}-${Date.now()}.${fileExt}`
+      
+      const { data, error } = await supabase.storage
+        .from(bucket)
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from(bucket)
+        .getPublicUrl(fileName)
+
+      return urlData.publicUrl
+    } catch (error) {
+      console.error(`Error uploading to ${bucket}:`, error)
+      throw error
+    }
+  }
+
   const handleUploadVideo = async () => {
     if (uploadMode === "url") {
       if (!uploadData.title || !uploadData.video_url) {
@@ -144,40 +175,25 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
       if (uploadMode === "file") {
         if (uploadFiles.video) {
           showToast("Uploading video file to storage...", "info")
-          const videoData = new FormData()
-          videoData.append("file", uploadFiles.video)
-          videoData.append("type", "video")
-
-          const videoResponse = await fetch("/api/admin/upload", {
-            method: "POST",
-            body: videoData,
-          })
-          const videoResult = await videoResponse.json()
-
-          if (!videoResult.success) {
-            showToast("Failed to upload video: " + videoResult.message, "error")
+          try {
+            video_url = await uploadToSupabase(uploadFiles.video, "videos")
+          } catch (error) {
+            showToast("Failed to upload video: " + (error instanceof Error ? error.message : "Unknown error"), "error")
             setUploadLoading(false)
             return
           }
-
-          video_url = videoResult.url
         }
 
         if (uploadFiles.thumbnail) {
           showToast("Uploading thumbnail to storage...", "info")
-          const thumbData = new FormData()
-          thumbData.append("file", uploadFiles.thumbnail)
-          thumbData.append("type", "thumbnail")
-
-          const thumbResponse = await fetch("/api/admin/upload", {
-            method: "POST",
-            body: thumbData,
-          })
-          const thumbResult = await thumbResponse.json()
-
-          if (thumbResult.success) {
-            thumbnail_url = thumbResult.url
+          try {
+            thumbnail_url = await uploadToSupabase(uploadFiles.thumbnail, "thumbnails")
+          } catch (error) {
+            console.error("Thumbnail upload failed:", error)
+            // Don't fail the whole upload if thumbnail fails
+            showToast("Warning: Thumbnail upload failed, but video will be uploaded", "warning")
           }
+        }
         }
       }
 
