@@ -194,7 +194,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
             showToast("Warning: Thumbnail upload failed, but video will be uploaded", "warning")
           }
         }
-        }
       }
 
       showToast("Creating video record...", "info")
