@@ -50,29 +50,28 @@ export default function VideosGrid({ onVideoClose }: { onVideoClose?: () => void
     const fetchVideos = async () => {
       try {
         setLoading(true)
-        console.log("🎬 Fetching videos from Supabase...")
+        console.log("🎬 Fetching videos from API...")
         
-        // Fetch ALL videos first (ignore status filter to debug)
-        const { data, error } = await supabase
-          .from("videos")
-          .select("*")
-          .order("created_at", { ascending: false })
+        // Use the API route instead of direct DB access for proper permissions
+        const response = await fetch("/api/admin/videos")
+        const result = await response.json()
 
-        console.log("📊 Supabase Response:", { 
-          data, 
-          error,
-          count: data?.length 
+        console.log("📊 API Response:", { 
+          data: result.videos, 
+          error: result.success ? null : result.message,
+          count: result.videos?.length 
         })
 
-        if (error) {
-          console.error("❌ Error fetching videos:", error)
+        if (!result.success) {
+          console.error("❌ Error fetching videos:", result.message)
           setVideos([])
           setLoading(false)
           return
         }
 
+        const data = result.videos
         if (!data) {
-          console.warn("⚠️ No data returned from Supabase")
+          console.warn("⚠️ No data returned from API")
           setVideos([])
           setLoading(false)
           return
@@ -252,6 +251,7 @@ export default function VideosGrid({ onVideoClose }: { onVideoClose?: () => void
                 id: video.id,
                 title: video.title,
                 subtitle: video.subtitle,
+                thumbnail: video.thumbnail,
                 participants: video.participantCount,
                 duration: `${Math.floor(video.duration / 60)}m`,
               }}
