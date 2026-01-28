@@ -1,7 +1,37 @@
 import { NextResponse } from "next/server"
 import { getSupabaseServerClient } from "@/lib/supabase/server-client"
+import { createClient } from "@supabase/supabase-js"
 
 export const dynamic = 'force-dynamic'
+
+// Generate thumbnail from video URL
+async function generateThumbnail(videoUrl: string): Promise<string | null> {
+  try {
+    // Use a simple approach: use ffmpeg via a service or create a placeholder
+    // For now, we'll use a placeholder - in production you might use:
+    // - ffmpeg server-side
+    // - or a third-party thumbnail service
+    
+    // Example using a free thumbnail service (if the video is from YouTube):
+    // But since we're storing in Supabase, we'll create a simple frame extraction
+    
+    // For Supabase videos, we can use a simple approach:
+    // Create a placeholder or use an external service
+    // For now, return null and we'll handle it client-side
+    console.log("Thumbnail generation requested for:", videoUrl)
+    
+    // TODO: Implement proper thumbnail generation
+    // Options:
+    // 1. Use ffmpeg on the server
+    // 2. Use a service like Mux or Cloudinary
+    // 3. Create a placeholder based on category
+    
+    return null
+  } catch (error) {
+    console.error("Error generating thumbnail:", error)
+    return null
+  }
+}
 
 export async function GET(request: Request) {
   try {
@@ -130,6 +160,19 @@ export async function POST(request: Request) {
       )
     }
 
+    // Generate thumbnail from video
+    let thumbnailUrl = body.thumbnail_url || null
+    if (!thumbnailUrl && body.video_url) {
+      console.log("Generating thumbnail for video...")
+      const generatedThumbnail = await generateThumbnail(body.video_url)
+      if (generatedThumbnail) {
+        thumbnailUrl = generatedThumbnail
+      } else {
+        // Use a placeholder image based on category
+        thumbnailUrl = `https://via.placeholder.com/320x180?text=${encodeURIComponent(body.category || "Video")}`
+      }
+    }
+
     // Insert the video with the valid user ID
     const { data: video, error } = await getSupabaseServerClient()
       .from("videos")
@@ -139,7 +182,7 @@ export async function POST(request: Request) {
           description: body.description || null,
           category: body.category || "general",
           video_url: body.video_url,
-          thumbnail_url: body.thumbnail_url || null,
+          thumbnail_url: thumbnailUrl,
           uploaded_by: systemUserId,
           uploader_name: body.uploader_name || "Admin",
           status: body.status || "pending",

@@ -196,7 +196,7 @@ export default function SignUp() {
         setIsCodeSent(false)
         setIsVerified(false)
         
-        // ✅ REDIRECT TO LOGIN PAGE
+        // REDIRECT TO LOGIN PAGE
         router.push("/login")
       }, 2000)  // Changed from 5000 to 2000 (2 seconds) for faster redirect
     } catch (err) {
@@ -344,7 +344,7 @@ export default function SignUp() {
 
                 <button
                   onClick={handleNextStep}
-                  disabled={!formData.fullName || !formData.email || !formData.phoneNumber || !isVerified || isLoading}
+                  disabled={!formData.fullName || !formData.email || !formData.phoneNumber || !formData.dateOfBirth || !formData.agreeToTerms || !isVerified || isLoading}
                   className="w-full py-3 bg-primary text-black rounded-lg font-bold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed glow-gold-hover"
                 >
                   Next
@@ -360,15 +360,6 @@ export default function SignUp() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Date of Birth</label>
-                  <DatePicker
-                    value={formData.dateOfBirth}
-                    onChange={(date) => setFormData((prev) => ({ ...prev, dateOfBirth: date }))}
-                    placeholder="Select your date of birth"
-                  />
-                </div>
-
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Password</label>
                   <div className="relative">

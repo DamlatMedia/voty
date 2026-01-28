@@ -49,7 +49,7 @@ export default function PhoneInput({ value, countryCode, onPhoneChange, onCountr
   const selectedCountry = countries.find((c) => c.code === countryCode) || countries[0]
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col sm:flex-row gap-2">
       {/* Country Selector */}
       <div className="relative">
         <button
@@ -68,7 +68,7 @@ export default function PhoneInput({ value, countryCode, onPhoneChange, onCountr
             <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
 
             {/* Dropdown */}
-            <div className="absolute top-full mt-2 left-0 w-72 bg-card border border-primary/20 rounded-lg shadow-lg z-20 max-h-80 overflow-hidden">
+            <div className="absolute top-full mt-2 left-0  max-w-xs bg-card border border-primary/20 rounded-lg shadow-lg z-20 max-h-80 overflow-hidden">
               {/* Search */}
               <div className="p-3 border-b border-primary/20">
                 <input

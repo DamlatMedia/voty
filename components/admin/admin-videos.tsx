@@ -38,56 +38,16 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
     title: "",
     description: "",
     category: "",
-    video_url: "",
-    thumbnail_url: "",
   })
   const [uploadFiles, setUploadFiles] = useState({
     video: null as File | null,
     thumbnail: null as File | null,
   })
-  const [uploadMode, setUploadMode] = useState<"url" | "file">("url")
   const [uploadLoading, setUploadLoading] = useState(false)
-  const [triviaEditingId, setTriviaEditingId] = useState<string | null>(null)
-  const [videoTrivia, setVideoTrivia] = useState<Record<string, any[]>>({})
-  const [availableTrivia, setAvailableTrivia] = useState<any[]>([])
-  const [triviaLoading, setTriviaLoading] = useState(false)
-  const [selectedUploadTrivia, setSelectedUploadTrivia] = useState<string[]>([])
-  const [editingTriviaId, setEditingTriviaId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchVideos()
-    fetchAvailableTrivia()
   }, [])
-
-  const fetchAvailableTrivia = async () => {
-    try {
-      const response = await fetch("/api/trivia")
-      const data = await response.json()
-      if (data.success) {
-        setAvailableTrivia(data.questions || [])
-      }
-    } catch (error) {
-      console.error("Error fetching trivia:", error)
-    }
-  }
-
-  const fetchVideoTrivia = async (videoId: string) => {
-    try {
-      setTriviaLoading(true)
-      const response = await fetch(`/api/admin/video-trivia?videoId=${videoId}`)
-      const data = await response.json()
-      if (data.success) {
-        setVideoTrivia({
-          ...videoTrivia,
-          [videoId]: data.questions || [],
-        })
-      }
-    } catch (error) {
-      console.error("Error fetching video trivia:", error)
-    } finally {
-      setTriviaLoading(false)
-    }
-  }
 
   const fetchVideos = async () => {
     try {
@@ -113,14 +73,11 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
 
   const startEdit = (video: Video) => {
     setEditingId(video.id)
-    setEditingTriviaId(video.id)
     setEditData({
       title: video.title,
       description: video.description || "",
       category: video.category || "",
     })
-    // Fetch existing trivia for this video
-    fetchVideoTrivia(video.id)
   }
 
   // Direct Supabase upload to bypass Vercel's 4.5MB limit
@@ -154,45 +111,37 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
   }
 
   const handleUploadVideo = async () => {
-    if (uploadMode === "url") {
-      if (!uploadData.title || !uploadData.video_url) {
-        showToast("Please fill in title and video URL", "error")
-        return
-      }
-    } else {
-      if (!uploadData.title || !uploadFiles.video) {
-        showToast("Please fill in title and select a video file", "error")
-        return
-      }
+    if (!uploadData.title || !uploadFiles.video) {
+      showToast("Please fill in title and select a video file", "error")
+      return
     }
 
     setUploadLoading(true)
     try {
-      let video_url = uploadData.video_url
-      let thumbnail_url = uploadData.thumbnail_url
+      let video_url = ""
+      let thumbnail_url = ""
 
-      // Upload files to Supabase Storage if in file mode
-      if (uploadMode === "file") {
-        if (uploadFiles.video) {
-          showToast("Uploading video file to storage...", "info")
-          try {
-            video_url = await uploadToSupabase(uploadFiles.video, "videos")
-          } catch (error) {
-            showToast("Failed to upload video: " + (error instanceof Error ? error.message : "Unknown error"), "error")
-            setUploadLoading(false)
-            return
-          }
+      // Upload video file to Supabase Storage
+      if (uploadFiles.video) {
+        showToast("Uploading video file...", "info")
+        try {
+          video_url = await uploadToSupabase(uploadFiles.video, "videos")
+        } catch (error) {
+          showToast("Failed to upload video: " + (error instanceof Error ? error.message : "Unknown error"), "error")
+          setUploadLoading(false)
+          return
         }
+      }
 
-        if (uploadFiles.thumbnail) {
-          showToast("Uploading thumbnail to storage...", "info")
-          try {
-            thumbnail_url = await uploadToSupabase(uploadFiles.thumbnail, "thumbnails")
-          } catch (error) {
-            console.error("Thumbnail upload failed:", error)
-            // Don't fail the whole upload if thumbnail fails
-            showToast("Warning: Thumbnail upload failed, but video will be uploaded", "warning")
-          }
+      // Upload thumbnail if provided
+      if (uploadFiles.thumbnail) {
+        showToast("Uploading thumbnail...", "info")
+        try {
+          thumbnail_url = await uploadToSupabase(uploadFiles.thumbnail, "thumbnails")
+        } catch (error) {
+          console.error("Thumbnail upload failed:", error)
+          // Don't fail the whole upload if thumbnail fails
+          showToast("Warning: Thumbnail upload failed, but video will be uploaded", "warning")
         }
       }
 
@@ -216,23 +165,14 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
       const data = await response.json()
 
       if (data.success) {
-        // Link trivia if any selected
-        if (selectedUploadTrivia.length > 0) {
-          await handleLinkTrivia(data.video.id, selectedUploadTrivia)
-        }
-
         setVideos([data.video, ...videos])
         setShowUploadModal(false)
         setUploadData({
           title: "",
           description: "",
           category: "",
-          video_url: "",
-          thumbnail_url: "",
         })
         setUploadFiles({ video: null, thumbnail: null })
-        setUploadMode("url")
-        setSelectedUploadTrivia([])
         showToast("Video uploaded successfully!", "success")
       } else {
         showToast(data.message || "Failed to upload video", "error")
@@ -319,36 +259,8 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
     }
   }
 
-  const handleLinkTrivia = async (videoId: string, triviaIds: string[]) => {
-    try {
-      setActionLoading(videoId)
-      const response = await fetch("/api/admin/video-trivia", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          videoId,
-          trivia_question_ids: triviaIds,
-        }),
-      })
-
-      const data = await response.json()
-      if (data.success) {
-        await fetchVideoTrivia(videoId)
-        showToast("Trivia linked successfully!", "success")
-      } else {
-        showToast(data.message || "Failed to link trivia", "error")
-      }
-    } catch (error) {
-      console.error("Error linking trivia:", error)
-      showToast("Error linking trivia", "error")
-    } finally {
-      setActionLoading(null)
-    }
-  }
-
   const cancelEdit = () => {
     setEditingId(null)
-    setEditingTriviaId(null)
     setEditData({})
   }
 
@@ -412,34 +324,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
             >
               <h3 className="text-2xl font-bold text-white mb-4">Upload New Video</h3>
               
-              {/* Upload Mode Tabs */}
-              <div className="flex gap-2 mb-6">
-                <motion.button
-                  onClick={() => setUploadMode("url")}
-                  className={`px-4 py-2 rounded-lg font-medium transition ${
-                    uploadMode === "url"
-                      ? "bg-primary text-black"
-                      : "bg-card border border-primary/20 text-white hover:bg-card/80"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  From URL
-                </motion.button>
-                <motion.button
-                  onClick={() => setUploadMode("file")}
-                  className={`px-4 py-2 rounded-lg font-medium transition ${
-                    uploadMode === "file"
-                      ? "bg-primary text-black"
-                      : "bg-card border border-primary/20 text-white hover:bg-card/80"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  From Device
-                </motion.button>
-              </div>
-              
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">Video Title *</label>
@@ -474,39 +358,9 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
                   />
                 </div>
 
-                {/* URL Input Mode */}
-                {uploadMode === "url" && (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-white mb-2">Thumbnail URL</label>
-                      <input
-                        type="text"
-                        value={uploadData.thumbnail_url}
-                        onChange={(e) => setUploadData({ ...uploadData, thumbnail_url: e.target.value })}
-                        placeholder="Image URL"
-                        className="w-full px-4 py-2 bg-background border border-primary/20 rounded-lg text-white placeholder-muted-foreground focus:outline-none focus:border-primary"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-white mb-2">Video URL *</label>
-                      <input
-                        type="text"
-                        value={uploadData.video_url}
-                        onChange={(e) => setUploadData({ ...uploadData, video_url: e.target.value })}
-                        placeholder="Video URL (YouTube, Vimeo, or direct link)"
-                        className="w-full px-4 py-2 bg-background border border-primary/20 rounded-lg text-white placeholder-muted-foreground focus:outline-none focus:border-primary"
-                      />
-                    </div>
-                  </>
-                )}
-
-                {/* File Upload Mode */}
-                {uploadMode === "file" && (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-white mb-2">Video File *</label>
-                      <div className="relative border-2 border-dashed border-primary/30 rounded-lg p-6 hover:border-primary/60 transition cursor-pointer">
+                <div>
+                  <label className="block text-sm font-medium text-white mb-2">Video File *</label>
+                  <div className="relative border-2 border-dashed border-primary/30 rounded-lg p-6 hover:border-primary/60 transition cursor-pointer">
                         <input
                           type="file"
                           accept="video/*"
@@ -551,44 +405,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
                         </div>
                       </div>
                     </div>
-                  </>
-                )}
-
-                {/* Trivia Questions Selection */}
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Link Trivia Questions (Optional)</label>
-                  <div className="max-h-48 overflow-y-auto space-y-2 p-3 bg-background border border-primary/20 rounded-lg">
-                    {availableTrivia.length === 0 ? (
-                      <p className="text-xs text-muted-foreground text-center py-4">No trivia questions available. Create some in the Trivia section first.</p>
-                    ) : (
-                      availableTrivia.map((question) => (
-                        <label
-                          key={question.id}
-                          className="flex items-start gap-2 p-2 rounded hover:bg-primary/10 cursor-pointer"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedUploadTrivia.includes(question.id)}
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setSelectedUploadTrivia([...selectedUploadTrivia, question.id])
-                              } else {
-                                setSelectedUploadTrivia(selectedUploadTrivia.filter(id => id !== question.id))
-                              }
-                            }}
-                            className="mt-1 rounded border-primary/20 text-primary cursor-pointer"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium text-white truncate">{question.question}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {question.category || "general"} • {question.difficulty || "medium"}
-                            </p>
-                          </div>
-                        </label>
-                      ))
-                    )}
-                  </div>
-                </div>
 
                 <div className="flex gap-3 pt-4">
                   <motion.button
@@ -678,39 +494,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
                             className="px-3 py-1 bg-background border border-primary/20 rounded text-white text-sm placeholder-muted-foreground focus:outline-none focus:border-primary"
                           />
                         </div>
-
-                        {/* Trivia Selection in Edit Mode */}
-                        <div>
-                          <label className="block text-xs font-medium text-white mb-2">Linked Trivia Questions</label>
-                          <div className="max-h-32 overflow-y-auto space-y-1 p-2 bg-background border border-primary/20 rounded text-xs">
-                            {availableTrivia.length === 0 ? (
-                              <p className="text-muted-foreground">No trivia available</p>
-                            ) : (
-                              availableTrivia.map((question) => {
-                                const isLinked = videoTrivia[video.id]?.some(q => q.id === question.id)
-                                return (
-                                  <label key={question.id} className="flex items-start gap-2 cursor-pointer hover:bg-primary/10 p-1 rounded">
-                                    <input
-                                      type="checkbox"
-                                      checked={isLinked}
-                                      onChange={(e) => {
-                                        let updatedIds = (videoTrivia[video.id] || []).map(q => q.id)
-                                        if (e.target.checked) {
-                                          updatedIds.push(question.id)
-                                        } else {
-                                          updatedIds = updatedIds.filter(id => id !== question.id)
-                                        }
-                                        handleLinkTrivia(video.id, updatedIds)
-                                      }}
-                                      className="mt-0.5"
-                                    />
-                                    <span className="text-white truncate flex-1">{question.question.substring(0, 40)}...</span>
-                                  </label>
-                                )
-                              })
-                            )}
-                          </div>
-                        </div>
                       </div>
                     ) : (
                       <>
@@ -775,20 +558,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
                           <Edit2 size={18} />
                         </motion.button>
                         <motion.button
-                          onClick={() => {
-                            if (!videoTrivia[video.id]) {
-                              fetchVideoTrivia(video.id)
-                            }
-                            setTriviaEditingId(triviaEditingId === video.id ? null : video.id)
-                          }}
-                          className="p-2 rounded-lg bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 transition"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                          title="Manage Trivia"
-                        >
-                          <HelpCircle size={18} />
-                        </motion.button>
-                        <motion.button
                           onClick={() => handleDeleteVideo(video.id)}
                           disabled={actionLoading === video.id}
                           className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition disabled:opacity-50"
@@ -802,67 +571,6 @@ export default function AdminVideos({ adminId }: AdminVideosProps) {
                     )}
                   </div>
                 </div>
-
-                {/* Trivia Management Section */}
-                {triviaEditingId === video.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="bg-card border-t border-primary/10 p-4 space-y-4"
-                  >
-                    <div>
-                      <h4 className="text-sm font-semibold text-white mb-3">Link Trivia Questions</h4>
-                      {triviaLoading ? (
-                        <div className="flex justify-center py-4">
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full"
-                          />
-                        </div>
-                      ) : (
-                        <div className="max-h-96 overflow-y-auto space-y-2">
-                          {availableTrivia.length === 0 ? (
-                            <p className="text-xs text-muted-foreground">No trivia questions available. Create some first.</p>
-                          ) : (
-                            availableTrivia.map((question) => {
-                              const isLinked = videoTrivia[video.id]?.some(q => q.id === question.id)
-                              return (
-                                <motion.label
-                                  key={question.id}
-                                  className="flex items-start gap-3 p-2 rounded-lg hover:bg-primary/10 cursor-pointer transition"
-                                  whileHover={{ x: 4 }}
-                                >
-                                  <input
-                                    type="checkbox"
-                                    checked={isLinked}
-                                    onChange={(e) => {
-                                      let updatedIds = (videoTrivia[video.id] || []).map(q => q.id)
-                                      if (e.target.checked) {
-                                        updatedIds.push(question.id)
-                                      } else {
-                                        updatedIds = updatedIds.filter(id => id !== question.id)
-                                      }
-                                      handleLinkTrivia(video.id, updatedIds)
-                                    }}
-                                    className="mt-1 rounded border-primary/20 text-primary cursor-pointer"
-                                  />
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-xs font-medium text-white truncate">{question.question}</p>
-                                    <p className="text-xs text-muted-foreground">
-                                      Category: {question.category || "general"} • Difficulty: {question.difficulty || "medium"}
-                                    </p>
-                                  </div>
-                                </motion.label>
-                              )
-                            })
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
               </motion.div>
             ))}
           </AnimatePresence>
